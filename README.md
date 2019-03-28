@@ -65,11 +65,13 @@ We provide VAULT, wallet, ledger service for cryptocurrency. Trusted by many exc
    walletsdk.maven.password=$MAVEN_REPO_PASSWORD
    ```
 
-2. Edit `BuildConfig.json` ➜ `GOOGLE_SIGN_IN_WEB_CLI_ID` to your Google sign-in client ID
-3. Edit `BuildConfig.json` ➜ `SERVICE_ENDPOINT` to point to your Wallet Service endpoont
-4. Register your app on CYBAVO WALLET MANAGEMENT system web > Administration > System settings, input `package name` and `Signature keystore SHA1 fingerprint`, follow the instruction to retrieve an `API Code`.
-5. Edit `BuildConfig.json` ➜ `SERVICE_API_CODE` to fill in yout `API Code`
-6. Edit `BuildConfig.json` ➜ `WECHAT_APP_ID` to fill in yout `WeChat app id`
+2. Place your `google-services.json` file downloaded from Firebase to `android/app` [(LearnMore)](https://github.com/react-native-community/react-native-google-signin/blob/master/docs/android-guide.md)
+
+3. Edit `BuildConfig.json` ➜ `GOOGLE_SIGN_IN_WEB_CLI_ID` to your Google sign-in client ID
+4. Edit `BuildConfig.json` ➜ `SERVICE_ENDPOINT` to point to your Wallet Service endpoont
+5. Register your app on CYBAVO WALLET MANAGEMENT system web > Administration > System settings, input `package name` and `Signature keystore SHA1 fingerprint`, follow the instruction to retrieve an `API Code`.
+6. Edit `BuildConfig.json` ➜ `SERVICE_API_CODE` to fill in yout `API Code`
+7. Edit `BuildConfig.json` ➜ `WECHAT_APP_ID` to fill in yout `WeChat app id`
 
 # Features
 
