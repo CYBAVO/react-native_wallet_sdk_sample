@@ -65,7 +65,7 @@ We provide VAULT, wallet, ledger service for cryptocurrency. Trusted by many exc
    walletsdk.maven.password=$MAVEN_REPO_PASSWORD
    ```
 
-2. Place your `google-services.json` file downloaded from Firebase to `android/app` [(LearnMore)](https://github.com/react-native-community/react-native-google-signin/blob/master/docs/android-guide.md)
+2. Place your `google-services.json` file downloaded from Firebase to `android/app` [(LearnMore)](https://github.com/react-native-community/react-native-google-signin/blob/master/docs/get-config-file.md)
 
 3. Edit `BuildConfig.json` ➜ `GOOGLE_SIGN_IN_WEB_CLI_ID` to your Google sign-in client ID
 4. Edit `BuildConfig.json` ➜ `SERVICE_ENDPOINT` to point to your Wallet Service endpoont
