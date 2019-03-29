@@ -1,4 +1,8 @@
+# CYBAVO Wallet SDK for React Native
+
 [![NPM](https://nodeico.herokuapp.com/@cybavo/react-native-wallet-service.svg)](https://npmjs.com/package/@cybavo/react-native-wallet-service)
+
+## Installation
 
 ```shell
 npm install @cybavo/react-native-wallet-service --save
@@ -57,21 +61,23 @@ We provide VAULT, wallet, ledger service for cryptocurrency. Trusted by many exc
 
 # Setup
 
-1. Edit `android/local.properties` to config Maven repository URL / credentials provided by CYBAVO
-
+1. Clone the source code from GitHub
+2. Install the dependencies
+   ```
+   yarn install
+   ```
+3. Edit `android/local.properties` to config Maven repository URL / credentials provided by CYBAVO
    ```
    walletsdk.maven.url=$MAVEN_REPO_URL
    walletsdk.maven.username=$MAVEN_REPO_USRENAME
    walletsdk.maven.password=$MAVEN_REPO_PASSWORD
    ```
-
-2. Place your `google-services.json` file downloaded from Firebase to `android/app` [(LearnMore)](https://github.com/react-native-community/react-native-google-signin/blob/master/docs/get-config-file.md)
-
-3. Edit `BuildConfig.json` ➜ `GOOGLE_SIGN_IN_WEB_CLI_ID` to your Google sign-in client ID
-4. Edit `BuildConfig.json` ➜ `SERVICE_ENDPOINT` to point to your Wallet Service endpoont
-5. Register your app on CYBAVO WALLET MANAGEMENT system web > Administration > System settings, input `package name` and `Signature keystore SHA1 fingerprint`, follow the instruction to retrieve an `API Code`.
-6. Edit `BuildConfig.json` ➜ `SERVICE_API_CODE` to fill in yout `API Code`
-7. Edit `BuildConfig.json` ➜ `WECHAT_APP_ID` to fill in yout `WeChat app id`
+4. Place your `google-services.json` file downloaded from Firebase to `android/app` [(LearnMore)](https://github.com/react-native-community/react-native-google-signin/blob/master/docs/get-config-file.md)
+5. Edit `BuildConfig.json` ➜ `GOOGLE_SIGN_IN_WEB_CLI_ID` to your Google sign-in client ID
+6. Edit `BuildConfig.json` ➜ `SERVICE_ENDPOINT` to point to your Wallet Service endpoont
+7. Register your app on CYBAVO WALLET MANAGEMENT system web > Administration > System settings, input `package name` and `Signature keystore SHA1 fingerprint`, follow the instruction to retrieve an `API Code`.
+8. Edit `BuildConfig.json` ➜ `SERVICE_API_CODE` to fill in yout `API Code`
+9. Edit `BuildConfig.json` ➜ `WECHAT_APP_ID` to fill in yout `WeChat app id`
 
 # Features
 
