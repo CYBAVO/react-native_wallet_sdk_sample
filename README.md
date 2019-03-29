@@ -81,7 +81,7 @@ We provide VAULT, wallet, ledger service for cryptocurrency. Trusted by many exc
 
 # Features
 
-- Sign in / Sign up with 3rd-party account system - Google Account
+- Sign in / Sign up with 3rd-party account system - Google, WeChat(微信)
 - Wallet Creation / Editing
 - Wallet Deposit / Withdrawal
 - Transaction History query
