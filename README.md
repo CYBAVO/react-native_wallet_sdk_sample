@@ -77,7 +77,7 @@ We provide VAULT, wallet, ledger service for cryptocurrency. Trusted by many exc
 6. Edit `BuildConfig.json` ➜ `SERVICE_ENDPOINT` to point to your Wallet Service endpoont
 7. Register your app on CYBAVO WALLET MANAGEMENT system web > Administration > System settings, input `package name` and `Signature keystore SHA1 fingerprint`, follow the instruction to retrieve an `API Code`.
 8. Edit `BuildConfig.json` ➜ `SERVICE_API_CODE` to fill in yout `API Code`
-9. Edit `BuildConfig.json` ➜ `WECHAT_APP_ID` to fill in yout `WeChat app id`
+9. Edit `BuildConfig.json` ➜ `WECHAT_SIGN_IN_APP_ID` to fill in yout `WeChat app id`
 
 # Features
 
