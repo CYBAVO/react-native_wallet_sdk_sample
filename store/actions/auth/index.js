@@ -96,10 +96,6 @@ export function signIn(identityProvider) {
         console.log('auth.signOut... Done');
         dispatch({ type: AUTH_ERROR, error });
       }
-      console.log('auth.signOut#2...');
-      await idProvider.signOut();
-      console.log('auth.signOut#2... Done');
-      dispatch({ type: AUTH_ERROR, error });
     }
     dispatch({ type: AUTH_LOADING, loading: false });
     console.log('signIn... Done');
