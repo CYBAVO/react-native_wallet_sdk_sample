@@ -66,7 +66,7 @@ We provide VAULT, wallet, ledger service for cryptocurrency. Trusted by many exc
    ```
    yarn install
    ```
-3. Edit `android/local.properties` to config Maven repository URL / credentials provided by CYBAVO
+3. Edit or create `android/local.properties` to config Maven repository URL / credentials provided by CYBAVO
    ```
    walletsdk.maven.url=$MAVEN_REPO_URL
    walletsdk.maven.username=$MAVEN_REPO_USRENAME
