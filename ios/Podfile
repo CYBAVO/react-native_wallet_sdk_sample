@@ -1,0 +1,73 @@
+use_frameworks!
+platform :ios, '11.0'
+
+source 'https://github.com/CocoaPods/Specs.git'
+source 'https://bitbucket.org/cybavo/Specs.git'
+
+target 'CybavoWalletExample' do
+
+  pod 'React', :path => '../node_modules/react-native', :subspecs => [
+    'Core',
+    'CxxBridge',
+    'DevSupport',
+    'RCTText',
+    'RCTImage',
+    'RCTNetwork',
+    'RCTWebSocket',
+    'RCTSettings',
+    'RCTAnimation',
+    'RCTLinkingIOS',
+    'RCTVibration',
+  ]
+
+  pod "yoga", :path => "../node_modules/react-native/ReactCommon/yoga"
+  pod 'DoubleConversion', :podspec => '../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec'
+  pod 'glog', :podspec => '../node_modules/react-native/third-party-podspecs/glog.podspec'
+  pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
+
+  pod 'CybavoWalletService', :path => "../node_modules/@cybavo/react-native-wallet-service/ios/CybavoWalletService.podspec"
+  pod 'GoogleSignIn', '~> 4.4.0'
+  pod 'RNGoogleSignin', :path => '../node_modules/react-native-google-signin'
+  pod 'RNFS', :podspec => '../node_modules/react-native-fs/RNFS.podspec'
+  pod 'react-native-camera', :podspec => '../node_modules/react-native-camera/react-native-camera.podspec'
+  pod 'RNGestureHandler', :podspec => '../node_modules/react-native-gesture-handler/RNGestureHandler.podspec'
+  pod 'RNSVG', :podspec => '../node_modules/react-native-svg/RNSVG.podspec'
+  pod 'ReactNativePermissions', :podspec => '../node_modules/react-native-permissions/ReactNativePermissions.podspec'
+  pod 'RCTWeChat', :podspec => '../node_modules/react-native-wechat/ios/RCTWeChat.podspec'
+  
+  pre_install do |installer|
+    # workaround for https://github.com/CocoaPods/CocoaPods/issues/3289
+    Pod::Installer::Xcode::TargetValidator.send(:define_method, :verify_no_static_framework_transitive_dependencies) {}
+    installer.analysis_result.specifications.each do |s|
+      s.swift_version = '4.2.1' unless s.swift_version
+    end
+  end
+
+  def change_lines_in_file(file_path, &change)
+    print "Fixing #{file_path}...\n"
+
+    contents = []
+
+    file = File.open(file_path, 'r')
+    file.each_line do | line |
+        contents << line
+    end
+    file.close
+
+    File.open(file_path, 'w') do |f|
+        f.puts(change.call(contents))
+    end
+  end
+end
+
+post_install do |installer|
+  installer.pods_project.targets.each do |target|
+      if target.name == 'yoga'
+          target.build_configurations.each do |config|
+              config.build_settings['GCC_TREAT_WARNINGS_AS_ERRORS'] = 'NO'
+              config.build_settings['GCC_WARN_64_TO_32_BIT_CONVERSION'] = 'NO'
+          end
+      end
+  end
+end
+

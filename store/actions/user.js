@@ -1,3 +1,9 @@
+/**
+ * Copyright (c) 2019 CYBAVO, Inc.
+ * https://www.cybavo.com
+ *
+ * All rights reserved.
+ */
 import { Auth } from '@cybavo/react-native-wallet-service';
 // import NavigationService from '../../NavigationService';
 

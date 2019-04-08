@@ -1,5 +1,10 @@
+/**
+ * Copyright (c) 2019 CYBAVO, Inc.
+ * https://www.cybavo.com
+ *
+ * All rights reserved.
+ */
 import { WalletSdk, Auth } from '@cybavo/react-native-wallet-service';
-import { DeviceEventEmitter } from 'react-native';
 import NavigationService from '../../../NavigationService';
 import { COMMON_RESET } from '../common';
 import Google from './providers/google';
@@ -57,19 +62,25 @@ export function signIn(identityProvider) {
     console.log('signIn...', idProvider);
     dispatch({ type: AUTH_LOADING, loading: true });
     let userToken;
+    const identity = {
+      provider: identityProvider,
+      name: '',
+      email: '',
+      avatar: '',
+    };
     try {
       console.log('auth.signIn...');
       const { idToken, name, email, avatar } = await idProvider.signIn();
+      identity.name = name;
+      identity.email = email;
+      identity.avatar = avatar;
       console.log('auth.signIn...', idToken);
       userToken = idToken;
       console.log('signInWithToken...');
       await signInWithToken(userToken, identityProvider);
       dispatch({
         type: AUTH_UPDATE_IDENTITY,
-        provider: identityProvider,
-        name,
-        email,
-        avatar,
+        ...identity,
       });
       console.log('signInWithToken... Done');
     } catch (error) {
@@ -82,7 +93,10 @@ export function signIn(identityProvider) {
           console.log('signUpWithToken... Done');
           console.log('signInWithToken#2...');
           await signInWithToken(userToken, identityProvider);
-          dispatch({ type: AUTH_UPDATE_IDENTITY, identityProvider });
+          dispatch({
+            type: AUTH_UPDATE_IDENTITY,
+            ...identity,
+          });
           console.log('signInWithToken#2... Done');
         } catch (error) {
           console.log('signUp - signIn failed', error);
@@ -127,12 +141,9 @@ export function initAuth() {
     dispatch({ type: AUTH_LOADING, loading: false });
 
     // register evenrt listener
-    DeviceEventEmitter.addListener(
-      Auth.Events.onSignInStateChanged,
-      signInState => {
-        console.log('updateSignInState:', signInState);
-        dispatch(updateSignInState(signInState));
-      }
-    );
+    Auth.addListener(Auth.Events.onSignInStateChanged, signInState => {
+      console.log('updateSignInState:', signInState);
+      dispatch(updateSignInState(signInState));
+    });
   };
 }

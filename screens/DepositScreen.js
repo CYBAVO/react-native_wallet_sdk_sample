@@ -1,3 +1,9 @@
+/**
+ * Copyright (c) 2019 CYBAVO, Inc.
+ * https://www.cybavo.com
+ *
+ * All rights reserved.
+ */
 import React, { Component } from 'react';
 import { View, Clipboard, CameraRoll, PermissionsAndroid } from 'react-native';
 import {

@@ -60,7 +60,7 @@ A group of cybersecurity experts making crypto-currency wallet secure and usable
 We provide VAULT, wallet, ledger service for cryptocurrency. Trusted by many exchanges and stable-coin ico teams, please feel free to contact us when your company or business need any help in cryptocurrency operation.
 
 # Setup
-
+## Android
 1. Clone the source code from GitHub
 2. Install the dependencies
    ```
@@ -73,11 +73,38 @@ We provide VAULT, wallet, ledger service for cryptocurrency. Trusted by many exc
    walletsdk.maven.password=$MAVEN_REPO_PASSWORD
    ```
 4. Place your `google-services.json` file downloaded from Firebase to `android/app` [(LearnMore)](https://github.com/react-native-community/react-native-google-signin/blob/master/docs/get-config-file.md)
-5. Edit `BuildConfig.json` ➜ `GOOGLE_SIGN_IN_WEB_CLI_ID` to your Google sign-in client ID
+5. Edit `BuildConfig.json` ➜ `MY_GOOGLE_SIGN_IN_WEB_CLI_ID` to your Google sign-in client ID
 6. Edit `BuildConfig.json` ➜ `SERVICE_ENDPOINT` to point to your Wallet Service endpoont
 7. Register your app on CYBAVO WALLET MANAGEMENT system web > Administration > System settings, input `package name` and `Signature keystore SHA1 fingerprint`, follow the instruction to retrieve an `API Code`.
 8. Edit `BuildConfig.json` ➜ `SERVICE_API_CODE` to fill in yout `API Code`
 9. Edit `BuildConfig.json` ➜ `MY_WECHAT_SIGN_IN_APP_ID` to fill in yout `WeChat app id`
+## iOS
+1. Clone the source code from GitHub
+2. Install the dependencies
+   ```
+   yarn install
+   ```
+3. Place ssh key requested from CYBAVO to ~/.ssh/ (rename it if nessersary)
+4. Edit `node_modules/react-native-wechat/ios/RCTWeChat.podspec`. Modify below lines
+   ```
+    s.source_files  = "**/*.{h,m}"
+    s.vendored_libraries = "libWeChatSDK.a"
+    s.ios.frameworks = 'SystemConfiguration','CoreTelephony','XCTest'
+   ```
+   to
+   ```
+    s.source_files  = 'ios/*.{h,m}'
+    s.vendored_libraries = 'ios/libWeChatSDK.a'
+    s.ios.frameworks = 'SystemConfiguration','CoreTelephony'
+   ```
+   [(LearnMore)](https://github.com/yorkie/react-native-wechat/issues/446)
+5. Place your `GoogleService-Info.plist` file downloaded from Firebase to `ios/` [(LearnMore)](https://github.com/react-native-community/react-native-google-signin/blob/master/docs/get-config-file.md)
+6. Open your project configuration: double-click the project name in the left tree view. Select your app from the TARGETS section, then select the Info tab, and expand the URL Types section. Replace `Identifier` and `URL Schemes` with `CLIENT_ID" and `REVERSED_CLIENT_ID` in your `GoogleService-Info.plist`. [(LearnMore)](https://developers.google.com/identity/sign-in/ios/start-integrating)
+6. Edit `BuildConfig.json` ➜ `MY_GOOGLE_SIGN_IN_WEB_CLI_ID` to your Google sign-in client ID
+7. Edit `BuildConfig.json` ➜ `SERVICE_ENDPOINT` to point to your Wallet Service endpoont
+8. Register your app on CYBAVO WALLET MANAGEMENT system web > Administration > System settings, input `bundle id`, follow the instruction to retrieve an `API Code`.
+9. Edit `BuildConfig.json` ➜ `SERVICE_API_CODE` to fill in yout `API Code`
+19. Edit `BuildConfig.json` ➜ `MY_WECHAT_SIGN_IN_APP_ID` to fill in yout `WeChat app id`
 
 # Features
 

@@ -1,3 +1,9 @@
+/**
+ * Copyright (c) 2019 CYBAVO, Inc.
+ * https://www.cybavo.com
+ *
+ * All rights reserved.
+ */
 import React, { Component } from 'react';
 import { Provider } from 'react-redux';
 import { store, persistor } from './store';

@@ -1,3 +1,9 @@
+/**
+ * Copyright (c) 2019 CYBAVO, Inc.
+ * https://www.cybavo.com
+ *
+ * All rights reserved.
+ */
 export const Coin = {
   BTC: 0,
   LTC: 2,

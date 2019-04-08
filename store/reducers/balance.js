@@ -1,3 +1,9 @@
+/**
+ * Copyright (c) 2019 CYBAVO, Inc.
+ * https://www.cybavo.com
+ *
+ * All rights reserved.
+ */
 import { BALANCE_ENQUEUE, BALANCE_UPDATE_BALANCES } from '../actions/balance';
 import { COMMON_RESET } from '../actions/common';
 

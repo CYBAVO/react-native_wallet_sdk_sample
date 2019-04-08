@@ -1,3 +1,9 @@
+/**
+ * Copyright (c) 2019 CYBAVO, Inc.
+ * https://www.cybavo.com
+ *
+ * All rights reserved.
+ */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { View } from 'react-native';
@@ -24,7 +30,12 @@ const {
 class SignInScreen extends Component {
   static navigationOptions = ({ navigation }) => ({
     header: (
-      <Header noShadow>
+      <Header
+        noShadow
+        style={{
+          backgroundColor: colorPrimary,
+        }}
+      >
         <Right
           style={{
             flexDirection: 'column',
@@ -32,9 +43,9 @@ class SignInScreen extends Component {
           }}
         >
           <Text
-            style={{ color: 'white', opacity: 0.25, fontSize: 10 }}
+            style={{ color: 'white', opacity: 0.5, fontSize: 10 }}
           >{`${VERSION_NAME} (${VERSION_CODE}) - ${BUILD_TYPE}`}</Text>
-          <Text style={{ color: 'white', opacity: 0.25, fontSize: 10 }}>
+          <Text style={{ color: 'white', opacity: 0.5, fontSize: 10 }}>
             {SERVICE_ENDPOINT}
           </Text>
         </Right>

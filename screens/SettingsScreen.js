@@ -1,3 +1,9 @@
+/**
+ * Copyright (c) 2019 CYBAVO, Inc.
+ * https://www.cybavo.com
+ *
+ * All rights reserved.
+ */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { StyleSheet, Alert, View } from 'react-native';
@@ -118,7 +124,7 @@ class SettingsScreen extends Component {
                 )}
                 {!identity.avatar && (
                   <Text style={styles.dummyAvatar}>
-                    {!!identity.name ? identity.name[0] : '?'}
+                    {!!userState.realNme ? userState.realNme[0] : '?'}
                   </Text>
                 )}
               </Left>
@@ -128,12 +134,14 @@ class SettingsScreen extends Component {
                     <Text>{identity.provider}</Text>
                   </Badge>
                   <Text numberOfLines={1} ellipsizeMode="middle">
-                    {identity.name}
+                    {userState.realName}
                   </Text>
                 </View>
-                <Text note numberOfLines={1} ellipsizeMode="middle">
-                  {identity.email}
-                </Text>
+                {!!userState.email && (
+                  <Text note numberOfLines={1} ellipsizeMode="middle">
+                    {userState.email}
+                  </Text>
+                )}
               </Body>
               <Right>
                 <Button

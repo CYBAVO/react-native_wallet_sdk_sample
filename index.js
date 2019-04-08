@@ -1,3 +1,9 @@
+/**
+ * Copyright (c) 2019 CYBAVO, Inc.
+ * https://www.cybavo.com
+ *
+ * All rights reserved.
+ */
 import { WalletSdk } from '@cybavo/react-native-wallet-service';
 import { AppRegistry } from 'react-native';
 import AppWrapper from './AppWrapper';

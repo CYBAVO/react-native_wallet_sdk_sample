@@ -1,3 +1,9 @@
+/**
+ * Copyright (c) 2019 CYBAVO, Inc.
+ * https://www.cybavo.com
+ *
+ * All rights reserved.
+ */
 import { Wallets } from '@cybavo/react-native-wallet-service';
 
 export const WALLETS_LOADING = 'WALLETS_LOADING';

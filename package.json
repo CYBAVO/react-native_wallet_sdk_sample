@@ -7,14 +7,14 @@
     "test": "jest"
   },
   "dependencies": {
-    "@cybavo/react-native-wallet-service": "^1.1.0",
+    "@cybavo/react-native-wallet-service": "~1.1.26",
     "moment": "^2.24.0",
     "native-base": "^2.12.1",
     "prop-types": "^15.7.2",
     "react": "16.8.3",
     "react-art": "^16.8.4",
     "react-dom": "^16.8.4",
-    "react-native": "0.59.0",
+    "react-native": "0.59.2",
     "react-native-camera": "^2.1.0",
     "react-native-easy-grid": "^0.2.1",
     "react-native-fs": "^2.13.3",

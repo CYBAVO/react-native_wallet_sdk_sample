@@ -1,3 +1,9 @@
+/**
+ * Copyright (c) 2019 CYBAVO, Inc.
+ * https://www.cybavo.com
+ *
+ * All rights reserved.
+ */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { View, ActivityIndicator } from 'react-native';
@@ -249,20 +255,24 @@ class WalletDetailScreen extends Component {
                 </Text>
               </View>
 
-              <Footer style={{ elevation: 0 }}>
-                <FooterTab>
-                  <Button onPress={this._goDeposit}>
-                    <Text style={{ fontSize: 14, color: 'white' }}>
-                      Deposit
-                    </Text>
-                  </Button>
-                  <Button onPress={this._goWithdraw}>
-                    <Text style={{ fontSize: 14, color: 'white' }}>
-                      Withdraw
-                    </Text>
-                  </Button>
-                </FooterTab>
-              </Footer>
+              <View style={{ flexDirection: 'row', alignItems: 'stretch' }}>
+                <Button
+                  full
+                  transparent
+                  onPress={this._goDeposit}
+                  style={{ flex: 1 }}
+                >
+                  <Text style={{ fontSize: 14, color: 'white' }}>Deposit</Text>
+                </Button>
+                <Button
+                  full
+                  transparent
+                  onPress={this._goWithdraw}
+                  style={{ flex: 1 }}
+                >
+                  <Text style={{ fontSize: 14, color: 'white' }}>Withdraw</Text>
+                </Button>
+              </View>
             </Row>
             <Row size={2}>
               <Col>

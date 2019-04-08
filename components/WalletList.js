@@ -1,3 +1,9 @@
+/**
+ * Copyright (c) 2019 CYBAVO, Inc.
+ * https://www.cybavo.com
+ *
+ * All rights reserved.
+ */
 import React, { Component } from 'react';
 import { FlatList } from 'react-native';
 import { ListItem, Text, Icon, Left, Right, Body } from 'native-base';

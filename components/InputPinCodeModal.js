@@ -1,3 +1,9 @@
+/**
+ * Copyright (c) 2019 CYBAVO, Inc.
+ * https://www.cybavo.com
+ *
+ * All rights reserved.
+ */
 import React, { Component } from 'react';
 import { ActivityIndicator } from 'react-native';
 import { Button, Text, Body, Card, CardItem, Item, Input } from 'native-base';

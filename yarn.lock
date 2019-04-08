@@ -582,9 +582,9 @@
     exec-sh "^0.3.2"
     minimist "^1.2.0"
 
-"@cybavo/react-native-wallet-service@^1.1.0":
-  version "1.1.21"
-  resolved "https://registry.yarnpkg.com/@cybavo/react-native-wallet-service/-/react-native-wallet-service-1.1.21.tgz#a4200dc8e1185a2c68e777e24c0bfa2fa91371e3"
+"@cybavo/react-native-wallet-service@^1.1.25":
+  version "1.1.26"
+  resolved "https://registry.yarnpkg.com/@cybavo/react-native-wallet-service/-/react-native-wallet-service-1.1.26.tgz#df4b3c0fe1e51b0c76e88c0e3c052b7d876c9dee"
 
 "@jest/console@^24.3.0":
   version "24.3.0"
@@ -5254,8 +5254,8 @@ react-native-gesture-handler@^1.1.0:
     prop-types "^15.5.10"
 
 react-native-google-signin@^1.2.1:
-  version "1.2.1"
-  resolved "https://registry.yarnpkg.com/react-native-google-signin/-/react-native-google-signin-1.2.1.tgz#c4d442c24039ba3ef6983aab18cf13991a29a71f"
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/react-native-google-signin/-/react-native-google-signin-1.2.2.tgz#8131b3f0668b3dc96f963835ae821613f022070f"
 
 react-native-iphone-x-helper@^1.0.3:
   version "1.2.0"
@@ -5342,9 +5342,9 @@ react-native-wechat@^1.9.10:
   dependencies:
     events "1.0.2"
 
-react-native@0.59.0:
-  version "0.59.0"
-  resolved "https://registry.yarnpkg.com/react-native/-/react-native-0.59.0.tgz#7d0ad297da3fd2e18f387f0ef5581270aaabac42"
+react-native@0.59.2:
+  version "0.59.2"
+  resolved "https://registry.yarnpkg.com/react-native/-/react-native-0.59.2.tgz#c2e2d9e185b04e54948f170841d97c24661a0fa9"
   dependencies:
     "@babel/runtime" "^7.0.0"
     "@react-native-community/cli" "^1.2.1"
