@@ -117,9 +117,11 @@ class MainScreen extends Component {
 
   render() {
     const { userState, wallets, walletsLoading } = this.props;
+    const hasWallet = wallets && wallets.length > 0;
     return (
       <Container>
-        {userState.setPin === false && (
+        {/* No PIN */}
+        {!userState.setPin && (
           <Content
             contentContainerStyle={{
               flex: 1,
@@ -150,7 +152,39 @@ class MainScreen extends Component {
             </Button>
           </Content>
         )}
-        {userState.setPin !== false && (
+        {/* No Wallets */}
+        {userState.setPin && wallets && wallets.length === 0 && (
+          <Content
+            contentContainerStyle={{
+              flex: 1,
+              justifyContent: 'center',
+            }}
+          >
+            <Button
+              transparent
+              style={{
+                height: 'auto',
+                alignSelf: 'center',
+                flexDirection: 'column',
+                alignItems: 'center',
+              }}
+              onPress={this._goCreateWallet}
+            >
+              <Icon
+                name="bulb"
+                style={{ fontSize: 128, color: colorPrimary, opacity: 0.5 }}
+              />
+              <Text
+                style={{
+                  color: colorPrimary,
+                }}
+              >
+                Create a wallet now!
+              </Text>
+            </Button>
+          </Content>
+        )}
+        {userState.setPin && wallets && wallets.length > 0 && (
           <WalletList
             wallets={wallets}
             onWalletPress={this._goWalletDetail}

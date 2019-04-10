@@ -65,13 +65,13 @@ class CreateWalletScreen extends Component {
   };
 
   _getAvailableCurrencies = () => {
-    const { wallets, currencies } = this.props;
-    if (!wallets || !wallets.length || !currencies || !currencies.length) {
+    const { wallets = [], currencies } = this.props;
+    if (!currencies || !currencies.length) {
       return [];
     }
     return currencies.filter(
       currency =>
-        !wallets.find(
+        !(wallets || []).find(
           wallet =>
             wallet.currency === currency.currency &&
             wallet.tokenAddress === currency.tokenAddress

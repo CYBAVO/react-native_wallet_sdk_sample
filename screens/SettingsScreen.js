@@ -109,7 +109,8 @@ class SettingsScreen extends Component {
   };
 
   render() {
-    const { userState, identity } = this.props;
+    const { userState, hasWallet, identity } = this.props;
+
     return (
       <Container>
         <Content>
@@ -175,27 +176,27 @@ class SettingsScreen extends Component {
                 </Body>
               </ListItem>
             )}
+            {/* Setup/Change securiry question -- must has a wallet */}
+            {hasWallet && (
+              <ListItem avatar button onPress={this._goSetupSecurityQuestions}>
+                <Left>
+                  <Icon name="help-buoy" style={styles.icon} />
+                </Left>
+                <Body>
+                  <Text>
+                    {userState.setSecurityQuestions
+                      ? 'Change security questions'
+                      : 'Setup security questions'}
+                  </Text>
+                  <Text note>
+                    Security questions is required when PIN code restoration
+                  </Text>
+                </Body>
+              </ListItem>
+            )}
+            {/* change PIN code with current PIN code -- must has PIN code */}
             {userState.setPin && (
               <>
-                <ListItem
-                  avatar
-                  button
-                  onPress={this._goSetupSecurityQuestions}
-                >
-                  <Left>
-                    <Icon name="help-buoy" style={styles.icon} />
-                  </Left>
-                  <Body>
-                    <Text>
-                      {userState.setSecurityQuestions
-                        ? 'Change security questions'
-                        : 'Setup security questions'}
-                    </Text>
-                    <Text note>
-                      Security questions is required when PIN code restoration
-                    </Text>
-                  </Body>
-                </ListItem>
                 <ListItem avatar button onPress={this._goChangePinCode}>
                   <Left>
                     <Icon name="refresh" style={styles.icon} />
@@ -205,20 +206,21 @@ class SettingsScreen extends Component {
                     <Text note>Change your PIN code to another one</Text>
                   </Body>
                 </ListItem>
-                <ListItem avatar button onPress={this._goForgotPinCode}>
-                  <Left>
-                    <Icon name="lock" style={styles.icon} />
-                  </Left>
-                  <Body>
-                    <Text>Forgot PIN code</Text>
-                    <Text note>
-                      Restore your PIN code by answering security questions
-                    </Text>
-                  </Body>
-                </ListItem>
               </>
             )}
-
+            {userState.setPin && (
+              <ListItem avatar button onPress={this._goForgotPinCode}>
+                <Left>
+                  <Icon name="lock" style={styles.icon} />
+                </Left>
+                <Body>
+                  <Text>Forgot PIN code</Text>
+                  <Text note>
+                    Restore your PIN code by answering security questions
+                  </Text>
+                </Body>
+              </ListItem>
+            )}
             <ListItem itemHeader>
               <Text style={styles.header}>Development</Text>
             </ListItem>
@@ -263,6 +265,7 @@ const mapStateToProps = (state, ownProps) => {
     userState: state.user.userState,
     signInState: state.auth.signInState,
     identity: state.auth.identity,
+    hasWallet: state.wallets.wallets && state.wallets.wallets.length > 0,
   };
 };
 

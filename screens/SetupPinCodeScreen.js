@@ -69,6 +69,13 @@ class SetupPinCodeScreen extends Component {
     this.setState({ loading: false });
   };
 
+  _goCreateWallet = () => {
+    const { navigation } = this.props;
+    navigation.replace({
+      routeName: 'CreateWallet',
+    });
+  };
+
   _goSetupSecurityQuestions = () => {
     const { pinCode } = this.state;
     const { navigation } = this.props;
@@ -128,15 +135,10 @@ class SetupPinCodeScreen extends Component {
         {userState.setPin && (
           <>
             <Text style={{ color: colorPrimary, marginBottom: 16 }}>
-              PIN code setup successfully. We strongly encourage you to create
-              your security questions to protect your wallet!
+              PIN code setup successfully. Do you want to create a wallet now?
             </Text>
-            <Button
-              full
-              disabled={loading}
-              onPress={this._goSetupSecurityQuestions}
-            >
-              <Text>Setup security questions now</Text>
+            <Button full disabled={loading} onPress={this._goCreateWallet}>
+              <Text>Create Wallet Now</Text>
             </Button>
             <Button full transparent disabled={loading} onPress={this._quit}>
               <Text>Skip</Text>
