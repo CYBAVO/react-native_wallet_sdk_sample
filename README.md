@@ -98,13 +98,18 @@ We provide VAULT, wallet, ledger service for cryptocurrency. Trusted by many exc
     s.ios.frameworks = 'SystemConfiguration','CoreTelephony'
    ```
    [(LearnMore)](https://github.com/yorkie/react-native-wechat/issues/446)
-5. Place your `GoogleService-Info.plist` file downloaded from Firebase to `ios/` [(LearnMore)](https://github.com/react-native-community/react-native-google-signin/blob/master/docs/get-config-file.md)
-6. Open your project configuration: double-click the project name in the left tree view. Select your app from the TARGETS section, then select the Info tab, and expand the URL Types section. Replace `Identifier` and `URL Schemes` with `CLIENT_ID" and `REVERSED_CLIENT_ID` in your `GoogleService-Info.plist`. [(LearnMore)](https://developers.google.com/identity/sign-in/ios/start-integrating)
-7. Edit `BuildConfig.json` ➜ `MY_GOOGLE_SIGN_IN_WEB_CLI_ID` to your Google sign-in client ID
-8. Edit `BuildConfig.json` ➜ `SERVICE_ENDPOINT` to point to your Wallet Service endpoont
-9. Register your app on CYBAVO WALLET MANAGEMENT system web > Administration > System settings, input `bundle id`, follow the instruction to retrieve an `API Code`.
-10. Edit `BuildConfig.json` ➜ `SERVICE_API_CODE` to fill in yout `API Code`
-11. Edit `BuildConfig.json` ➜ `MY_WECHAT_SIGN_IN_APP_ID` to fill in yout `WeChat app id`
+5. Install Pods
+   ```shell
+   cd ios/
+   pod install
+   ```
+6. Place your `GoogleService-Info.plist` file downloaded from Firebase to `ios/` [(LearnMore)](https://github.com/react-native-community/react-native-google-signin/blob/master/docs/get-config-file.md)
+7. Open your project configuration: double-click the project name in the left tree view. Select your app from the TARGETS section, then select the Info tab, and expand the URL Types section. Replace `Identifier` and `URL Schemes` with `CLIENT_ID" and `REVERSED_CLIENT_ID` in your `GoogleService-Info.plist`. [(LearnMore)](https://developers.google.com/identity/sign-in/ios/start-integrating)
+8. Edit `BuildConfig.json` ➜ `MY_GOOGLE_SIGN_IN_WEB_CLI_ID` to your Google sign-in client ID
+9. Edit `BuildConfig.json` ➜ `SERVICE_ENDPOINT` to point to your Wallet Service endpoont
+10. Register your app on CYBAVO WALLET MANAGEMENT system web > Administration > System settings, input `bundle id`, follow the instruction to retrieve an `API Code`.
+11. Edit `BuildConfig.json` ➜ `SERVICE_API_CODE` to fill in yout `API Code`
+12. Edit `BuildConfig.json` ➜ `MY_WECHAT_SIGN_IN_APP_ID` to fill in yout `WeChat app id`
 
 # Features
 
