@@ -137,6 +137,7 @@ class SetupPinCodeScreen extends Component {
             <Input
               secureTextEntry
               keyboardType="number-pad"
+              returnKeyType='done'
               maxLength={RECOVERY_CODE_LENGTH}
               editable={!loading}
               value={recoveryCode}

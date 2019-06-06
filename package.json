@@ -14,9 +14,10 @@
     "react": "16.8.3",
     "react-art": "^16.8.4",
     "react-dom": "^16.8.4",
-    "react-native": "0.59.2",
+    "react-native": "0.59.0",
     "react-native-camera": "^2.1.0",
     "react-native-easy-grid": "^0.2.1",
+    "react-native-fbsdk": "^0.8.0",
     "react-native-fs": "^2.13.3",
     "react-native-gesture-handler": "^1.1.0",
     "react-native-google-signin": "^1.2.1",
@@ -60,5 +61,8 @@
   },
   "jest": {
     "preset": "react-native"
+  },
+  "resolutions": {
+    "istanbul-reports/handlebars": "^4.1.2"
   }
 }

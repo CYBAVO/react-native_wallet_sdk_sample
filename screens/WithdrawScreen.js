@@ -299,6 +299,7 @@ export default class WithdrawScreen extends Component {
             <Input
               style={styles.input}
               keyboardType="number-pad"
+              returnKeyType='done'
               placeholder={'Amount to withdraw deposit'}
               placeholderTextColor={placeholderTextColor}
               editable={!loading}

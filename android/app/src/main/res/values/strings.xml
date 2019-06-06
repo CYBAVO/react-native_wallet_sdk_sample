@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">Cybavo Wallet Example</string>
+    <string name="facebook_app_id" translatable="false">MY_FACEBOOK_APP_ID</string>
+    <string name="fb_login_protocol_scheme" translatable="false">fbMY_FACEBOOK_APP_ID</string>
+    <string name="line_channel_id" translatable="false">MY_LINE_CHANNEL_ID</string>
 </resources>

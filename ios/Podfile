@@ -35,6 +35,13 @@ target 'CybavoWalletExample' do
   pod 'ReactNativePermissions', :podspec => '../node_modules/react-native-permissions/ReactNativePermissions.podspec'
   pod 'RCTWeChat', :podspec => '../node_modules/react-native-wechat/ios/RCTWeChat.podspec'
   
+  pod 'react-native-fbsdk', :path => '../node_modules/react-native-fbsdk'
+  pod 'FBSDKCoreKit', '~> 4.42.0'
+  pod 'FBSDKLoginKit', '~> 4.42.0'
+  pod 'FBSDKShareKit', '~> 4.42.0'
+
+  pod 'LineSDK', '~> 5.0.0'
+
   pre_install do |installer|
     # workaround for https://github.com/CocoaPods/CocoaPods/issues/3289
     Pod::Installer::Xcode::TargetValidator.send(:define_method, :verify_no_static_framework_transitive_dependencies) {}

@@ -114,6 +114,7 @@ class SetupPinCodeScreen extends Component {
             <Input
               secureTextEntry
               keyboardType="number-pad"
+              returnKeyType='done'
               maxLength={PIN_CODE_LENGTH}
               editable={!loading && !userState.setPin}
               value={pinCode}

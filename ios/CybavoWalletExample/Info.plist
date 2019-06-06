@@ -8,6 +8,8 @@
 	<string>Cybavo Wallet Example</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
+	<key>CFBundleIconName</key>
+	<string>AppIcon</string>
 	<key>CFBundleIdentifier</key>
 	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
@@ -40,16 +42,41 @@
 				<string>MY_WECHAT_SIGN_IN_APP_ID</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>fbMY_FACEBOOK_SIGN_IN_APP_ID</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>MY_LINE_CHANNEL_SCHEME</string>
+			</array>
+		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>
+	<key>FacebookAppID</key>
+	<string>MY_FACEBOOK_SIGN_IN_APP_ID</string>
+	<key>FacebookDisplayName</key>
+	<string>CYBAVO Wallet</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
+		<string>lineauth2</string>
 		<string>weixin</string>
-		<string>wechat</string>
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>LineSDKConfig</key>
+	<dict>
+		<key>ChannelID</key>
+		<string>MY_LINE_CHANNEL_ID</string>
+	</dict>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>
@@ -63,12 +90,26 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>NSAppleMusicUsageDescription</key>
+	<string>Not supposed to see this</string>
+	<key>NSBluetoothPeripheralUsageDescription</key>
+	<string>Not supposed to see this</string>
+	<key>NSCalendarsUsageDescription</key>
+	<string>Not supposed to see this</string>
 	<key>NSCameraUsageDescription</key>
 	<string>Scan QR Code</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Not supposed to see this</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string></string>
+	<string>Not supposed to see this</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Scan QR Code</string>
+	<key>NSMotionUsageDescription</key>
+	<string>Not supposed to see this</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Not supposed to see this</string>
+	<key>NSSpeechRecognitionUsageDescription</key>
+	<string>Not supposed to see this</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>AntDesign.ttf</string>
@@ -99,10 +140,10 @@
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>kTCCServiceMediaLibrary</key>
+	<string>Not supposed to see this</string>
 </dict>
 </plist>

@@ -11,6 +11,9 @@
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
 #import <React/RCTLinkingManager.h>
+#import <FBSDKLoginKit/FBSDKLoginKit.h>
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import <LineSDK/LineSDK.h>
 
 @implementation AppDelegate
 
@@ -28,6 +31,7 @@
   rootViewController.view = rootView;
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
+  
   return YES;
 }
 
@@ -43,14 +47,32 @@
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url
   sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 {
-  return [RCTLinkingManager application:application openURL:url
-                      sourceApplication:sourceApplication annotation:annotation];
+  BOOL handledFB = [[FBSDKApplicationDelegate sharedInstance] application:application
+                                                                  openURL:url
+                                                        sourceApplication:sourceApplication
+                                                               annotation:annotation
+                    ];
+  
+  BOOL handledRCT = [RCTLinkingManager application:application openURL:url sourceApplication:sourceApplication annotation:annotation];
+  
+  return handledFB || handledRCT;
 }
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url
             options:(NSDictionary<NSString*, id> *)options
 {
-  return [RCTLinkingManager application:application openURL:url options:options];
+  BOOL handledFB = [[FBSDKApplicationDelegate sharedInstance] application:application
+                           didFinishLaunchingWithOptions:options];
+  if(handledFB){
+    return TRUE;
+  }
+  BOOL handledLINE =  [[LineSDKLogin sharedInstance] handleOpenURL:url];
+  if(handledLINE){
+    return TRUE;
+  }
+  BOOL handledRCT = [RCTLinkingManager application:application openURL:url options:options];
+  
+  return handledRCT;
 }
 
 @end

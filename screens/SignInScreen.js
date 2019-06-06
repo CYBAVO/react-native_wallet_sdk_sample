@@ -61,7 +61,7 @@ class SignInScreen extends Component {
   };
 
   render() {
-    const { loading, googleSignIn, wechatSignIn } = this.props;
+    const { loading, googleSignIn, wechatSignIn, facebookSignIn, lineSignIn } = this.props;
 
     return (
       <Container>
@@ -122,6 +122,35 @@ class SignInScreen extends Component {
             onPress={googleSignIn}
             disabled={loading}
           />
+          <Button
+            full
+            style={{ margin: 4, height: 40 }}
+            onPress={facebookSignIn}
+            disabled={loading}
+          >
+            <View
+              style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}
+            >
+              <Icon type="MaterialCommunityIcons" name="facebook" backgroundColor="#3b5998" />
+              <Text style={{ flex: 1, textAlign: 'center' }}>
+                Sign in with Facebook
+              </Text>
+            </View>
+          </Button>
+          <Button
+            full
+            style={{ margin: 4, height: 40, backgroundColor: "#00c300" }}
+            onPress={lineSignIn}
+            disabled={loading}
+          >
+            <View
+              style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}
+            >
+              <Text style={{ flex: 1, textAlign: 'center' }}>
+                Sign in with LINE
+              </Text>
+            </View>
+          </Button>
         </View>
       </Container>
     );
@@ -140,6 +169,8 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     googleSignIn: () => dispatch(signIn('Google')),
     wechatSignIn: () => dispatch(signIn('WeChat')),
+    facebookSignIn: () => dispatch(signIn('Facebook')),
+    lineSignIn: () => dispatch(signIn('LINE')),
   };
 };
 

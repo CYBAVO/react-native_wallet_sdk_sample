@@ -9,6 +9,8 @@ import NavigationService from '../../../NavigationService';
 import { COMMON_RESET } from '../common';
 import Google from './providers/google';
 import WeChat from './providers/wechat';
+import Facebook from './providers/facebook';
+import LINE from './providers/LINE';
 
 const { ErrorCodes } = WalletSdk;
 
@@ -54,6 +56,8 @@ function updateSignInState(signInState) {
 const IDENTITY_PROVIDERS = {
   Google: Google,
   WeChat: WeChat,
+  Facebook: Facebook,
+  LINE: LINE,
 };
 
 export function signIn(identityProvider) {
