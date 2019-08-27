@@ -27,6 +27,7 @@ import RestorePinCodeScreen from './screens/RestorePinCodeScreen';
 import RecoverPinCodeScreen from './screens/RecoverPinCodeScreen';
 import ResetPinCodeScreen from './screens/ResetPinCodeScreen';
 import SessionExpiredScreen from './screens/SessionExpiredScreen';
+import EosResourceScreen from './screens/EosResourceScreen';
 
 const MainStack = createStackNavigator({
   Main: MainScreen,
@@ -43,6 +44,7 @@ const MainStack = createStackNavigator({
   Deposit: DepositScreen,
   Withdraw: WithdrawScreen,
   Scan: ScanScreen,
+  EosResource: EosResourceScreen,
 
   // Settings
   Settings: SettingsScreen,

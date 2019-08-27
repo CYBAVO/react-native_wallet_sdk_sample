@@ -26,7 +26,7 @@ import {
 import { WalletSdk, Wallets } from '@cybavo/react-native-wallet-service';
 import CurrencyIcon from '../components/CurrencyIcon';
 import CurrencyText from '../components/CurrencyText';
-import { colorPrimary, colorAccent } from '../Constants';
+import { colorPrimary, colorAccent, Coin } from '../Constants';
 import Balance from '../components/Balance';
 import InputPinCodeModal from '../components/InputPinCodeModal';
 import { toastError } from '../Helpers';
@@ -45,6 +45,10 @@ const styles = StyleSheet.create({
 const ACTION_WITHDRAW = 'withdraw';
 const ACTION_SECURE_TOKEN = 'secure_token';
 
+const hasMemo = wallet => {
+  return [Coin.EOS, Coin.XRP].includes(wallet.currency);
+};
+
 export default class WithdrawScreen extends Component {
   static navigationOptions = ({ navigation }) => ({
     header: (
@@ -55,7 +59,7 @@ export default class WithdrawScreen extends Component {
           </Button>
         </Left>
         <Body>
-          <Title>Deposit</Title>
+          <Title>Withdraw</Title>
         </Body>
         <Right />
       </Header>
@@ -65,6 +69,7 @@ export default class WithdrawScreen extends Component {
   state = {
     outgoingAddress: '',
     amout: '',
+    memo: '',
     selectedFee: null,
     pinCode: '',
     fee: null,
@@ -124,10 +129,19 @@ export default class WithdrawScreen extends Component {
   };
 
   _createTransaction = async pinCode => {
-    const { outgoingAddress, amount, selectedFee, fee } = this.state;
+    const { outgoingAddress, amount, selectedFee, fee, memo } = this.state;
     const { navigation } = this.props;
     const wallet = navigation.state.params.wallet;
     const transactionFee = fee[selectedFee];
+
+    let extras = {};
+    if (hasMemo(wallet)) {
+      extras = {
+        ...extras,
+        memo,
+      };
+    }
+
     this.setState({ loading: true });
     try {
       await Wallets.createTransaction(
@@ -136,7 +150,8 @@ export default class WithdrawScreen extends Component {
         amount,
         transactionFee ? transactionFee.amount : '0',
         '',
-        pinCode
+        pinCode,
+        extras
       );
       navigation.goBack();
     } catch (error) {
@@ -151,10 +166,19 @@ export default class WithdrawScreen extends Component {
   };
 
   _createTransactionWithSecureToken = async requestToken => {
-    const { outgoingAddress, amount, selectedFee, fee } = this.state;
+    const { outgoingAddress, amount, selectedFee, fee, memo } = this.state;
     const { navigation } = this.props;
     const wallet = navigation.state.params.wallet;
     const transactionFee = fee[selectedFee];
+
+    let extras = {};
+    if (hasMemo(wallet)) {
+      extras = {
+        ...extras,
+        memo,
+      };
+    }
+
     this.setState({ loading: true });
     try {
       await Wallets.createTransaction(
@@ -162,7 +186,9 @@ export default class WithdrawScreen extends Component {
         outgoingAddress,
         amount,
         transactionFee ? transactionFee.amount : '0',
-        ''
+        '',
+        undefined, // no pin code for secure token
+        extras
       );
       navigation.goBack();
     } catch (error) {
@@ -187,6 +213,7 @@ export default class WithdrawScreen extends Component {
       loading,
       outgoingAddress,
       amount,
+      memo,
       selectedFee,
       fee,
       usage,
@@ -299,7 +326,7 @@ export default class WithdrawScreen extends Component {
             <Input
               style={styles.input}
               keyboardType="number-pad"
-              returnKeyType='done'
+              returnKeyType="done"
               placeholder={'Amount to withdraw deposit'}
               placeholderTextColor={placeholderTextColor}
               editable={!loading}
@@ -307,6 +334,24 @@ export default class WithdrawScreen extends Component {
               onChangeText={amount => this.setState({ amount })}
             />
           </Item>
+
+          {hasMemo(wallet) && (
+            <Item stackedLabel>
+              <Label style={styles.label}>Memo</Label>
+
+              <Input
+                style={styles.input}
+                keyboardType="email-address"
+                returnKeyType="done"
+                placeholder={'Memo / dst.tag for this transaction…'}
+                placeholderTextColor={placeholderTextColor}
+                editable={!loading}
+                value={memo}
+                onChangeText={memo => this.setState({ memo })}
+              />
+            </Item>
+          )}
+
           <Item stackedLabel>
             <Label style={styles.label}>Transaction fee</Label>
 

@@ -181,7 +181,13 @@ class VerifySecurityQuestionsScreen extends Component {
           disabled={loading}
           onPress={this._goRecoverPinCode}
         >
-          <Text>I Don't remember my answers…</Text>
+          <Text
+            style={{
+              color: 'white',
+            }}
+          >
+            I Don't remember my answers…
+          </Text>
         </Button>
         <Button
           full

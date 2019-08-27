@@ -117,6 +117,9 @@ class SetupPinCodeScreen extends Component {
             onPress={this._forgotPinCode}
           >
             <Icon
+              style={{
+                color: 'white',
+              }}
               name={
                 !!handleNum ? 'ios-checkmark-circle-outline' : 'ios-help-buoy'
               }
@@ -137,7 +140,7 @@ class SetupPinCodeScreen extends Component {
             <Input
               secureTextEntry
               keyboardType="number-pad"
-              returnKeyType='done'
+              returnKeyType="done"
               maxLength={RECOVERY_CODE_LENGTH}
               editable={!loading}
               value={recoveryCode}

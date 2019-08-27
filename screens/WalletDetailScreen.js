@@ -17,8 +17,6 @@ import {
   Icon,
   Left,
   Right,
-  Footer,
-  FooterTab,
   Badge,
   Card,
   CardItem,
@@ -32,7 +30,7 @@ import { fetchWallet, fetchBalance } from '../store/actions';
 import CurrencyText from '../components/CurrencyText';
 import Balance from '../components/Balance';
 import TransactionList from '../components/TransactionList';
-import { colorPrimary, colorAccent } from '../Constants';
+import { colorPrimary, colorAccent, Coin } from '../Constants';
 import { toastError } from '../Helpers';
 
 class WalletDetailScreen extends Component {
@@ -48,6 +46,11 @@ class WalletDetailScreen extends Component {
           <Title>{navigation.state.params.wallet.name}</Title>
         </Body>
         <Right>
+          {Coin.EOS === navigation.state.params.wallet.currency && (
+            <Button transparent onPress={navigation.getParam('goEosResource')}>
+              <Icon name="stats" />
+            </Button>
+          )}
           <Button transparent onPress={navigation.getParam('renameWallet')}>
             <Icon name="create" />
           </Button>
@@ -68,6 +71,8 @@ class WalletDetailScreen extends Component {
   componentDidMount = () => {
     const { navigation, fetchWallet, fetchBalance } = this.props;
     navigation.setParams({ renameWallet: this._renameWallet });
+    navigation.setParams({ goEosResource: this._goEosResource });
+
     const wallet = navigation.state.params.wallet;
     if (!wallet) {
       console.warn('No wallet specified');
@@ -190,6 +195,16 @@ class WalletDetailScreen extends Component {
     });
     // update title
     navigation.setParams({ wallet: this.props.wallet });
+  };
+
+  _goEosResource = () => {
+    const { navigation, wallet } = this.props;
+    navigation.navigate({
+      routeName: 'EosResource',
+      params: {
+        wallet,
+      },
+    });
   };
 
   render() {

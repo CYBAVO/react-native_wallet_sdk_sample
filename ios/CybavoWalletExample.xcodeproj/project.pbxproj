@@ -5,7 +5,6 @@
 	};
 	objectVersion = 46;
 	objects = {
-
 /* Begin PBXBuildFile section */
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB11A68108700A75B9A /* LaunchScreen.xib */; };
@@ -29,6 +28,9 @@
 		BFDAF8AC22545A5500CD1801 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = BFDAF8AB22545A5500CD1801 /* libsqlite3.0.tbd */; };
 		BFDAF8AE22545A6200CD1801 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = BFDAF8AD22545A6200CD1801 /* libc++.tbd */; };
 		BFDAF8B022545A6A00CD1801 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = BFDAF8AF22545A6A00CD1801 /* libz.tbd */; };
+		BFE7C5202279ADC80065BE32 /* LineSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFE7C51F2279ADC80065BE32 /* LineSDK.framework */; };
+		BFE7C5232279ADDE0065BE32 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFE7C5222279ADDE0065BE32 /* Security.framework */; };
+		BFE7C5392279AFDA0065BE32 /* LineLoginManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BFE7C5382279AFDA0065BE32 /* LineLoginManager.m */; };
 		C33B358384F64CB897C99460 /* FontAwesome5_Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5C0D9F4FD2B0490FB203EE74 /* FontAwesome5_Regular.ttf */; };
 		CBAA5DC82AD649D29A043EA4 /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 37F5F8AB16AB49B0B7A00784 /* EvilIcons.ttf */; };
 		DBA91F99FA4E4F2596DFB8B5 /* FontAwesome5_Solid.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C8542C09D1EA4530B6BB25CB /* FontAwesome5_Solid.ttf */; };
@@ -37,6 +39,7 @@
 		ED1D301263CB4681A5C52389 /* Roboto_medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BA603892E3B64D8988F0619D /* Roboto_medium.ttf */; };
 		ED297163215061F000B7C4FE /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED297162215061F000B7C4FE /* JavaScriptCore.framework */; };
 		EE5F38A2ECC842D3A3C9FF08 /* AntDesign.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B7B8495EFE03487F811A72D2 /* AntDesign.ttf */; };
+		3573FDF682A24E2C93870859 /* libCybavoWalletService.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 60CF3BB30D69493AAD71EAF1 /* libCybavoWalletService.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -75,14 +78,20 @@
 		BFDAF8AB22545A5500CD1801 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
 		BFDAF8AD22545A6200CD1801 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		BFDAF8AF22545A6A00CD1801 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		BFE7C51F2279ADC80065BE32 /* LineSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LineSDK.framework; path = Pods/LineSDK/LineSDK/LineSDK.framework; sourceTree = "<group>"; };
+		BFE7C5222279ADDE0065BE32 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		BFE7C5372279AFDA0065BE32 /* LineLoginManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LineLoginManager.h; path = CybavoWalletExample/LineLoginManager.h; sourceTree = "<group>"; };
+		BFE7C5382279AFDA0065BE32 /* LineLoginManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LineLoginManager.m; path = CybavoWalletExample/LineLoginManager.m; sourceTree = "<group>"; };
 		C8542C09D1EA4530B6BB25CB /* FontAwesome5_Solid.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Solid.ttf; path = "../node_modules/native-base/Fonts/FontAwesome5_Solid.ttf"; sourceTree = "<group>"; };
 		CC1C621B163747ECA689DDF7 /* FontAwesome5_Brands.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Brands.ttf; path = "../node_modules/native-base/Fonts/FontAwesome5_Brands.ttf"; sourceTree = "<group>"; };
 		EA26C47C83934383800EFB19 /* libRCTWeChat.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRCTWeChat.a; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
-		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
 		F571EA7AE711FFF1B55F9268 /* Pods-CybavoWalletExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CybavoWalletExample.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CybavoWalletExample/Pods-CybavoWalletExample.debug.xcconfig"; sourceTree = "<group>"; };
 		FEC9F220361641DCB9B18A89 /* Zocial.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Zocial.ttf; path = "../node_modules/native-base/Fonts/Zocial.ttf"; sourceTree = "<group>"; };
 		FF2BAA287F1D4F1609816081 /* Pods_CybavoWalletExample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CybavoWalletExample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		873B6821E8F04EFBBE93C89B /* CybavoWalletService.xcodeproj */ = {isa = PBXFileReference; name = "CybavoWalletService.xcodeproj"; path = "../node_modules/@cybavo/react-native-wallet-service/ios/CybavoWalletService.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		60CF3BB30D69493AAD71EAF1 /* libCybavoWalletService.a */ = {isa = PBXFileReference; name = "libCybavoWalletService.a"; path = "libCybavoWalletService.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		1CD62BE6296F49FA87012A8E /* RCTWeChat.xcodeproj */ = {isa = PBXFileReference; name = "RCTWeChat.xcodeproj"; path = "../node_modules/react-native-wechat/ios/RCTWeChat.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,13 +99,16 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BFE7C5232279ADDE0065BE32 /* Security.framework in Frameworks */,
 				BFDAF8B022545A6A00CD1801 /* libz.tbd in Frameworks */,
 				BFDAF8AE22545A6200CD1801 /* libc++.tbd in Frameworks */,
 				BFDAF8AC22545A5500CD1801 /* libsqlite3.0.tbd in Frameworks */,
 				BFDAF8AA22545A4D00CD1801 /* CoreTelephony.framework in Frameworks */,
 				BFDAF8A822545A4500CD1801 /* SystemConfiguration.framework in Frameworks */,
 				ED297163215061F000B7C4FE /* JavaScriptCore.framework in Frameworks */,
+				BFE7C5202279ADC80065BE32 /* LineSDK.framework in Frameworks */,
 				A10920EB947A08628374BE2D /* Pods_CybavoWalletExample.framework in Frameworks */,
+				3573FDF682A24E2C93870859 /* libCybavoWalletService.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -123,6 +135,8 @@
 		13B07FAE1A68108700A75B9A /* CybavoWalletExample */ = {
 			isa = PBXGroup;
 			children = (
+				BFE7C5372279AFDA0065BE32 /* LineLoginManager.h */,
+				BFE7C5382279AFDA0065BE32 /* LineLoginManager.m */,
 				BF7F25DC2251E499003A9DAE /* GoogleService-Info.plist */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
@@ -138,13 +152,14 @@
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BFE7C5222279ADDE0065BE32 /* Security.framework */,
 				BFDAF8AF22545A6A00CD1801 /* libz.tbd */,
 				BFDAF8AD22545A6200CD1801 /* libc++.tbd */,
 				BFDAF8AB22545A5500CD1801 /* libsqlite3.0.tbd */,
 				BFDAF8A922545A4D00CD1801 /* CoreTelephony.framework */,
 				BFDAF8A522545A4500CD1801 /* SystemConfiguration.framework */,
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
-				ED2971642150620600B7C4FE /* JavaScriptCore.framework */,
+				BFE7C51F2279ADC80065BE32 /* LineSDK.framework */,
 				2D16E6891FA4F8E400B85C8A /* libReact.a */,
 				FF2BAA287F1D4F1609816081 /* Pods_CybavoWalletExample.framework */,
 			);
@@ -179,6 +194,8 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				873B6821E8F04EFBBE93C89B /* CybavoWalletService.xcodeproj */,
+				1CD62BE6296F49FA87012A8E /* RCTWeChat.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -262,6 +279,7 @@
 				TargetAttributes = {
 					13B07F861A680F5B00A75B9A = {
 						DevelopmentTeam = A46Z766J68;
+						ProvisioningStyle = Manual;
 					};
 				};
 			};
@@ -360,12 +378,16 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-CybavoWalletExample/Pods-CybavoWalletExample-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-CybavoWalletExample/Pods-CybavoWalletExample-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/AlamofireObjectMapper/AlamofireObjectMapper.framework",
+				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
 				"${BUILT_PRODUCTS_DIR}/CryptoSwift/CryptoSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/CybavoWalletService/CybavoWalletService.framework",
 				"${BUILT_PRODUCTS_DIR}/DoubleConversion/DoubleConversion.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKShareKit/FBSDKShareKit.framework",
 				"${BUILT_PRODUCTS_DIR}/Folly/folly.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
@@ -379,6 +401,7 @@
 				"${BUILT_PRODUCTS_DIR}/SwiftOTP/SwiftOTP.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyUserDefaults/SwiftyUserDefaults.framework",
 				"${BUILT_PRODUCTS_DIR}/glog/glog.framework",
+				"${BUILT_PRODUCTS_DIR}/react-native-fbsdk/react_native_fbsdk.framework",
 				"${BUILT_PRODUCTS_DIR}/yoga/yoga.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -387,9 +410,13 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireObjectMapper.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CryptoSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CybavoWalletService.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DoubleConversion.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKShareKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/folly.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
@@ -403,11 +430,12 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftOTP.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyUserDefaults.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/glog.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/react_native_fbsdk.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/yoga.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CybavoWalletExample/Pods-CybavoWalletExample-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CybavoWalletExample/Pods-CybavoWalletExample-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		29C245D0A4053D558C6F446C /* [CP] Copy Pods Resources */ = {
@@ -418,18 +446,20 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-CybavoWalletExample/Pods-CybavoWalletExample-resources.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-CybavoWalletExample/Pods-CybavoWalletExample-resources.sh",
 				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
+				"${PODS_CONFIGURATION_BUILD_DIR}/LineSDK/LineSDKResource.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
 			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleSignIn.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/LineSDKResource.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CybavoWalletExample/Pods-CybavoWalletExample-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CybavoWalletExample/Pods-CybavoWalletExample-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -441,6 +471,7 @@
 			files = (
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
+				BFE7C5392279AFDA0065BE32 /* LineLoginManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -465,10 +496,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = A46Z766J68;
-				ENABLE_BITCODE = NO;
+				ENABLE_BITCODE = YES;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-gesture-handler/ios/**",
@@ -485,12 +517,15 @@
 					"$(SRCROOT)/../node_modules/react-native-wechat/ios",
 					"$(SRCROOT)/../node_modules/react-native-wechat/ios",
 					"$(SRCROOT)/../node_modules/react-native-wechat/ios",
+					"$(SRCROOT)/../node_modules/@cybavo/react-native-wallet-service/ios",
+					"$(SRCROOT)/../node_modules/react-native-wechat/ios",
 				);
 				INFOPLIST_FILE = CybavoWalletExample/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/CybavoWalletExample\"",
 					"\"$(SRCROOT)/CybavoWalletExample\"",
 					"\"$(SRCROOT)/CybavoWalletExample\"",
 					"\"$(SRCROOT)/CybavoWalletExample\"",
@@ -503,6 +538,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.cybavo.example.rn.wallet;
 				PRODUCT_NAME = CybavoWalletExample;
+				PROVISIONING_PROFILE_SPECIFIER = CybavoDevelopement;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -513,9 +549,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = A46Z766J68;
-				ENABLE_BITCODE = NO;
+				ENABLE_BITCODE = YES;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-gesture-handler/ios/**",
@@ -532,12 +570,15 @@
 					"$(SRCROOT)/../node_modules/react-native-wechat/ios",
 					"$(SRCROOT)/../node_modules/react-native-wechat/ios",
 					"$(SRCROOT)/../node_modules/react-native-wechat/ios",
+					"$(SRCROOT)/../node_modules/@cybavo/react-native-wallet-service/ios",
+					"$(SRCROOT)/../node_modules/react-native-wechat/ios",
 				);
 				INFOPLIST_FILE = CybavoWalletExample/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/CybavoWalletExample\"",
 					"\"$(SRCROOT)/CybavoWalletExample\"",
 					"\"$(SRCROOT)/CybavoWalletExample\"",
 					"\"$(SRCROOT)/CybavoWalletExample\"",
@@ -550,6 +591,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.cybavo.example.rn.wallet;
 				PRODUCT_NAME = CybavoWalletExample;
+				PROVISIONING_PROFILE_SPECIFIER = CYBAVO_WALLET_SDK_DEMO;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;

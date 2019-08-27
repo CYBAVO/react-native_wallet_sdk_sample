@@ -145,13 +145,14 @@ class SettingsScreen extends Component {
                 )}
               </Body>
               <Right>
-                <Button
-                  transparent
-                  primary
-                  small
-                  onPress={this._confirmSignOut}
-                >
-                  <Text>SIGN OUT</Text>
+                <Button transparent onPress={this._confirmSignOut}>
+                  <Text
+                    style={{
+                      color: colorPrimary,
+                    }}
+                  >
+                    SIGN OUT
+                  </Text>
                 </Button>
               </Right>
             </ListItem>
