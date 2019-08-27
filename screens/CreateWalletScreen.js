@@ -28,6 +28,7 @@ import CurrencyPicker from '../components/CurrencyPicker';
 import WalletPicker from '../components/WalletPicker';
 import InputPinCodeModal from '../components/InputPinCodeModal';
 import { toastError } from '../Helpers';
+import { Coin } from '../Constants';
 
 class CreateWalletScreen extends Component {
   static navigationOptions = ({ navigation }) => ({
@@ -49,6 +50,7 @@ class CreateWalletScreen extends Component {
   state = {
     loading: false,
     name: '',
+    accountName: '',
     currency: null,
     parentIdx: 0,
     inputPinCode: false,
@@ -107,7 +109,7 @@ class CreateWalletScreen extends Component {
   };
 
   _createWallet = async pinCode => {
-    const { name, parentIdx } = this.state;
+    const { name, parentIdx, accountName } = this.state;
     const { wallets, fetchWallets, navigation } = this.props;
     const currency = this._getSelectedCurrency();
     const parents = this._getAvailableParents(wallets, currency);
@@ -120,7 +122,11 @@ class CreateWalletScreen extends Component {
         parent.walletId || 0, // parentWalletId
         name, // name
         pinCode, // pinCode
-        {} // extraAttributes
+        {
+          account_name:
+            currency.currency === Coin.EOS ? accountName : undefined,
+          // EOS specified extras
+        } // extraAttributes
       );
       await fetchWallets();
       navigation.goBack();
@@ -134,7 +140,7 @@ class CreateWalletScreen extends Component {
 
   render() {
     const { wallets } = this.props;
-    const { loading, name, parentIdx, inputPinCode } = this.state;
+    const { loading, name, accountName, parentIdx, inputPinCode } = this.state;
 
     const currencies = this._getAvailableCurrencies();
     const currency = this._getSelectedCurrency();
@@ -165,6 +171,20 @@ class CreateWalletScreen extends Component {
                 filter={wallet =>
                   wallet.currency === currency.currency && !wallet.tokenAddress
                 }
+              />
+            </Item>
+          )}
+          {/* EOS account */}
+          {Coin.EOS === currency.currency && (
+            <Item stackedLabel>
+              <Label>Account Name</Label>
+              <Input
+                autoCapitalize="words"
+                placeholder="Account Name"
+                placeholderTextColor="lightgray"
+                editable={!loading}
+                value={accountName}
+                onChangeText={accountName => this.setState({ accountName })}
               />
             </Item>
           )}
