@@ -16,7 +16,7 @@ react-native link @cybavo/react-native-wallet-service
 
 # CYBABO Wallet SDK for React Native - Sample
 
-Sample app for integrating Cybavo Wallet App SDK, https://www.cybavo.com/wallet-app-sdk/
+Sample app for integrating CYBAVO Wallet App SDK, https://www.cybavo.com/wallet-app-sdk/
 
 ![image](https://github.com/CYBAVO/react-native_wallet_sdk_sample/raw/master/image/sc_wallet_list.png)
 ![image](https://github.com/CYBAVO/react-native_wallet_sdk_sample/raw/master/image/sc_wallet_detail.png)
