@@ -150,7 +150,7 @@ export default class TransactionDetailScreen extends Component {
                 <Text>PENDING</Text>
               </Badge>
             )}
-            {!transaction.pending && !transaction.success && (
+            {!transaction.success && (
               <Badge danger style={styles.badge}>
                 <Text>FAILED</Text>
               </Badge>
