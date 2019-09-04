@@ -22,7 +22,7 @@ import {
 import CurrencyIcon from '../components/CurrencyIcon';
 import CurrencyText from '../components/CurrencyText';
 import DisplayTime from '../components/DisplayTime';
-import { getTransactionExplorerUri } from '../Constants';
+import { getTransactionExplorerUri, colorDanger } from '../Constants';
 
 const styles = StyleSheet.create({
   label: {
@@ -135,7 +135,6 @@ export default class TransactionDetailScreen extends Component {
           <Text style={styles.label}>Transaction fee</Text>
           <Text style={styles.value}>{transaction.transactionFee}</Text>
 
-          {/* <Text style={styles.label}>TXID</Text> */}
           <View
             style={[
               styles.label,
@@ -157,10 +156,23 @@ export default class TransactionDetailScreen extends Component {
               </Badge>
             )}
           </View>
-          <Text style={styles.value}>{transaction.txid}</Text>
+          {!!transaction.txid && (
+            <Text style={styles.value}>{transaction.txid}</Text>
+          )}
+          {!!transaction.error && (
+            <Text style={[styles.value, { color: colorDanger }]}>
+              {transaction.error}
+            </Text>
+          )}
+
+          <Text style={styles.label}>Memo</Text>
+          <Text style={styles.value}>{transaction.memo || '-'}</Text>
 
           <Text style={styles.label}>Time</Text>
           <DisplayTime textStyle={styles.value} unix={transaction.timestamp} />
+
+          <Text style={styles.label}>Description</Text>
+          <Text style={styles.value}>{transaction.description || '-'}</Text>
 
           <View
             style={{

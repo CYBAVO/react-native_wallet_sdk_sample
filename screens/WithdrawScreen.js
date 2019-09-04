@@ -70,6 +70,7 @@ export default class WithdrawScreen extends Component {
     outgoingAddress: '',
     amout: '',
     memo: '',
+    description: '',
     selectedFee: null,
     pinCode: '',
     fee: null,
@@ -129,7 +130,14 @@ export default class WithdrawScreen extends Component {
   };
 
   _createTransaction = async pinCode => {
-    const { outgoingAddress, amount, selectedFee, fee, memo } = this.state;
+    const {
+      outgoingAddress,
+      amount,
+      selectedFee,
+      fee,
+      memo,
+      description,
+    } = this.state;
     const { navigation } = this.props;
     const wallet = navigation.state.params.wallet;
     const transactionFee = fee[selectedFee];
@@ -149,7 +157,7 @@ export default class WithdrawScreen extends Component {
         outgoingAddress,
         amount,
         transactionFee ? transactionFee.amount : '0',
-        '',
+        description,
         pinCode,
         extras
       );
@@ -218,6 +226,7 @@ export default class WithdrawScreen extends Component {
       fee,
       usage,
       inputPinCode,
+      description,
     } = this.state;
     const { navigation } = this.props;
     const wallet = navigation.state.params.wallet;
@@ -371,6 +380,22 @@ export default class WithdrawScreen extends Component {
                   />
                 ))}
             </Picker>
+          </Item>
+
+          <Item stackedLabel>
+            <Label style={styles.label}>Description</Label>
+            <Input
+              style={styles.input}
+              autoCapitalize="sentences"
+              returnKeyType="done"
+              placeholder={
+                'Description for this transaction, private to this wallet.'
+              }
+              placeholderTextColor={placeholderTextColor}
+              editable={!loading}
+              value={description}
+              onChangeText={description => this.setState({ description })}
+            />
           </Item>
         </Form>
 

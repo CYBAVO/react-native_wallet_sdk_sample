@@ -15,8 +15,14 @@ class CurrencyText extends Component {
   };
 
   render() {
-    const { loading, currencyItem, currencySymbol,
-        textStyle = {}, symbol = false, note = false } = this.props;
+    const {
+      loading,
+      currencyItem,
+      currencySymbol,
+      textStyle = {},
+      symbol = false,
+      note = false,
+    } = this.props;
     return (
       <React.Fragment>
         {loading && <Text note={note}>{currencySymbol}</Text>}

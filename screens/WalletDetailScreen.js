@@ -6,7 +6,7 @@
  */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { View, ActivityIndicator } from 'react-native';
+import { View, ActivityIndicator, ScrollView } from 'react-native';
 import {
   Container,
   Button,
@@ -23,15 +23,27 @@ import {
   Item,
   Input,
 } from 'native-base';
-import { Col, Row, Grid } from 'react-native-easy-grid';
+import moment from 'moment';
 import Modal from 'react-native-modal';
 import { Wallets } from '@cybavo/react-native-wallet-service';
 import { fetchWallet, fetchBalance } from '../store/actions';
 import CurrencyText from '../components/CurrencyText';
 import Balance from '../components/Balance';
 import TransactionList from '../components/TransactionList';
+import Filter from '../components/Filter';
 import { colorPrimary, colorAccent, Coin } from '../Constants';
 import { toastError } from '../Helpers';
+
+const FILTER_DIRECTION = [
+  null,
+  Wallets.Transaction.Direction.IN,
+  Wallets.Transaction.Direction.OUT,
+];
+const FILTER_PENDING = [null, true, false];
+const FILTER_SUCCESS = [null, true, false];
+const FILTER_TIME_ALL = 0;
+const FILTER_TIME_TODAY = 1;
+const FILTER_TIME_YESTERDAY = 2;
 
 class WalletDetailScreen extends Component {
   static navigationOptions = ({ navigation }) => ({
@@ -63,6 +75,10 @@ class WalletDetailScreen extends Component {
     historyTransactions: [],
     historyLoading: false,
     historyHasMore: true,
+    filterTime: 0,
+    filterDirection: 0,
+    filterPending: 0,
+    filterSuccess: 0,
     renameInProgress: false,
     renameNewName: '',
     renameLoading: false,
@@ -87,7 +103,14 @@ class WalletDetailScreen extends Component {
   componentWillReceiveProps = () => {};
 
   _fetchMoreHistory = () => {
-    const { historyHasMore, historyLoading } = this.state;
+    const {
+      historyHasMore,
+      historyLoading,
+      filterDirection,
+      filterPending,
+      filterSuccess,
+      filterTime,
+    } = this.state;
     if (!historyHasMore || historyLoading) {
       return;
     }
@@ -96,19 +119,46 @@ class WalletDetailScreen extends Component {
       try {
         const { wallet } = this.props;
         const { historyTransactions } = this.state;
-        const history = await Wallets.getHistory(
+
+        let filters = {
+          direction: FILTER_DIRECTION[filterDirection],
+          pending: FILTER_PENDING[filterPending],
+          success: FILTER_SUCCESS[filterSuccess],
+        };
+
+        if (filterTime === FILTER_TIME_TODAY) {
+          filters = {
+            ...filters,
+            start_time: moment()
+              .startOf('day')
+              .unix(),
+            end_time: moment().unix(),
+          };
+        } else if (filterTime === FILTER_TIME_YESTERDAY) {
+          filters = {
+            ...filters,
+            start_time: moment()
+              .startOf('day')
+              .subtract(1, 'days')
+              .unix(),
+            end_time: moment()
+              .startOf('day')
+              .unix(),
+          };
+        }
+
+        const result = await Wallets.getHistory(
           wallet.currency,
           wallet.tokenAddress,
           wallet.address,
           historyTransactions.length,
-          count
+          count,
+          filters
         );
         this.setState({
-          historyTransactions: [
-            ...historyTransactions,
-            ...history.transactions,
-          ],
-          historyHasMore: history.transactions.length >= count,
+          historyTransactions: [...historyTransactions, ...result.transactions],
+          historyHasMore:
+            result.start + result.transactions.length < result.total,
         });
       } catch (error) {
         console.log('Wallets.getHistory failed', error);
@@ -207,12 +257,44 @@ class WalletDetailScreen extends Component {
     });
   };
 
+  _setFilterTime = time => {
+    this.setState({
+      filterTime: time,
+    });
+    this._refresh();
+  };
+
+  _setFilterDirection = direction => {
+    this.setState({
+      filterDirection: direction,
+    });
+    this._refresh();
+  };
+
+  _setFilterPending = pending => {
+    this.setState({
+      filterPending: pending,
+    });
+    this._refresh();
+  };
+
+  _setFilterSuccess = success => {
+    this.setState({
+      filterSuccess: success,
+    });
+    this._refresh();
+  };
+
   render() {
     const { wallet } = this.props;
     const {
       historyTransactions,
       historyLoading,
       historyHasMore,
+      filterTime,
+      filterDirection,
+      filterPending,
+      filterSuccess,
       renameInProgress,
       renameNewName,
       renameLoading,
@@ -226,101 +308,135 @@ class WalletDetailScreen extends Component {
     return (
       <>
         <Container>
-          <Grid>
-            <Row
-              size={1}
+          <View
+            style={{
+              flex: 1,
+              flexDirection: 'column',
+              backgroundColor: colorPrimary,
+            }}
+          >
+            <View
               style={{
+                flex: 1,
                 flexDirection: 'column',
-                backgroundColor: colorPrimary,
+                alignSelf: 'center',
+                alignItems: 'center',
+                justifyContent: 'center',
               }}
             >
               <View
                 style={{
-                  flex: 1,
-                  flexDirection: 'column',
-                  alignSelf: 'center',
-                  alignItems: 'center',
+                  flexDirection: 'row',
+                  alignItems: 'baseline',
                   justifyContent: 'center',
+                  marginHorizontal: 16,
                 }}
               >
-                <View
-                  style={{
-                    flexDirection: 'row',
-                    alignItems: 'baseline',
-                    justifyContent: 'center',
-                    marginHorizontal: 16,
+                <Balance
+                  {...wallet}
+                  textStyle={{
+                    color: 'white',
+                    fontSize: 34,
+                    maxWidth: '60%',
                   }}
-                >
-                  <Balance
-                    {...wallet}
-                    textStyle={{
-                      color: 'white',
-                      fontSize: 34,
-                      maxWidth: '60%',
-                    }}
-                  />
-                  <CurrencyText
-                    {...wallet}
-                    symbol
-                    textStyle={{ color: 'white', fontSize: 24, marginLeft: 8 }}
-                  />
-                </View>
-                <Text style={{ fontSize: 12, color: 'white', opacity: 0.75 }}>
-                  {wallet.address}
-                </Text>
+                />
+                <CurrencyText
+                  {...wallet}
+                  symbol
+                  textStyle={{ color: 'white', fontSize: 24, marginLeft: 8 }}
+                />
               </View>
+              <Text style={{ fontSize: 12, color: 'white', opacity: 0.75 }}>
+                {wallet.address}
+              </Text>
+            </View>
 
-              <View style={{ flexDirection: 'row', alignItems: 'stretch' }}>
-                <Button
-                  full
-                  transparent
-                  onPress={this._goDeposit}
-                  style={{ flex: 1 }}
-                >
-                  <Text style={{ fontSize: 14, color: 'white' }}>Deposit</Text>
-                </Button>
-                <Button
-                  full
-                  transparent
-                  onPress={this._goWithdraw}
-                  style={{ flex: 1 }}
-                >
-                  <Text style={{ fontSize: 14, color: 'white' }}>Withdraw</Text>
-                </Button>
-              </View>
-            </Row>
-            <Row size={2}>
-              <Col>
-                {historyTransactions && (
-                  <TransactionList
-                    wallet={wallet}
-                    transactions={Object.values(historyTransactions)}
-                    onTransactionPress={this._goTransactionDetail}
-                    refreshing={initialLoading}
-                    onRefresh={this._refresh}
-                    onEndReached={this._fetchMoreHistory}
-                  />
-                )}
+            <View style={{ flexDirection: 'row', alignItems: 'stretch' }}>
+              <Button
+                full
+                transparent
+                onPress={this._goDeposit}
+                style={{ flex: 1 }}
+              >
+                <Text style={{ fontSize: 14, color: 'white' }}>Deposit</Text>
+              </Button>
+              <Button
+                full
+                transparent
+                onPress={this._goWithdraw}
+                style={{ flex: 1 }}
+              >
+                <Text style={{ fontSize: 14, color: 'white' }}>Withdraw</Text>
+              </Button>
+            </View>
+          </View>
+          <ScrollView horizontal={true} style={{ flexGrow: 0 }}>
+            <View
+              style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+                padding: 16,
+              }}
+            >
+              <Filter
+                options={['ALL TIME', 'TODAY', 'YESTERDAY']}
+                selected={filterTime}
+                onChange={this._setFilterTime}
+              />
 
-                {(!historyHasMore || loadingMore) && (
-                  <Badge
-                    primary
-                    style={{
-                      position: 'absolute',
-                      bottom: 16,
-                      alignSelf: 'center',
-                      elevation: 2,
-                      opacity: 0.75,
-                    }}
-                  >
-                    <Text>
-                      {loadingMore ? 'Loading more…' : 'End of History'}
-                    </Text>
-                  </Badge>
-                )}
-              </Col>
-            </Row>
-          </Grid>
+              <Filter
+                containerStyle={{ paddingLeft: 16 }}
+                options={['ALL', 'RECEIVED', 'SENT']}
+                selected={filterDirection}
+                onChange={this._setFilterDirection}
+              />
+
+              <Filter
+                containerStyle={{ paddingLeft: 16 }}
+                options={['ALL', 'PENDING', 'DONE']}
+                selected={filterPending}
+                onChange={this._setFilterPending}
+              />
+
+              <Filter
+                containerStyle={{ paddingLeft: 16 }}
+                options={['ALL', 'SUCCESS', 'FAILED']}
+                selected={filterSuccess}
+                onChange={this._setFilterSuccess}
+              />
+            </View>
+          </ScrollView>
+          <View
+            style={{
+              flex: 2,
+            }}
+          >
+            {historyTransactions && (
+              <TransactionList
+                wallet={wallet}
+                transactions={Object.values(historyTransactions)}
+                onTransactionPress={this._goTransactionDetail}
+                refreshing={initialLoading}
+                onRefresh={this._refresh}
+                onEndReached={this._fetchMoreHistory}
+              />
+            )}
+
+            {(!historyHasMore || loadingMore) && (
+              <Badge
+                primary
+                style={{
+                  position: 'absolute',
+                  bottom: 16,
+                  alignSelf: 'center',
+                  elevation: 2,
+                  opacity: 0.75,
+                }}
+              >
+                <Text>{loadingMore ? 'Loading more…' : 'End of History'}</Text>
+              </Badge>
+            )}
+          </View>
         </Container>
         <Modal
           isVisible={renameInProgress}

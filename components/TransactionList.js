@@ -21,7 +21,7 @@ export default class TransactionList extends Component {
         onPress={() => onTransactionPress(item)}
       >
         <Left>
-          {!item.pending && !item.success && (
+          {!item.success && (
             <Icon
               style={{
                 color: colorDanger,
@@ -77,11 +77,18 @@ export default class TransactionList extends Component {
   };
 
   render() {
-    const { transactions, onRefresh, refreshing, onEndReached } = this.props;
+    const {
+      transactions,
+      onRefresh,
+      refreshing,
+      onEndReached,
+      containerStyle,
+    } = this.props;
     return (
       <FlatList
+        style={containerStyle}
         data={transactions}
-        keyExtractor={tx => `${tx.txid}`}
+        keyExtractor={(tx, idx) => `${tx.txid}#${idx}`}
         onRefresh={onRefresh}
         refreshing={refreshing}
         onEndReached={onEndReached}
