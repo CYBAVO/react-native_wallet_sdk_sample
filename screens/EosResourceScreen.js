@@ -228,10 +228,13 @@ class EosResourceScreen extends Component {
   };
 
   _setTransactionType = transactionType => {
+    const { navigation } = this.props;
+    const wallet = navigation.state.params.wallet;
     this.setState({
       transactionType,
       amount: '0',
       numBytes: 0,
+      receiver: wallet.address,
     });
   };
 

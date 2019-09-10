@@ -175,7 +175,7 @@ class CreateWalletScreen extends Component {
             </Item>
           )}
           {/* EOS account */}
-          {Coin.EOS === currency.currency && (
+          {Coin.EOS === currency.currency && !currency.tokenAddress && (
             <Item stackedLabel>
               <Label>Account Name</Label>
               <Input

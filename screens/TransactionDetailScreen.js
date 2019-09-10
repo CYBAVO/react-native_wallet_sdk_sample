@@ -19,9 +19,11 @@ import {
   Right,
   Badge,
 } from 'native-base';
+import { Wallets } from '@cybavo/react-native-wallet-service';
 import CurrencyIcon from '../components/CurrencyIcon';
 import CurrencyText from '../components/CurrencyText';
 import DisplayTime from '../components/DisplayTime';
+import { toastError } from '../Helpers';
 import { getTransactionExplorerUri, colorDanger } from '../Constants';
 
 const styles = StyleSheet.create({
@@ -54,6 +56,29 @@ export default class TransactionDetailScreen extends Component {
     ),
   });
 
+  state = {
+    confirmBlocks: null,
+  };
+
+  componentDidMount = () => {
+    this._fetchTransactionDetail();
+  };
+
+  _fetchTransactionDetail = async () => {
+    const { navigation } = this.props;
+    const { transaction, wallet } = navigation.state.params;
+    try {
+      const { confirmBlocks } = await Wallets.getTransactionInfo(
+        wallet.currency,
+        transaction.txid
+      );
+      this.setState({ confirmBlocks });
+    } catch (error) {
+      console.log('Wallets.getTransactionInfo failed', error);
+      toastError(error);
+    }
+  };
+
   _explorer = () => {
     const { navigation } = this.props;
     const { transaction, wallet } = navigation.state.params;
@@ -67,6 +92,7 @@ export default class TransactionDetailScreen extends Component {
     const { navigation } = this.props;
     const { transaction, wallet } = navigation.state.params;
     const withdraw = transaction.fromAddress === wallet.address;
+    const { confirmBlocks } = this.state;
     // console.log('TX', transaction);
     return (
       <Container>
@@ -153,6 +179,11 @@ export default class TransactionDetailScreen extends Component {
             {!transaction.success && (
               <Badge danger style={styles.badge}>
                 <Text>FAILED</Text>
+              </Badge>
+            )}
+            {confirmBlocks && (
+              <Badge success style={styles.badge}>
+                <Text>{confirmBlocks} CONFIRMED</Text>
               </Badge>
             )}
           </View>

@@ -17,14 +17,30 @@ const styles = StyleSheet.create({
   },
   filter: {
     borderColor: colorPrimary,
-    borderWidth: 1,
+    borderTopWidth: 1,
+    borderBottomWidth: 1,
+    borderRightWidth: 1,
     color: colorPrimary,
     paddingHorizontal: 8,
-    paddingVertical: 4,
+    paddingVertical: 8,
+    minWidth: 80,
+    textAlign: 'center',
+    fontSize: 12,
+    fontWeight: 'bold',
   },
   filterActive: {
     backgroundColor: colorPrimary,
     color: 'white',
+  },
+  first: {
+    borderTopLeftRadius: 4,
+    borderBottomLeftRadius: 4,
+    borderLeftWidth: 1,
+  },
+  last: {
+    borderTopRightRadius: 4,
+    borderBottomRightRadius: 4,
+    borderLeftWidth: 0,
   },
 });
 
@@ -39,6 +55,8 @@ export default class Filter extends Component {
               style={[
                 styles.filter,
                 idx === selected ? styles.filterActive : {},
+                idx === 0 ? styles.first : {},
+                idx === options.length - 1 ? styles.last : {},
               ]}
             >
               {opt}

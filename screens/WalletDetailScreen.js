@@ -82,6 +82,7 @@ class WalletDetailScreen extends Component {
     renameInProgress: false,
     renameNewName: '',
     renameLoading: false,
+    moreFilters: false,
   };
 
   componentDidMount = () => {
@@ -298,6 +299,7 @@ class WalletDetailScreen extends Component {
       renameInProgress,
       renameNewName,
       renameLoading,
+      moreFilters,
     } = this.state;
 
     const initialLoading =
@@ -375,35 +377,48 @@ class WalletDetailScreen extends Component {
               style={{
                 flexDirection: 'row',
                 alignItems: 'center',
-                padding: 16,
+                padding: 8,
               }}
             >
               <Filter
-                options={['ALL TIME', 'TODAY', 'YESTERDAY']}
-                selected={filterTime}
-                onChange={this._setFilterTime}
-              />
-
-              <Filter
-                containerStyle={{ paddingLeft: 16 }}
+                containerStyle={{ margin: 8 }}
                 options={['ALL', 'RECEIVED', 'SENT']}
                 selected={filterDirection}
                 onChange={this._setFilterDirection}
               />
 
-              <Filter
-                containerStyle={{ paddingLeft: 16 }}
-                options={['ALL', 'PENDING', 'DONE']}
-                selected={filterPending}
-                onChange={this._setFilterPending}
-              />
-
-              <Filter
-                containerStyle={{ paddingLeft: 16 }}
-                options={['ALL', 'SUCCESS', 'FAILED']}
-                selected={filterSuccess}
-                onChange={this._setFilterSuccess}
-              />
+              {!moreFilters && (
+                <Icon
+                  name="ios-more"
+                  style={{
+                    color: colorPrimary,
+                    padding: 8,
+                  }}
+                  onPress={() => this.setState({ moreFilters: true })}
+                />
+              )}
+              {moreFilters && (
+                <>
+                  <Filter
+                    containerStyle={{ margin: 8 }}
+                    options={['ALL TIME', 'TODAY', 'YESTERDAY']}
+                    selected={filterTime}
+                    onChange={this._setFilterTime}
+                  />
+                  <Filter
+                    containerStyle={{ margin: 8 }}
+                    options={['ALL', 'PENDING', 'DONE']}
+                    selected={filterPending}
+                    onChange={this._setFilterPending}
+                  />
+                  <Filter
+                    containerStyle={{ margin: 8 }}
+                    options={['ALL', 'SUCCESS', 'FAILED']}
+                    selected={filterSuccess}
+                    onChange={this._setFilterSuccess}
+                  />
+                </>
+              )}
             </View>
           </ScrollView>
           <View
