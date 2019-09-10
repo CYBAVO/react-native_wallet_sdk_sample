@@ -5,6 +5,7 @@
 	};
 	objectVersion = 46;
 	objects = {
+
 /* Begin PBXBuildFile section */
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB11A68108700A75B9A /* LaunchScreen.xib */; };
@@ -23,6 +24,7 @@
 		B6505CFA92AF4951B4016198 /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8AFEC0686398435EB9156505 /* Foundation.ttf */; };
 		BF520CAFB2384BF69FF756CF /* FontAwesome5_Brands.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CC1C621B163747ECA689DDF7 /* FontAwesome5_Brands.ttf */; };
 		BF7F25DD2251E49A003A9DAE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BF7F25DC2251E499003A9DAE /* GoogleService-Info.plist */; };
+		BFA45E9F23277A030055EE7B /* CybavoWalletExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA45E9E23277A030055EE7B /* CybavoWalletExample.swift */; };
 		BFDAF8A822545A4500CD1801 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFDAF8A522545A4500CD1801 /* SystemConfiguration.framework */; };
 		BFDAF8AA22545A4D00CD1801 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFDAF8A922545A4D00CD1801 /* CoreTelephony.framework */; };
 		BFDAF8AC22545A5500CD1801 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = BFDAF8AB22545A5500CD1801 /* libsqlite3.0.tbd */; };
@@ -39,7 +41,6 @@
 		ED1D301263CB4681A5C52389 /* Roboto_medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BA603892E3B64D8988F0619D /* Roboto_medium.ttf */; };
 		ED297163215061F000B7C4FE /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED297162215061F000B7C4FE /* JavaScriptCore.framework */; };
 		EE5F38A2ECC842D3A3C9FF08 /* AntDesign.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B7B8495EFE03487F811A72D2 /* AntDesign.ttf */; };
-		3573FDF682A24E2C93870859 /* libCybavoWalletService.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 60CF3BB30D69493AAD71EAF1 /* libCybavoWalletService.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -65,6 +66,7 @@
 		596E19BCE6524CA58F2BEBF6 /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = "../node_modules/native-base/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; };
 		5C0D9F4FD2B0490FB203EE74 /* FontAwesome5_Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Regular.ttf; path = "../node_modules/native-base/Fonts/FontAwesome5_Regular.ttf"; sourceTree = "<group>"; };
 		5CF5E4D8150A4D6D987084CD /* RCTWeChatTests.xctest */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = RCTWeChatTests.xctest; sourceTree = "<group>"; };
+		60CF3BB30D69493AAD71EAF1 /* libCybavoWalletService.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libCybavoWalletService.a; sourceTree = "<group>"; };
 		77D2005FA3C44A8B998055AB /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/native-base/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
 		8A6A06BA7EBF47DA9C7A7093 /* Roboto.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Roboto.ttf; path = "../node_modules/native-base/Fonts/Roboto.ttf"; sourceTree = "<group>"; };
 		8AFEC0686398435EB9156505 /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = "../node_modules/native-base/Fonts/Foundation.ttf"; sourceTree = "<group>"; };
@@ -73,6 +75,8 @@
 		B7B8495EFE03487F811A72D2 /* AntDesign.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = AntDesign.ttf; path = "../node_modules/native-base/Fonts/AntDesign.ttf"; sourceTree = "<group>"; };
 		BA603892E3B64D8988F0619D /* Roboto_medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Roboto_medium.ttf; path = "../node_modules/native-base/Fonts/Roboto_medium.ttf"; sourceTree = "<group>"; };
 		BF7F25DC2251E499003A9DAE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		BFA45E9D23277A030055EE7B /* CybavoWalletExample-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CybavoWalletExample-Bridging-Header.h"; sourceTree = "<group>"; };
+		BFA45E9E23277A030055EE7B /* CybavoWalletExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CybavoWalletExample.swift; sourceTree = "<group>"; };
 		BFDAF8A522545A4500CD1801 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		BFDAF8A922545A4D00CD1801 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		BFDAF8AB22545A5500CD1801 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
@@ -89,9 +93,6 @@
 		F571EA7AE711FFF1B55F9268 /* Pods-CybavoWalletExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CybavoWalletExample.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CybavoWalletExample/Pods-CybavoWalletExample.debug.xcconfig"; sourceTree = "<group>"; };
 		FEC9F220361641DCB9B18A89 /* Zocial.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Zocial.ttf; path = "../node_modules/native-base/Fonts/Zocial.ttf"; sourceTree = "<group>"; };
 		FF2BAA287F1D4F1609816081 /* Pods_CybavoWalletExample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CybavoWalletExample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		873B6821E8F04EFBBE93C89B /* CybavoWalletService.xcodeproj */ = {isa = PBXFileReference; name = "CybavoWalletService.xcodeproj"; path = "../node_modules/@cybavo/react-native-wallet-service/ios/CybavoWalletService.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
-		60CF3BB30D69493AAD71EAF1 /* libCybavoWalletService.a */ = {isa = PBXFileReference; name = "libCybavoWalletService.a"; path = "libCybavoWalletService.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
-		1CD62BE6296F49FA87012A8E /* RCTWeChat.xcodeproj */ = {isa = PBXFileReference; name = "RCTWeChat.xcodeproj"; path = "../node_modules/react-native-wechat/ios/RCTWeChat.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,7 +109,6 @@
 				ED297163215061F000B7C4FE /* JavaScriptCore.framework in Frameworks */,
 				BFE7C5202279ADC80065BE32 /* LineSDK.framework in Frameworks */,
 				A10920EB947A08628374BE2D /* Pods_CybavoWalletExample.framework in Frameworks */,
-				3573FDF682A24E2C93870859 /* libCybavoWalletService.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -145,6 +145,8 @@
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
 				13B07FB71A68108700A75B9A /* main.m */,
+				BFA45E9E23277A030055EE7B /* CybavoWalletExample.swift */,
+				BFA45E9D23277A030055EE7B /* CybavoWalletExample-Bridging-Header.h */,
 			);
 			name = CybavoWalletExample;
 			sourceTree = "<group>";
@@ -194,8 +196,6 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
-				873B6821E8F04EFBBE93C89B /* CybavoWalletService.xcodeproj */,
-				1CD62BE6296F49FA87012A8E /* RCTWeChat.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -240,6 +240,7 @@
 				212C63780B54469A8277343A /* libRNGoogleSignin.a */,
 				EA26C47C83934383800EFB19 /* libRCTWeChat.a */,
 				5CF5E4D8150A4D6D987084CD /* RCTWeChatTests.xctest */,
+				60CF3BB30D69493AAD71EAF1 /* libCybavoWalletService.a */,
 			);
 			name = "Recovered References";
 			sourceTree = "<group>";
@@ -279,6 +280,7 @@
 				TargetAttributes = {
 					13B07F861A680F5B00A75B9A = {
 						DevelopmentTeam = A46Z766J68;
+						LastSwiftMigration = 1030;
 						ProvisioningStyle = Manual;
 					};
 				};
@@ -375,8 +377,6 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-CybavoWalletExample/Pods-CybavoWalletExample-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
@@ -405,8 +405,6 @@
 				"${BUILT_PRODUCTS_DIR}/yoga/yoga.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireObjectMapper.framework",
@@ -443,17 +441,15 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-CybavoWalletExample/Pods-CybavoWalletExample-resources.sh",
+				"${PODS_ROOT}/CYBAVOWallet/CYBAVOWallet.framework/WalletSDK.plist",
 				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/LineSDK/LineSDKResource.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-			);
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/WalletSDK.plist",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleSignIn.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/LineSDKResource.bundle",
 			);
@@ -470,6 +466,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
+				BFA45E9F23277A030055EE7B /* CybavoWalletExample.swift in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 				BFE7C5392279AFDA0065BE32 /* LineLoginManager.m in Sources */,
 			);
@@ -496,6 +493,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
@@ -539,6 +537,9 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.cybavo.example.rn.wallet;
 				PRODUCT_NAME = CybavoWalletExample;
 				PROVISIONING_PROFILE_SPECIFIER = CybavoDevelopement;
+				SWIFT_OBJC_BRIDGING_HEADER = "CybavoWalletExample-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -549,6 +550,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
@@ -592,6 +594,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.cybavo.example.rn.wallet;
 				PRODUCT_NAME = CybavoWalletExample;
 				PROVISIONING_PROFILE_SPECIFIER = CYBAVO_WALLET_SDK_DEMO;
+				SWIFT_OBJC_BRIDGING_HEADER = "CybavoWalletExample-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
