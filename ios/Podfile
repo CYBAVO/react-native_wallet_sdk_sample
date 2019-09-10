@@ -2,7 +2,7 @@ use_frameworks!
 platform :ios, '11.0'
 
 source 'https://github.com/CocoaPods/Specs.git'
-source 'https://bitbucket.org/cybavo/Specs.git'
+source 'https://bitbucket.org/cybavo/Specs_501.git'
 
 target 'CybavoWalletExample' do
 
