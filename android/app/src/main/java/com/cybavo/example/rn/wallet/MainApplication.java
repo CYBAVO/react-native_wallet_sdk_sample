@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.facebook.CallbackManager;
 import com.facebook.react.ReactApplication;
+import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
 import com.facebook.reactnative.androidsdk.FBSDKPackage;
 import com.theweflex.react.WeChatPackage;
 import com.cybavo.reactnative.wallet.service.CybavoWalletServicePackage;
@@ -37,6 +38,7 @@ public class MainApplication extends Application implements ReactApplication {
     @Override
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(new MainReactPackage(),
+            new AsyncStoragePackage(),
             new LineLoginPackage(),
             new FBSDKPackage(mCallbackManager),
             new WeChatPackage(), new CybavoWalletServicePackage(),
