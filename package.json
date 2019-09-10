@@ -7,7 +7,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "@cybavo/react-native-wallet-service": "~1.2.0",
+    "@cybavo/react-native-wallet-service": "~1.2.5",
     "@react-native-community/async-storage": "1.6.1",
     "bignumber.js": "^9.0.0",
     "moment": "^2.24.0",
