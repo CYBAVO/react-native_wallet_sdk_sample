@@ -101,15 +101,19 @@ We provide VAULT, wallet, ledger service for cryptocurrency. Trusted by many exc
     s.ios.frameworks = 'SystemConfiguration','CoreTelephony'
    ```
    [(LearnMore)](https://github.com/yorkie/react-native-wechat/issues/446)
-5. Place your `GoogleService-Info.plist` file downloaded from Firebase to `ios/` [(LearnMore)](https://github.com/react-native-community/react-native-google-signin/blob/master/docs/get-config-file.md)
-6. Open your project configuration: double-click the project name in the left tree view. Select your app from the TARGETS section, then select the Info tab, and expand the URL Types section. Replace `Identifier` and `URL Schemes` with `CLIENT_ID" and `REVERSED_CLIENT_ID` in your `GoogleService-Info.plist`. [(LearnMore)](https://developers.google.com/identity/sign-in/ios/start-integrating)
-7. Replace `MY_FACEBOOK_SIGN_IN_APP_ID` with your `Facebook app id`
-8. Replace `MY_LINE_CHANNEL_SCHEME` with your `LINE channel scheme`
-9. Edit `BuildConfig.json` ➜ `MY_GOOGLE_SIGN_IN_WEB_CLI_ID` to your Google sign-in client ID
-10. Edit `BuildConfig.json` ➜ `SERVICE_ENDPOINT` to point to your Wallet Service endpoont
-11. Register your app on CYBAVO WALLET MANAGEMENT system web > Administration > System settings, input `bundle id`, follow the instruction to retrieve an `API Code`.
-12. Edit `BuildConfig.json` ➜ `SERVICE_API_CODE` to fill in yout `API Code`
-13. Edit `BuildConfig.json` ➜ `MY_WECHAT_SIGN_IN_APP_ID` to fill in yout `WeChat app id`
+5. Edit `ios/Podfile`, Replace source 'https://bitbucket.org/cybavo/Specs.git' with
+https://bitbucket.org/cybavo/Specs.git if using Xcode < 10.2
+https://bitbucket.org/cybavo/Specs_501.git if using Xcode >= 10.2
+6. Run `pod install` in `ios/`
+7. Place your `GoogleService-Info.plist` file downloaded from Firebase to `ios/` [(LearnMore)](https://github.com/react-native-community/react-native-google-signin/blob/master/docs/get-config-file.md)
+8. Open your project configuration: double-click the project name in the left tree view. Select your app from the TARGETS section, then select the Info tab, and expand the URL Types section. Replace `Identifier` and `URL Schemes` with `CLIENT_ID" and `REVERSED_CLIENT_ID` in your `GoogleService-Info.plist`. [(LearnMore)](https://developers.google.com/identity/sign-in/ios/start-integrating)
+9. Replace `MY_FACEBOOK_SIGN_IN_APP_ID` with your `Facebook app id`
+10. Replace `MY_LINE_CHANNEL_SCHEME` with your `LINE channel scheme`
+11. Edit `BuildConfig.json` ➜ `MY_GOOGLE_SIGN_IN_WEB_CLI_ID` to your Google sign-in client ID
+12. Edit `BuildConfig.json` ➜ `SERVICE_ENDPOINT` to point to your Wallet Service endpoont
+13. Register your app on CYBAVO WALLET MANAGEMENT system web > Administration > System settings, input `bundle id`, follow the instruction to retrieve an `API Code`.
+14. Edit `BuildConfig.json` ➜ `SERVICE_API_CODE` to fill in yout `API Code`
+15. Edit `BuildConfig.json` ➜ `MY_WECHAT_SIGN_IN_APP_ID` to fill in yout `WeChat app id`
 
 # Features
 
