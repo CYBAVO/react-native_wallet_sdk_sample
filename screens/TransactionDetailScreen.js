@@ -67,6 +67,9 @@ export default class TransactionDetailScreen extends Component {
   _fetchTransactionDetail = async () => {
     const { navigation } = this.props;
     const { transaction, wallet } = navigation.state.params;
+    if (transaction.txid === '') {
+      return;
+    }
     try {
       const { confirmBlocks } = await Wallets.getTransactionInfo(
         wallet.currency,
@@ -156,7 +159,9 @@ export default class TransactionDetailScreen extends Component {
           <Text style={styles.value}>{transaction.toAddress}</Text>
 
           <Text style={styles.label}>Amount</Text>
-          <Text style={styles.value}>{transaction.amount}</Text>
+          <Text style={styles.value}>
+            {transaction.amount} {wallet.currencySymbol}
+          </Text>
 
           <Text style={styles.label}>Transaction fee</Text>
           <Text style={styles.value}>{transaction.transactionFee}</Text>
@@ -181,7 +186,7 @@ export default class TransactionDetailScreen extends Component {
                 <Text>FAILED</Text>
               </Badge>
             )}
-            {confirmBlocks && (
+            {confirmBlocks != null && (
               <Badge success style={styles.badge}>
                 <Text>{confirmBlocks} CONFIRMED</Text>
               </Badge>
