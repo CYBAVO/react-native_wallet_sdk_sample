@@ -256,9 +256,9 @@ class EosResourceScreen extends Component {
     const { transactionType, amount, numBytes, receiver } = this.state;
     switch (transactionType) {
       case Wallets.EosResourceTransactionType.BUY_RAM:
-        return numBytes > 0 && !!receiver;
+        return numBytes >= 1024 && !!receiver;
       case Wallets.EosResourceTransactionType.SELL_RAM:
-        return numBytes > 0;
+        return numBytes >= 1024;
       case Wallets.EosResourceTransactionType.DELEGATE_CPU:
       case Wallets.EosResourceTransactionType.DELEGATE_NET:
         return Number(amount) > 0 && !!receiver;
@@ -282,7 +282,6 @@ class EosResourceScreen extends Component {
     const { navigation } = this.props;
     const wallet = navigation.state.params.wallet;
     const { transactionType, amount, numBytes, receiver } = this.state;
-
     this.setState({ loading: true });
     try {
       await Wallets.createTransaction(

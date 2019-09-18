@@ -100,6 +100,33 @@ class CreateWalletScreen extends Component {
     this.setState({ parentIdx });
   };
 
+  _submit = async () => {
+    const { accountName } = this.state;
+    const currency = this._getSelectedCurrency();
+    // check account name for EOS
+    if (Coin.EOS === currency.currency && !currency.tokenAddress) {
+      try {
+        this.setState({ loading: true });
+        const result = await Wallets.validateEosAccount(accountName);
+        this.setState({ loading: false });
+        if (!result.valid) {
+          toastError(new Error('EOS account invalid'));
+          return;
+        }
+        if (result.exist) {
+          toastError(new Error('EOS account already exists'));
+          return;
+        }
+      } catch (error) {
+        console.log('validateEosAccount failed', error);
+        toastError(error);
+        return;
+      }
+    }
+
+    this._inputPinCode();
+  };
+
   _inputPinCode = () => {
     this.setState({ inputPinCode: true });
   };
@@ -204,7 +231,7 @@ class CreateWalletScreen extends Component {
               full
               style={{ margin: 16 }}
               disabled={loading || !isValid}
-              onPress={this._inputPinCode}
+              onPress={this._submit}
             >
               <Text>Submit</Text>
             </Button>
