@@ -10,8 +10,6 @@ import {
   Content,
   Button,
   Text,
-  Item,
-  Input,
   Header,
   Left,
   Body,
@@ -23,6 +21,7 @@ import {
 } from 'native-base';
 import { Auth } from '@cybavo/react-native-wallet-service';
 import { colorPrimary, PIN_CODE_LENGTH } from '../Constants';
+import InputPinCodeModal from '../components/InputPinCodeModal';
 import { toastError } from '../Helpers';
 
 class ChangePinCodeScreen extends Component {
@@ -44,24 +43,35 @@ class ChangePinCodeScreen extends Component {
 
   state = {
     loading: false,
-    pinCode: '',
-    newPinCode: '',
+    inputPinCode: null,
+    pinSecret: null,
+    newPinSecret: null,
   };
 
-  _inputPinCode = pinCode => {
-    this.setState({ pinCode });
+  _startInputPinCode = target => {
+    this.setState({ inputPinCode: target });
   };
 
-  _inputNewPinCode = newPinCode => {
-    this.setState({ newPinCode });
+  _finishInputPinCode = () => {
+    this.setState({ inputPinCode: null });
+  };
+
+  _onInputPinCode = pinSecret => {
+    const { inputPinCode } = this.state;
+    if (inputPinCode === 'pinCode') {
+      this.setState({ pinSecret: pinSecret });
+    } else if (inputPinCode === 'newPinCode') {
+      this.setState({ newPinSecret: pinSecret });
+    }
+    this._finishInputPinCode();
   };
 
   _changePinCode = async () => {
     const { navigation } = this.props;
-    const { pinCode, newPinCode } = this.state;
+    const { newPinSecret, pinSecret } = this.state;
     this.setState({ loading: true });
     try {
-      await Auth.changePinCode(newPinCode, pinCode);
+      await Auth.changePinCode(newPinSecret, pinSecret);
       Toast.show({ text: 'Change PIN code successfully' });
       navigation.goBack();
     } catch (error) {
@@ -72,9 +82,8 @@ class ChangePinCodeScreen extends Component {
   };
 
   render() {
-    const { loading, pinCode, newPinCode } = this.state;
-    const isValid =
-      pinCode.length >= PIN_CODE_LENGTH && newPinCode.length >= PIN_CODE_LENGTH;
+    const { loading, pinSecret, newPinSecret, inputPinCode } = this.state;
+    const isValid = pinSecret && newPinSecret;
     return (
       <Container style={{ padding: 16 }}>
         <Content>
@@ -89,18 +98,21 @@ class ChangePinCodeScreen extends Component {
           </Text>
 
           <Label>Current PIN code</Label>
-          <Item regular>
-            <Input
-              secureTextEntry
-              keyboardType="number-pad"
-              returnKeyType='done'
-              maxLength={PIN_CODE_LENGTH}
-              editable={!loading}
-              value={pinCode}
-              onChangeText={this._inputPinCode}
-              placeholder="Your PIN code"
-            />
-          </Item>
+          <Button
+            full
+            transparent
+            disabled={loading}
+            onPress={() => this._startInputPinCode('pinCode')}
+          >
+            <Text
+              style={{
+                letterSpacing: !!pinSecret ? 16 : undefined,
+                fontSize: !!pinSecret ? 32 : undefined,
+              }}
+            >
+              {!!pinSecret ? '*'.repeat(PIN_CODE_LENGTH) : 'Click to input'}
+            </Text>
+          </Button>
 
           <Label
             style={{
@@ -109,18 +121,21 @@ class ChangePinCodeScreen extends Component {
           >
             New PIN code
           </Label>
-          <Item regular>
-            <Input
-              secureTextEntry
-              keyboardType="number-pad"
-              returnKeyType='done'
-              maxLength={PIN_CODE_LENGTH}
-              editable={!loading}
-              value={newPinCode}
-              onChangeText={this._inputNewPinCode}
-              placeholder="New PIN code"
-            />
-          </Item>
+          <Button
+            full
+            transparent
+            disabled={loading}
+            onPress={() => this._startInputPinCode('newPinCode')}
+          >
+            <Text
+              style={{
+                letterSpacing: !!newPinSecret ? 16 : undefined,
+                fontSize: !!newPinSecret ? 32 : undefined,
+              }}
+            >
+              {!!newPinSecret ? '*'.repeat(PIN_CODE_LENGTH) : 'Click to input'}
+            </Text>
+          </Button>
         </Content>
 
         <Button
@@ -130,6 +145,13 @@ class ChangePinCodeScreen extends Component {
         >
           <Text>Submit</Text>
         </Button>
+
+        <InputPinCodeModal
+          isVisible={!!inputPinCode}
+          loading={loading}
+          onCancel={this._finishInputPinCode}
+          onInputPinCode={this._onInputPinCode}
+        />
       </Container>
     );
   }

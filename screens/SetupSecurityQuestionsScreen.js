@@ -79,13 +79,13 @@ class SetupSecurityQuestionsScreen extends Component {
         state: { params = {} },
       },
     } = this.props;
-    const pinCode = params.pinCode || '';
+    const pinSecret = params.pinSecret;
     this.state = {
       loading: false,
       questions: [QUESTIONS[0], QUESTIONS[1], QUESTIONS[2]],
       answers: ['', '', ''],
       inputPinCode: false,
-      pinCode,
+      pinSecret,
     };
   }
 
@@ -130,22 +130,22 @@ class SetupSecurityQuestionsScreen extends Component {
   };
 
   _submit = () => {
-    const { pinCode } = this.state;
-    if (pinCode) {
-      this._setupSecurityQuestions(pinCode);
+    const { pinSecret } = this.state;
+    if (pinSecret) {
+      this._setupSecurityQuestions(pinSecret);
     } else {
       this._inputPinCode();
     }
   };
 
-  _setupSecurityQuestions = async pinCode => {
+  _setupSecurityQuestions = async pinSecret => {
     this._finishInputPinCode();
     const { fetchUserState } = this.props;
     const { questions, answers } = this.state;
     this.setState({ loading: true });
     try {
       await Auth.setupBackupChallenge(
-        pinCode,
+        pinSecret,
         {
           question: questions[0],
           answer: answers[0],

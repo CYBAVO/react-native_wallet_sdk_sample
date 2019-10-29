@@ -106,6 +106,12 @@ class CreateWalletScreen extends Component {
     // check account name for EOS
     if (Coin.EOS === currency.currency && !currency.tokenAddress) {
       try {
+        // eslint-disable-next-line no-template-curly-in-string
+        var regex = new RegExp('^[a-z1-5]{12}$');
+        if (!regex.test(accountName)) {
+          toastError(new Error('Account Name only allow a-z, 1-5. length 12'));
+          return;
+        }
         this.setState({ loading: true });
         const result = await Wallets.validateEosAccount(accountName);
         this.setState({ loading: false });
@@ -135,7 +141,7 @@ class CreateWalletScreen extends Component {
     this.setState({ inputPinCode: false });
   };
 
-  _createWallet = async pinCode => {
+  _createWallet = async pinSecret => {
     const { name, parentIdx, accountName } = this.state;
     const { wallets, fetchWallets, navigation } = this.props;
     const currency = this._getSelectedCurrency();
@@ -148,7 +154,7 @@ class CreateWalletScreen extends Component {
         currency.tokenAddress, // tokenAddress
         parent.walletId || 0, // parentWalletId
         name, // name
-        pinCode, // pinCode
+        pinSecret, // pinSecret
         {
           account_name:
             currency.currency === Coin.EOS ? accountName : undefined,

@@ -5,13 +5,11 @@
  * All rights reserved.
  */
 import React, { Component } from 'react';
+import { View } from 'react-native';
 import {
   Container,
-  Content,
   Button,
   Text,
-  Item,
-  Input,
   Header,
   Left,
   Body,
@@ -20,7 +18,10 @@ import {
   Title,
   Toast,
 } from 'native-base';
-import { Auth } from '@cybavo/react-native-wallet-service';
+import {
+  Auth,
+  NumericPinCodeInputView,
+} from '@cybavo/react-native-wallet-service';
 import { colorPrimary, PIN_CODE_LENGTH } from '../Constants';
 import { toastError } from '../Helpers';
 
@@ -48,22 +49,22 @@ class SetupPinCodeScreen extends Component {
 
   state = {
     loading: false,
-    pinCode: '',
+    pinCodeLength: 0,
   };
 
-  _inputPinCode = pinCode => {
-    this.setState({ pinCode });
+  _inputPinCode = pinCodeLength => {
+    this.setState({ pinCodeLength });
   };
 
   _restorePinCode = async () => {
-    const { pinCode } = this.state;
     const { navigation } = this.props;
     const { questions, answers } = navigation.state.params;
 
     this.setState({ loading: true });
     try {
+      const pinSecret = await this.refs.pinCodeInput.submit();
       await Auth.restorePinCode(
-        pinCode,
+        pinSecret,
         {
           question: questions[0],
           answer: answers[0],
@@ -92,11 +93,17 @@ class SetupPinCodeScreen extends Component {
   };
 
   render() {
-    const { loading, pinCode } = this.state;
-    const isValid = pinCode.length >= PIN_CODE_LENGTH;
+    const { loading, pinCodeLength } = this.state;
+    const isValid = pinCodeLength >= PIN_CODE_LENGTH;
     return (
       <Container style={{ padding: 16 }}>
-        <Content>
+        <View
+          style={{
+            flex: 1,
+            flexDirection: 'column',
+            justifyContent: 'space-between',
+          }}
+        >
           <Text
             style={{
               color: colorPrimary,
@@ -107,19 +114,38 @@ class SetupPinCodeScreen extends Component {
             Questions verified successfully. Please enter your new PIN code.
           </Text>
 
-          <Item regular stackedLabel>
-            <Input
-              secureTextEntry
-              keyboardType="number-pad"
-              returnKeyType='done'
-              maxLength={PIN_CODE_LENGTH}
-              editable={!loading}
-              value={pinCode}
-              onChangeText={this._inputPinCode}
-              placeholder="PIN code"
-            />
-          </Item>
-        </Content>
+          <Text
+            style={{
+              color: 'gray',
+              fontSize: 32,
+              textAlign: 'center',
+              letterSpacing: 16,
+            }}
+          >
+            {`${'*'.repeat(pinCodeLength)}${'-'.repeat(
+              PIN_CODE_LENGTH - pinCodeLength
+            )}`}
+          </Text>
+
+          <NumericPinCodeInputView
+            ref="pinCodeInput"
+            style={{ marginBottom: 16 }}
+            maxLength={PIN_CODE_LENGTH}
+            fixedOrder={true}
+            hapticFeedback={true}
+            horizontalSpacing={16}
+            verticalSpacing={8}
+            buttonWidth={72}
+            buttonHeight={72}
+            buttonBorderRadius={36}
+            buttonBackgroundColor="#EEEEEE80"
+            buttonTextColor="black"
+            buttonTextSize={12}
+            androidButtonRippleColor="#80808080"
+            disabled={!loading}
+            onChanged={this._inputPinCode}
+          />
+        </View>
         <Button
           full
           disabled={loading || !isValid}

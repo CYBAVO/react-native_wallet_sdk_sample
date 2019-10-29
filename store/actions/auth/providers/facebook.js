@@ -12,7 +12,10 @@ export default {
     try {
       console.log('Facebook.signIn...');
       // eslint-disable-next-line no-undef
-      result = await LoginManager.logInWithReadPermissions(['public_profile']);
+      result = await LoginManager.logInWithReadPermissions([
+        'public_profile',
+        'email',
+      ]);
       // eslint-disable-next-line no-undef
       if (result.isCancelled) {
         throw new Error('Cancelled');
@@ -42,7 +45,7 @@ export default {
 var getMe = token => {
   const profileRequestParams = {
     fields: {
-      string: 'id, name, email, first_name, last_name, gender',
+      string: 'id, name, email',
     },
   };
 
@@ -52,7 +55,7 @@ var getMe = token => {
     parameters: profileRequestParams,
     accessToken: token,
   };
-debugger;
+
   return new Promise(function(resolve, reject) {
     const infoRequest = new GraphRequest(
       '/me',

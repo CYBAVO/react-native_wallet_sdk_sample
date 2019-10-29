@@ -67,7 +67,7 @@ export default class TransactionDetailScreen extends Component {
   _fetchTransactionDetail = async () => {
     const { navigation } = this.props;
     const { transaction, wallet } = navigation.state.params;
-    if (transaction.txid === '') {
+    if (transaction.txid === '' || transaction.dropped) {
       return;
     }
     try {
@@ -100,9 +100,9 @@ export default class TransactionDetailScreen extends Component {
     return (
       <Container>
         <Content
+          style={{ flex: 1 }}
           contentContainerStyle={{
             padding: 16,
-            flex: 1,
           }}
         >
           <View
@@ -158,7 +158,22 @@ export default class TransactionDetailScreen extends Component {
           </View>
           <Text style={styles.value}>{transaction.toAddress}</Text>
 
-          <Text style={styles.label}>Amount</Text>
+          <View
+            style={[
+              styles.label,
+              {
+                flexDirection: 'row',
+                alignItems: 'center',
+              },
+            ]}
+          >
+            <Text>Amount</Text>
+            {transaction.platformFee && (
+              <Badge info style={styles.badge}>
+                <Text>PLATFORM FEE</Text>
+              </Badge>
+            )}
+          </View>
           <Text style={styles.value}>
             {transaction.amount} {wallet.currencySymbol}
           </Text>
@@ -186,6 +201,11 @@ export default class TransactionDetailScreen extends Component {
                 <Text>FAILED</Text>
               </Badge>
             )}
+            {transaction.dropped && (
+              <Badge danger style={styles.badge}>
+                <Text>DROPPED</Text>
+              </Badge>
+            )}
             {confirmBlocks != null && (
               <Badge success style={styles.badge}>
                 <Text>{confirmBlocks} CONFIRMED</Text>
@@ -193,7 +213,18 @@ export default class TransactionDetailScreen extends Component {
             )}
           </View>
           {!!transaction.txid && (
-            <Text style={styles.value}>{transaction.txid}</Text>
+            <Text
+              style={[
+                styles.value,
+                {
+                  textDecorationLine: transaction.dropped
+                    ? 'line-through'
+                    : 'none',
+                },
+              ]}
+            >
+              {transaction.txid}
+            </Text>
           )}
           {!!transaction.error && (
             <Text style={[styles.value, { color: colorDanger }]}>
@@ -209,21 +240,20 @@ export default class TransactionDetailScreen extends Component {
 
           <Text style={styles.label}>Description</Text>
           <Text style={styles.value}>{transaction.description || '-'}</Text>
-
-          <View
-            style={{
-              flex: 1,
-              justifyContent: 'flex-end',
-              alignItems: 'center',
-              alignSelf: 'center',
-              width: '50%',
-            }}
-          >
-            <Button bordered full onPress={this._explorer}>
-              <Text>Explorer</Text>
-            </Button>
-          </View>
         </Content>
+        <View
+          style={{
+            justifyContent: 'flex-end',
+            alignItems: 'center',
+            alignSelf: 'center',
+            width: '50%',
+            margin: 16,
+          }}
+        >
+          <Button bordered full onPress={this._explorer}>
+            <Text>Explorer</Text>
+          </Button>
+        </View>
       </Container>
     );
   }

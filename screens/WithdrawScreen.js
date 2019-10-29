@@ -5,7 +5,7 @@
  * All rights reserved.
  */
 import React, { Component } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, Alert } from 'react-native';
 import {
   Container,
   Button,
@@ -72,7 +72,6 @@ export default class WithdrawScreen extends Component {
     memo: '',
     description: '',
     selectedFee: null,
-    pinCode: '',
     fee: null,
     usage: null,
     loading: false,
@@ -109,6 +108,50 @@ export default class WithdrawScreen extends Component {
     this.setState({ loading: false });
   };
 
+  _confirmTransaction = async action => {
+    const { outgoingAddress, amount, selectedFee, fee } = this.state;
+    const { navigation } = this.props;
+    const wallet = navigation.state.params.wallet;
+    const transactionFee = fee[selectedFee];
+
+    try {
+      // console.log(wallet.currency, wallet.tokenAddress, amount, transactionFee);
+      const {
+        tranasctionAmout,
+        platformFee,
+        blockchainFee,
+      } = await Wallets.estimateTransaction(
+        wallet.currency,
+        wallet.tokenAddress,
+        amount,
+        transactionFee ? transactionFee.amount : '0'
+      );
+
+      let mesasge = `Destination:\n${outgoingAddress}\n`;
+      if (tranasctionAmout && tranasctionAmout !== '0') {
+        mesasge += `\nTransaction Amount:\n${tranasctionAmout}\n`;
+      }
+      if (platformFee && platformFee !== '0') {
+        mesasge += `\nPlatform Fee:\n${platformFee}\n`;
+      }
+      if (blockchainFee && blockchainFee !== '0') {
+        mesasge += `\nBlockchain Fee:\n${blockchainFee}\n`;
+      }
+
+      Alert.alert(
+        'Confirm Transaction',
+        mesasge,
+        [{ text: 'Cancel' }, { text: 'Confirm', onPress: action }],
+        { cancelable: true }
+      );
+
+      // console.log(result);
+    } catch (error) {
+      console.log('_confirmTransaction failed', error);
+      toastError(error);
+    }
+  };
+
   _inputPinCode = action => {
     this.setState({ inputPinCode: action });
   };
@@ -117,10 +160,10 @@ export default class WithdrawScreen extends Component {
     this.setState({ inputPinCode: null });
   };
 
-  _requestSecureToken = async pinCode => {
+  _requestSecureToken = async pinSecret => {
     this.setState({ loading: true });
     try {
-      await Wallets.requestSecureToken(pinCode);
+      await Wallets.requestSecureToken(pinSecret);
       await this._createTransactionWithSecureToken(false);
     } catch (error) {
       console.log('_requestSecureToken failed', error);
@@ -129,7 +172,7 @@ export default class WithdrawScreen extends Component {
     this.setState({ loading: false });
   };
 
-  _createTransaction = async pinCode => {
+  _createTransaction = async pinSecret => {
     const {
       outgoingAddress,
       amount,
@@ -158,7 +201,7 @@ export default class WithdrawScreen extends Component {
         amount,
         transactionFee ? transactionFee.amount : '0',
         description,
-        pinCode,
+        pinSecret,
         extras
       );
       navigation.goBack();
@@ -334,7 +377,7 @@ export default class WithdrawScreen extends Component {
 
             <Input
               style={styles.input}
-              keyboardType="number-pad"
+              keyboardType="numeric"
               returnKeyType="done"
               placeholder={'Amount to withdraw deposit'}
               placeholderTextColor={placeholderTextColor}
@@ -420,7 +463,11 @@ export default class WithdrawScreen extends Component {
             full
             disabled={loading || !isValid}
             style={{ flex: 1, marginRight: 8 }}
-            onPress={() => this._createTransactionWithSecureToken(true)}
+            onPress={() =>
+              this._confirmTransaction(() =>
+                this._createTransactionWithSecureToken(true)
+              )
+            }
           >
             <Text>Send w. Token</Text>
           </Button>
@@ -430,7 +477,11 @@ export default class WithdrawScreen extends Component {
             full
             disabled={loading || !isValid}
             style={{ flex: 1, marginLeft: 8 }}
-            onPress={() => this._inputPinCode(ACTION_WITHDRAW)}
+            onPress={() =>
+              this._confirmTransaction(() =>
+                this._inputPinCode(ACTION_WITHDRAW)
+              )
+            }
           >
             <Text>Send</Text>
           </Button>
@@ -442,11 +493,11 @@ export default class WithdrawScreen extends Component {
             this._finishInputPinCode();
           }}
           loading={loading}
-          onInputPinCode={pinCode => {
+          onInputPinCode={pinSecret => {
             if (inputPinCode === ACTION_WITHDRAW) {
-              this._createTransaction(pinCode);
+              this._createTransaction(pinSecret);
             } else {
-              this._requestSecureToken(pinCode);
+              this._requestSecureToken(pinSecret);
             }
           }}
         />

@@ -5,30 +5,44 @@
  * All rights reserved.
  */
 import React, { Component } from 'react';
-import { ActivityIndicator } from 'react-native';
-import { Button, Text, Body, Card, CardItem, Item, Input } from 'native-base';
+import { View, ActivityIndicator } from 'react-native';
+import { Button, Text, Body, Card, CardItem } from 'native-base';
 import Modal from 'react-native-modal';
+import { NumericPinCodeInputView } from '@cybavo/react-native-wallet-service';
 import { colorAccent, PIN_CODE_LENGTH } from '../Constants';
 
 export default class InputPinCodeModal extends Component {
   state = {
-    pinCode: '',
+    pinCodeLength: 0,
   };
 
-  _reset = () => {
-    this.setState({ pinCode: '' });
+  _inputPinCode = pinCodeLength => {
+    this.setState({ pinCodeLength });
+  };
+
+  _submit = async () => {
+    const { onInputPinCode } = this.props;
+    if (!onInputPinCode) {
+      return;
+    }
+
+    try {
+      const pinSecret = await this.refs.pinCodeInput.submit();
+      onInputPinCode(pinSecret);
+    } catch (error) {
+      console.warn(error);
+    }
   };
 
   render() {
-    const { pinCode } = this.state;
-    const { isVisible, onCancel, loading, onInputPinCode } = this.props;
-    const isValid = pinCode.length === PIN_CODE_LENGTH;
+    const { pinCodeLength } = this.state;
+    const { isVisible, onCancel, loading } = this.props;
+    const isValid = pinCodeLength === PIN_CODE_LENGTH;
     return (
       <Modal
         isVisible={isVisible}
         onBackdropPress={onCancel}
         onBackButtonPress={onCancel}
-        onModalWillHide={this._reset}
       >
         <Card>
           <CardItem header>
@@ -36,28 +50,58 @@ export default class InputPinCodeModal extends Component {
           </CardItem>
           <CardItem>
             <Body>
-              <Item regular>
-                <Input
-                  autoFocus
-                  secureTextEntry
-                  maxLength={PIN_CODE_LENGTH}
-                  keyboardType="number-pad"
-                  value={pinCode}
-                  editable={!loading}
-                  onChangeText={pinCode => this.setState({ pinCode })}
-                />
+              <View
+                style={{
+                  alignSelf: 'stretch',
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}
+              >
+                <Text
+                  style={{
+                    color: 'gray',
+                    fontSize: 32,
+                    textAlign: 'center',
+                    letterSpacing: 16,
+                  }}
+                >
+                  {`${'*'.repeat(pinCodeLength)}${'-'.repeat(
+                    PIN_CODE_LENGTH - pinCodeLength
+                  )}`}
+                </Text>
                 {loading && (
                   <ActivityIndicator
                     color={colorAccent}
                     size="small"
                     style={{
                       position: 'absolute',
-                      alignSelf: 'center',
                       right: 16,
                     }}
                   />
                 )}
-              </Item>
+              </View>
+              <NumericPinCodeInputView
+                ref="pinCodeInput"
+                style={{
+                  alignSelf: 'center',
+                  marginTop: 16,
+                }}
+                maxLength={PIN_CODE_LENGTH}
+                hapticFeedback={true}
+                horizontalSpacing={16}
+                verticalSpacing={8}
+                buttonWidth={72}
+                buttonHeight={72}
+                buttonBorderRadius={36}
+                buttonTextColor="black"
+                buttonTextSize={12}
+                buttonBackgroundColor="#EEEEEE"
+                backspaceButtonBackgroundColor="#EEEEEE"
+                androidButtonRippleColor="#808080"
+                disabled={!loading}
+                onChanged={this._inputPinCode}
+              />
             </Body>
           </CardItem>
           <CardItem
@@ -72,7 +116,7 @@ export default class InputPinCodeModal extends Component {
             </Button>
             <Button
               transparent
-              onPress={() => onInputPinCode(pinCode)}
+              onPress={this._submit}
               disabled={loading || !isValid}
             >
               <Text>Submit</Text>

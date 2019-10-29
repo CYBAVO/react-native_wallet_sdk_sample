@@ -11,6 +11,7 @@ import Google from './providers/google';
 import WeChat from './providers/wechat';
 import Facebook from './providers/facebook';
 import LINE from './providers/LINE';
+import { Crashlytics } from 'react-native-fabric';
 
 const { ErrorCodes } = WalletSdk;
 
@@ -79,6 +80,9 @@ export function signIn(identityProvider) {
       identity.email = email;
       identity.avatar = avatar;
       console.log('auth.signIn...', idToken);
+      if (email) {
+        Crashlytics.setUserEmail(email);
+      }
       userToken = idToken;
       console.log('signInWithToken...');
       await signInWithToken(userToken, identityProvider);

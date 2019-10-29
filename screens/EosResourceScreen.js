@@ -278,7 +278,7 @@ class EosResourceScreen extends Component {
     this.setState({ inputPinCode: false });
   };
 
-  _createTransaction = async pinCode => {
+  _createTransaction = async pinSecret => {
     const { navigation } = this.props;
     const wallet = navigation.state.params.wallet;
     const { transactionType, amount, numBytes, receiver } = this.state;
@@ -290,7 +290,7 @@ class EosResourceScreen extends Component {
         amount,
         '', // fee
         '', // description
-        pinCode,
+        pinSecret,
         {
           // EOS resource specific extras
           eos_transaction_type: transactionType,
@@ -428,7 +428,13 @@ class EosResourceScreen extends Component {
                 selected={type === transactionType}
                 onPress={() => this._setTransactionType(type)}
               />
-              <Text style={styles.transactionLabel}>{label}</Text>
+              <Text
+                disabled={loading}
+                style={styles.transactionLabel}
+                onPress={() => this._setTransactionType(type)}
+              >
+                {label}
+              </Text>
             </View>
           ))}
         </ScrollView>
@@ -454,6 +460,7 @@ class EosResourceScreen extends Component {
                 <Label>Number of bytes</Label>
                 <Input
                   keyboardType="number-pad"
+                  returnKeyType="done"
                   editable={!loading}
                   value={String(numBytes)}
                   onChangeText={numBytes => this._setNumBytes(numBytes)}

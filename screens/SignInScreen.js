@@ -61,7 +61,13 @@ class SignInScreen extends Component {
   };
 
   render() {
-    const { loading, googleSignIn, wechatSignIn, facebookSignIn, lineSignIn } = this.props;
+    const {
+      loading,
+      googleSignIn,
+      wechatSignIn,
+      facebookSignIn,
+      lineSignIn,
+    } = this.props;
 
     return (
       <Container>
@@ -131,7 +137,11 @@ class SignInScreen extends Component {
             <View
               style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}
             >
-              <Icon type="MaterialCommunityIcons" name="facebook" backgroundColor="#3b5998" />
+              <Icon
+                type="MaterialCommunityIcons"
+                name="facebook"
+                backgroundColor="#3b5998"
+              />
               <Text style={{ flex: 1, textAlign: 'center' }}>
                 Sign in with Facebook
               </Text>
@@ -139,7 +149,7 @@ class SignInScreen extends Component {
           </Button>
           <Button
             full
-            style={{ margin: 4, height: 40, backgroundColor: "#00c300" }}
+            style={{ margin: 4, height: 40, backgroundColor: '#00c300' }}
             onPress={lineSignIn}
             disabled={loading}
           >

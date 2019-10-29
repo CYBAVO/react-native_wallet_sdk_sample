@@ -64,8 +64,20 @@ export default class TransactionList extends Component {
             flex: 1,
           }}
         >
-          <Text style={{ alignSelf: 'flex-end' }}>{item.amount}</Text>
-          <Text note numberOfLines={1} ellipsizeMode="middle">
+          <View style={{ flexDirection: 'row' }}>
+            <Text style={{ flex: 1, textAlign: 'right' }}>{item.amount}</Text>
+            {!!item.platformFee && (
+              <Text style={{ opacity: 0.5 }}>(Pl. Fee)</Text>
+            )}
+          </View>
+          <Text
+            note
+            numberOfLines={1}
+            ellipsizeMode="middle"
+            style={{
+              textDecorationLine: item.dropped ? 'line-through' : 'none',
+            }}
+          >
             {item.txid}
           </Text>
         </Body>

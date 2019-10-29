@@ -5,14 +5,12 @@
  * All rights reserved.
  */
 import React, { Component } from 'react';
+import { View } from 'react-native';
 import { connect } from 'react-redux';
 import {
   Container,
-  Content,
   Button,
   Text,
-  Item,
-  Input,
   Header,
   Left,
   Body,
@@ -20,7 +18,11 @@ import {
   Icon,
   Title,
 } from 'native-base';
-import { Auth } from '@cybavo/react-native-wallet-service';
+import {
+  Auth,
+  Wallets,
+  NumericPinCodeInputView,
+} from '@cybavo/react-native-wallet-service';
 import { fetchUserState, fetchWallets } from '../store/actions';
 import { colorPrimary, PIN_CODE_LENGTH } from '../Constants';
 
@@ -48,19 +50,29 @@ class SetupPinCodeScreen extends Component {
 
   state = {
     loading: false,
-    pinCode: '',
+    pinCodeLength: 0,
   };
 
-  _inputPinCode = pinCode => {
-    this.setState({ pinCode });
+  _inputPinCode = pinCodeLength => {
+    this.setState({ pinCodeLength });
   };
 
   _setupPinCode = async () => {
     const { fetchUserState, fetchWallets } = this.props;
-    const { pinCode } = this.state;
     this.setState({ loading: true });
     try {
-      await Auth.setupPinCode(pinCode);
+      const pinSecret = await this.refs.pinCodeInput.submit();
+      // setup PIN code and retain PinSecret
+      await Auth.setupPinCode({ pinSecret, retain: true });
+      // create default wallet with retained PinSecret
+      await Wallets.createWallet(
+        60, // currency
+        '', // tokenAddress
+        0, // parentWalletId
+        'My Ethereum', // name
+        pinSecret, // pinSecret
+        {} // extraAttributes
+      );
     } catch (error) {
       console.warn(error);
     }
@@ -69,60 +81,64 @@ class SetupPinCodeScreen extends Component {
     this.setState({ loading: false });
   };
 
-  _goCreateWallet = () => {
-    const { navigation } = this.props;
-    navigation.replace({
-      routeName: 'CreateWallet',
-    });
-  };
-
-  _goSetupSecurityQuestions = () => {
-    const { pinCode } = this.state;
-    const { navigation } = this.props;
-    navigation.replace({
-      routeName: 'SetupSecurityQuestions',
-      params: {
-        pinCode,
-      },
-    });
-  };
-
   _quit = async () => {
     const { navigation } = this.props;
     navigation.goBack();
   };
 
   render() {
-    const { loading, pinCode } = this.state;
+    const { loading, pinCodeLength } = this.state;
     const { userState } = this.props;
-    const isValid = pinCode.length >= PIN_CODE_LENGTH;
+    const isValid = pinCodeLength >= PIN_CODE_LENGTH;
     return (
       <Container style={{ padding: 16 }}>
-        <Content>
+        <View style={{ flex: 1, flexDirection: 'column' }}>
           <Text
             style={{
               color: colorPrimary,
               fontSize: 32,
-              marginTop: 56,
-              marginBottom: 16,
             }}
           >
             {`Please\nsetup your PIN code`}
           </Text>
 
-          <Item regular stackedLabel>
-            <Input
-              secureTextEntry
-              keyboardType="number-pad"
-              returnKeyType='done'
+          <Text
+            style={{
+              color: 'gray',
+              fontSize: 32,
+              marginTop: 32,
+              textAlign: 'center',
+              letterSpacing: 16,
+            }}
+          >
+            {`${'*'.repeat(pinCodeLength)}${'-'.repeat(
+              PIN_CODE_LENGTH - pinCodeLength
+            )}`}
+          </Text>
+
+          <View style={{ flex: 1 }} />
+
+          {!userState.setPin && (
+            <NumericPinCodeInputView
+              ref="pinCodeInput"
+              style={{ marginBottom: 16 }}
               maxLength={PIN_CODE_LENGTH}
-              editable={!loading && !userState.setPin}
-              value={pinCode}
-              onChangeText={this._inputPinCode}
-              placeholder="PIN code"
+              fixedOrder={true}
+              hapticFeedback={true}
+              horizontalSpacing={16}
+              verticalSpacing={8}
+              buttonWidth={72}
+              buttonHeight={72}
+              buttonBorderRadius={36}
+              buttonBackgroundColor="#EEEEEE80"
+              buttonTextColor="black"
+              buttonTextSize={12}
+              androidButtonRippleColor="#80808080"
+              disabled={!loading}
+              onChanged={this._inputPinCode}
             />
-          </Item>
-        </Content>
+          )}
+        </View>
 
         {!userState.setPin && (
           <Button
@@ -135,14 +151,17 @@ class SetupPinCodeScreen extends Component {
         )}
         {userState.setPin && (
           <>
-            <Text style={{ color: colorPrimary, marginBottom: 16 }}>
-              PIN code setup successfully. Do you want to create a wallet now?
+            <Text
+              style={{
+                color: colorPrimary,
+                marginBottom: 16,
+                textAlign: 'center',
+              }}
+            >
+              Congrations! You are ready to go!
             </Text>
-            <Button full disabled={loading} onPress={this._goCreateWallet}>
-              <Text>Create Wallet Now</Text>
-            </Button>
-            <Button full transparent disabled={loading} onPress={this._quit}>
-              <Text>Skip</Text>
+            <Button full disabled={loading} onPress={this._quit}>
+              <Text>Go to wallets</Text>
             </Button>
           </>
         )}

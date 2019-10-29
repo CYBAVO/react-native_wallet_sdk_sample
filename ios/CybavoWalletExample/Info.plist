@@ -61,6 +61,20 @@
 	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>
+	<key>Fabric</key>
+	<dict>
+		<key>APIKey</key>
+		<string>4d287f4eb1b177ca6c355240aa77088b1884b58c</string>
+		<key>Kits</key>
+		<array>
+			<dict>
+				<key>KitInfo</key>
+				<dict/>
+				<key>KitName</key>
+				<string>Crashlytics</string>
+			</dict>
+		</array>
+	</dict>
 	<key>FacebookAppID</key>
 	<string>MY_FACEBOOK_SIGN_IN_APP_ID</string>
 	<key>FacebookDisplayName</key>
@@ -94,10 +108,14 @@
 	<string>Not supposed to see this</string>
 	<key>NSBluetoothPeripheralUsageDescription</key>
 	<string>Not supposed to see this</string>
+	<key>NSBluetoothAlwaysUsageDescription</key>
+	<string>Not supposed to see this</string>
 	<key>NSCalendarsUsageDescription</key>
 	<string>Not supposed to see this</string>
 	<key>NSCameraUsageDescription</key>
 	<string>Scan QR Code</string>
+	<key>NSContactsUsageDescription</key>
+	<string>Not supposed to see this</string>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>Not supposed to see this</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
