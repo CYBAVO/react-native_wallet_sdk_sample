@@ -101,7 +101,8 @@ https://bitbucket.org/cybavo/Specs_501git if using Xcode >= 10.2
 12. Register your app on CYBAVO WALLET MANAGEMENT system web > Administration > System settings, input `bundle id`, follow the instruction to retrieve an `API Code`.
 13. Edit `BuildConfig.json` ➜ `SERVICE_API_CODE` to fill in yout `API Code`
 14. Edit `BuildConfig.json` ➜ `MY_WECHAT_SIGN_IN_APP_ID` to fill in yout `WeChat app id`
-
+# Push notification
+To receive silent push notification of deposit/withdrawal. Please refer to [this](docs/PushNotification.md) to setup.
 # Features
 
 - Sign in / Sign up with 3rd-party account system - Google, WeChat(微信)
