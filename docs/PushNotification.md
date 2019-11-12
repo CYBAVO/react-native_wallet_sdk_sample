@@ -18,14 +18,14 @@
 2. Please remember to call `Auth.setPushDeviceToken(token)` after signin. Otherwise the device won't be able to receive notification successfully. 
     ```javascript 1.8
     PushNotification.onRegister((token) => {
-     //Save the token and set push token after signin
+     // Save the token and set push token after signin
       AsyncStorage.setItem('pushDeviceToken', token)
           .then(() =>
           console.debug('save pushDeviceToken done')
         );
     });
    
-   //Make sure call setPushDeviceToken after signin. 
+   // Make sure call setPushDeviceToken after signin. 
    function setPushDeviceToken() {
      return async (dispatch, getState) => {
        const token = await AsyncStorage.getItem('pushDeviceToken');
@@ -34,10 +34,12 @@
      };
    }
     ```
-3. Receive the notification in `PushNotification.onNotification(notification => {})` and utilize `CYBAVOPushNotification.parse(json)` to parse the json string.
+3. Receive the notification in `PushNotification.onNotification(notification => {})` and we provided  `PushNotification.parse(json)` to help parsing the json string.
     
     iOS 
     ```javascript 1.8
+    import { PushNotification as CYBAVOPushNotification } from '@cybavo/react-native-wallet-service';
+    
     PushNotification.onNotification(notification => {
         let data = CYBAVOPushNotification.parse(
               JSON.stringify(notification._data.data.jsonBody)
@@ -46,6 +48,8 @@
     ```
     Android 
     ```javascript 1.8
+    import { PushNotification as CYBAVOPushNotification } from '@cybavo/react-native-wallet-service';
+    
     PushNotification.onNotification(notification => {
         let data = CYBAVOPushNotification.parse(
               notification.data['pinpoint.jsonBody']
