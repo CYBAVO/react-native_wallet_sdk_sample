@@ -15,7 +15,7 @@
      apnsSandbox: true,
    });
     ```
-2. After receive the push token, call `Auth.setPushDeviceToken`
+2. Please remeber to call `Auth.setPushDeviceToken(token)` after signin. Otherwise the device won't be able to receive notification successfully. 
     ```javascript 1.8
     PushNotification.onRegister((token) => {
      //Save the token and set push token after signin
@@ -25,7 +25,7 @@
         );
     });
    
-   //This function should be called once signin
+   //Make sure call setPushDeviceToken after signin. 
    function setPushDeviceToken() {
      return async (dispatch, getState) => {
        const token = await AsyncStorage.getItem('pushDeviceToken');
