@@ -6,13 +6,6 @@
 ## Installation and configuration
 1. Install and configure AWS Amplify push notification, please refer to [this](https://aws-amplify.github.io/docs/js/push-notifications).
 2. Setup AWS Mobile Hub. Please refer to [this](../docs/PushNotificationAws.md).
-3. Add following information of your app on `CYBAVO wallet management system` 
-    1. Pinpoint App ID
-    2. AWS Region
-    3. AWS Access Key ID
-    4. AWS Secret Access Key
-    
-    ![image](images/cybavo_wallet_management_system.png)
 ## Working with the API
 1. For iOS, you can set if it's apns sandbox while init WalletSdk
     ```javascript 1.8
