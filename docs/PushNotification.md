@@ -22,7 +22,7 @@
      apnsSandbox: true,
    });
     ```
-2. After receive the push token, call Auth.setPushDeviceToken
+2. After receive the push token, call `Auth.setPushDeviceToken`
     ```javascript 1.8
     PushNotification.onRegister((token) => {
      //Save the token and set push token after signin
