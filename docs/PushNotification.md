@@ -86,3 +86,19 @@
             );
     });
     ```
+4. The property of `PushNotification.parse(json)` result are listed below
+
+    Property    | Description  | Type  
+    :------------|:------------|:-------
+    walletID    | Wallet ID    |  number 
+    currency    | Currency     |  number 
+    tokenAddress  | Token address | string
+    direction  | Transaction direction | Wallets.Transaction.Direction<br>(IN:0, OUT:1)
+    amount  | Transaction amount | string
+    fee  | Transaction fee | string
+    fromAddress  | Transaction from address | string
+    toAddress  | Transaction to address | string
+    timestamp  | Transaction timestamp | number
+    txid  | Transaction TXID | string
+    description  | Transaction description | string
+
