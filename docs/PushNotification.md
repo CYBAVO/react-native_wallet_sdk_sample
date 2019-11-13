@@ -86,7 +86,7 @@
             );
     });
     ```
-4. The property of `PushNotification.parse(json)` result are listed below
+4. The properties of `PushNotification.parse(json)` result are listed below
 
     Property    | Description  | Type  
     :------------|:------------|:-------
