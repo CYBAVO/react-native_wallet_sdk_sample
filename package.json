@@ -4,18 +4,13 @@
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
-    "test": "jest"
+    "test": "jest",
+    "postinstall": "npx jetify"
   },
   "dependencies": {
-    "@aws-amplify/api": "^1.2.4",
-    "@aws-amplify/pubsub": "^1.2.4",
-    "@aws-amplify/pushnotification": "^1.1.4",
-    "@cybavo/react-native-wallet-service": "^1.2.26",
+    "@cybavo/react-native-wallet-service": "^1.2.23",
     "@react-native-community/async-storage": "1.6.1",
     "@react-native-community/push-notification-ios": "^1.0.2",
-    "aws-amplify": "^1.2.4",
-    "aws-amplify-react": "^2.5.4",
-    "aws-amplify-react-native": "^1.0.5",
     "bignumber.js": "^9.0.0",
     "moment": "^2.24.0",
     "native-base": "2.12.1",
@@ -33,10 +28,10 @@
     "react-native-gesture-handler": "1.1.0",
     "react-native-google-signin": "^1.2.1",
     "react-native-modal": "^9.0.0",
-    "react-native-permissions": "^1.2.1",
+    "react-native-permissions": "1.2.1",
     "react-native-progress": "^3.6.0",
     "react-native-push-notification": "^3.1.9",
-    "react-native-qrcode-scanner": "^1.1.2",
+    "react-native-qrcode-scanner": "1.1.2",
     "react-native-qrcode-svg": "^5.1.2",
     "react-native-svg": "^9.3.5",
     "react-native-web": "^0.11.0",
@@ -46,7 +41,8 @@
     "redux": "^4.0.1",
     "redux-logger": "^3.0.6",
     "redux-persist": "^5.10.0",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "jetifier":"1.6.5"
   },
   "devDependencies": {
     "@babel/core": "^7.3.4",

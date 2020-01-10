@@ -10,6 +10,7 @@ import user from './user';
 import wallets from './wallets';
 import currency from './currency';
 import balance from './balance';
+
 const walletApp = combineReducers({
   auth,
   user,

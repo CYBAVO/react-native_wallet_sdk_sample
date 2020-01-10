@@ -94,12 +94,21 @@ export default class InputPinCodeModal extends Component {
                 buttonWidth={72}
                 buttonHeight={72}
                 buttonBorderRadius={36}
+                buttonBackgroundColor="#EEEEEE80"
                 buttonTextColor="black"
                 buttonTextSize={12}
-                buttonBackgroundColor="#EEEEEE"
-                backspaceButtonBackgroundColor="#EEEEEE"
-                androidButtonRippleColor="#808080"
-                disabled={!loading}
+                backspaceButtonWidth={72}
+                backspaceButtonHeight={72}
+                backspaceButtonBorderRadius={36}
+                backspaceButtonBackgroundColor="#EEEEEE80"
+                buttonBackgroundColorDisabled="#EEEEEE"
+                backspaceButtonTextColor="black"
+                buttonTextColorDisabled="black"
+                backspaceButtonTextColorDisabled="black"
+                backspaceButtonTextSize={12}
+                backspaceButtonBackgroundColorDisabled="#EEEEEE"
+                androidButtonRippleColor="#80808080"
+                disabled={loading}
                 onChanged={this._inputPinCode}
               />
             </Body>

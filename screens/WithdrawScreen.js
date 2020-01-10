@@ -415,13 +415,13 @@ export default class WithdrawScreen extends Component {
               onValueChange={selectedFee => this.setState({ selectedFee })}
             >
               {fee &&
-                Object.entries(fee).map(([key, { amount, description }]) => (
-                  <Picker.Item
-                    key={key}
-                    label={`${amount} - ${description}`}
-                    value={key}
-                  />
-                ))}
+              Object.entries(fee).map(([key, { amount, description }]) => (
+                <Picker.Item
+                  key={key}
+                  label={`${amount} - ${description}`}
+                  value={key}
+                />
+              ))}
             </Picker>
           </Item>
 

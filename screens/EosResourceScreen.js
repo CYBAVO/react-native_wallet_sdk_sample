@@ -445,7 +445,8 @@ class EosResourceScreen extends Component {
             <Item stackedLabel>
               <Label>Amount</Label>
               <Input
-                keyboardType="number-pad"
+                keyboardType="numeric"
+                returnKeyType="done"
                 editable={!loading}
                 value={amount}
                 onChangeText={amount => this.setState({ amount })}

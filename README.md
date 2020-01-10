@@ -78,6 +78,7 @@ We provide VAULT, wallet, ledger service for cryptocurrency. Trusted by many exc
 7. Register your app on CYBAVO WALLET MANAGEMENT system web > Administration > System settings, input `package name` and `Signature keystore SHA1 fingerprint`, follow the instruction to retrieve an `API Code`.
 8. Edit `BuildConfig.json` ➜ `SERVICE_API_CODE` to fill in your `API Code`
 9. Edit `BuildConfig.json` ➜ `MY_WECHAT_SIGN_IN_APP_ID` to fill in your `WeChat app id`
+9. Edit `BuildConfig.json` ➜ `MY_GOOGLE_SENDER_ID` to fill in your `GCM or FCM Sender ID (product_number)`(Android only)
 10. Edit `android/app/src/main/res/values/strings.xml` ➜ `MY_FACEBOOK_APP_ID` to fill in your `Facebook app id`
 10. Edit `android/app/src/main/res/values/strings.xml` ➜ `MY_LINE_CHANNEL_ID` to fill in your `LINE channel scheme`
 

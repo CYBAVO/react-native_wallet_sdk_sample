@@ -137,8 +137,14 @@ class ResetPinCodeScreen extends Component {
             buttonBackgroundColor="#EEEEEE80"
             buttonTextColor="black"
             buttonTextSize={12}
+            backspaceButtonWidth={72}
+            backspaceButtonHeight={72}
+            backspaceButtonBorderRadius={36}
+            backspaceButtonBackgroundColor="#EEEEEE80"
+            backspaceButtonTextColor="black"
+            backspaceButtonTextSize={12}
             androidButtonRippleColor="#80808080"
-            disabled={!loading}
+            disabled={loading}
             onChanged={this._inputPinCode}
           />
         </View>

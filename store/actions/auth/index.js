@@ -12,6 +12,7 @@ import WeChat from './providers/wechat';
 import Facebook from './providers/facebook';
 import LINE from './providers/LINE';
 import { Crashlytics } from 'react-native-fabric';
+import { AsyncStorage } from 'react-native';
 
 const { ErrorCodes } = WalletSdk;
 
@@ -33,6 +34,15 @@ async function signUpWithToken(idToken, identityProvider) {
   const resp = await Auth.signUp(idToken, identityProvider);
   console.log('signInWithToken... Done', resp);
   return resp;
+}
+export function setPushDeviceToken() {
+  return async (dispatch, getState) => {
+    const token = await AsyncStorage.getItem('pushDeviceToken');
+    console.log('setPushDeviceToken from asyncStorage... ', token);
+    const resp = await Auth.setPushDeviceToken(token);
+    console.log('setPushDeviceToken from asyncStorage... Done', resp);
+    return resp;
+  };
 }
 
 function updateSignInState(signInState) {
@@ -152,6 +162,9 @@ export function initAuth() {
     Auth.addListener(Auth.Events.onSignInStateChanged, signInState => {
       console.log('updateSignInState:', signInState);
       dispatch(updateSignInState(signInState));
+      if (signInState === Auth.SignInState.SIGNED_IN) {
+        dispatch(setPushDeviceToken());
+      }
     });
   };
 }

@@ -18,6 +18,7 @@ target 'CybavoWalletExample' do
     'RCTAnimation',
     'RCTLinkingIOS',
     'RCTVibration',
+    "RCTPushNotification"
   ]
 
   pod "yoga", :path => "../node_modules/react-native/ReactCommon/yoga"
@@ -42,10 +43,11 @@ target 'CybavoWalletExample' do
 
   pod 'LineSDK', '~> 5.0.0'
 
-
   pod 'RNFS', :path => '../node_modules/react-native-fs'
 
   pod 'ReactNativeFabric', :path => '../node_modules/react-native-fabric'
+
+  pod 'RNCPushNotificationIOS', :path => '../node_modules/@react-native-community/push-notification-ios'
 
   pre_install do |installer|
     # workaround for https://github.com/CocoaPods/CocoaPods/issues/3289
