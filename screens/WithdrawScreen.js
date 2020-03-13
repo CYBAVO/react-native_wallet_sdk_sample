@@ -72,6 +72,7 @@ export default class WithdrawScreen extends Component {
     memo: '',
     description: '',
     selectedFee: null,
+    selectedTokenId: null,
     fee: null,
     usage: null,
     loading: false,
@@ -107,11 +108,16 @@ export default class WithdrawScreen extends Component {
     }
     this.setState({ loading: false });
   };
-
+  _getAmount = () => {
+    const { navigation } = this.props;
+    const isFungibleToken = navigation.state.params.isFungibleToken;
+    return isFungibleToken ? this.state.selectedTokenId : this.state.amount;
+  };
   _confirmTransaction = async action => {
-    const { outgoingAddress, amount, selectedFee, fee } = this.state;
+    const { outgoingAddress, selectedFee, fee } = this.state;
     const { navigation } = this.props;
     const wallet = navigation.state.params.wallet;
+    const isFungibleToken = navigation.state.params.isFungibleToken;
     const transactionFee = fee[selectedFee];
 
     try {
@@ -123,13 +129,14 @@ export default class WithdrawScreen extends Component {
       } = await Wallets.estimateTransaction(
         wallet.currency,
         wallet.tokenAddress,
-        amount,
+        this._getAmount(),
         transactionFee ? transactionFee.amount : '0'
       );
-
       let mesasge = `Destination:\n${outgoingAddress}\n`;
       if (tranasctionAmout && tranasctionAmout !== '0') {
-        mesasge += `\nTransaction Amount:\n${tranasctionAmout}\n`;
+        mesasge += isFungibleToken
+          ? `\nTransaction Token ID:\n${tranasctionAmout}\n`
+          : `\nTransaction Amount:\n${tranasctionAmout}\n`;
       }
       if (platformFee && platformFee !== '0') {
         mesasge += `\nPlatform Fee:\n${platformFee}\n`;
@@ -173,14 +180,7 @@ export default class WithdrawScreen extends Component {
   };
 
   _createTransaction = async pinSecret => {
-    const {
-      outgoingAddress,
-      amount,
-      selectedFee,
-      fee,
-      memo,
-      description,
-    } = this.state;
+    const { outgoingAddress, selectedFee, fee, memo, description } = this.state;
     const { navigation } = this.props;
     const wallet = navigation.state.params.wallet;
     const transactionFee = fee[selectedFee];
@@ -198,7 +198,7 @@ export default class WithdrawScreen extends Component {
       await Wallets.createTransaction(
         wallet.walletId,
         outgoingAddress,
-        amount,
+        this._getAmount(),
         transactionFee ? transactionFee.amount : '0',
         description,
         pinSecret,
@@ -217,7 +217,7 @@ export default class WithdrawScreen extends Component {
   };
 
   _createTransactionWithSecureToken = async requestToken => {
-    const { outgoingAddress, amount, selectedFee, fee, memo } = this.state;
+    const { outgoingAddress, selectedFee, fee, memo } = this.state;
     const { navigation } = this.props;
     const wallet = navigation.state.params.wallet;
     const transactionFee = fee[selectedFee];
@@ -235,7 +235,7 @@ export default class WithdrawScreen extends Component {
       await Wallets.createTransaction(
         wallet.walletId,
         outgoingAddress,
-        amount,
+        this._getAmount(),
         transactionFee ? transactionFee.amount : '0',
         '',
         undefined, // no pin code for secure token
@@ -266,6 +266,7 @@ export default class WithdrawScreen extends Component {
       amount,
       memo,
       selectedFee,
+      selectedTokenId,
       fee,
       usage,
       inputPinCode,
@@ -273,8 +274,10 @@ export default class WithdrawScreen extends Component {
     } = this.state;
     const { navigation } = this.props;
     const wallet = navigation.state.params.wallet;
-
-    const isValid = !!amount && !!outgoingAddress;
+    const tokenIds = navigation.state.params.tokenIds;
+    const isFungibleToken = navigation.state.params.isFungibleToken;
+    const isValid =
+      (amount != null || selectedTokenId != null) && !!outgoingAddress;
 
     return (
       <Container
@@ -373,18 +376,37 @@ export default class WithdrawScreen extends Component {
           </Item>
 
           <Item stackedLabel>
-            <Label style={styles.label}>Amount</Label>
-
-            <Input
-              style={styles.input}
-              keyboardType="numeric"
-              returnKeyType="done"
-              placeholder={'Amount to withdraw deposit'}
-              placeholderTextColor={placeholderTextColor}
-              editable={!loading}
-              value={amount}
-              onChangeText={amount => this.setState({ amount })}
-            />
+            <Label style={styles.label}>
+              {isFungibleToken ? 'Token ID' : 'Amount'}
+            </Label>
+            {isFungibleToken ? (
+              tokenIds.length > 0 && (
+                <Picker
+                  style={{ width: '100%', color: 'white' }}
+                  mode="dropdown"
+                  enabled={!loading}
+                  selectedValue={selectedTokenId}
+                  onValueChange={selectedTokenId =>
+                    this.setState({ selectedTokenId })
+                  }
+                >
+                  {tokenIds.map(token => (
+                    <Picker.Item key={token} label={`${token}`} value={token} />
+                  ))}
+                </Picker>
+              )
+            ) : (
+              <Input
+                style={styles.input}
+                keyboardType="numeric"
+                returnKeyType="done"
+                placeholder={'Amount to withdraw deposit'}
+                placeholderTextColor={placeholderTextColor}
+                editable={!loading}
+                value={amount}
+                onChangeText={amount => this.setState({ amount })}
+              />
+            )}
           </Item>
 
           {hasMemo(wallet) && (
@@ -415,13 +437,13 @@ export default class WithdrawScreen extends Component {
               onValueChange={selectedFee => this.setState({ selectedFee })}
             >
               {fee &&
-              Object.entries(fee).map(([key, { amount, description }]) => (
-                <Picker.Item
-                  key={key}
-                  label={`${amount} - ${description}`}
-                  value={key}
-                />
-              ))}
+                Object.entries(fee).map(([key, { amount, description }]) => (
+                  <Picker.Item
+                    key={key}
+                    label={`${amount} - ${description}`}
+                    value={key}
+                  />
+                ))}
             </Picker>
           </Item>
 

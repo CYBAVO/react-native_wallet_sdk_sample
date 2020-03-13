@@ -48,7 +48,4 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Balance);
+export default connect(mapStateToProps, mapDispatchToProps)(Balance);

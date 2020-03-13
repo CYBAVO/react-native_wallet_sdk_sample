@@ -71,7 +71,7 @@ export default class TransactionDetailScreen extends Component {
       return;
     }
     try {
-      const { confirmBlocks } = await Wallets.getTransactionInfo(
+      const { confirmBlocks, data } = await Wallets.getTransactionInfo(
         wallet.currency,
         transaction.txid
       );
@@ -93,7 +93,7 @@ export default class TransactionDetailScreen extends Component {
 
   render() {
     const { navigation } = this.props;
-    const { transaction, wallet } = navigation.state.params;
+    const { transaction, wallet, isFungibleToken } = navigation.state.params;
     const withdraw = transaction.fromAddress === wallet.address;
     const { confirmBlocks } = this.state;
     // console.log('TX', transaction);
@@ -167,7 +167,7 @@ export default class TransactionDetailScreen extends Component {
               },
             ]}
           >
-            <Text>Amount</Text>
+            <Text>{isFungibleToken ? 'Token ID' : 'Amount'}</Text>
             {transaction.platformFee && (
               <Badge info style={styles.badge}>
                 <Text>PLATFORM FEE</Text>
@@ -175,7 +175,7 @@ export default class TransactionDetailScreen extends Component {
             )}
           </View>
           <Text style={styles.value}>
-            {transaction.amount} {wallet.currencySymbol}
+            {transaction.amount} {!isFungibleToken && wallet.currencySymbol}
           </Text>
 
           <Text style={styles.label}>Transaction fee</Text>

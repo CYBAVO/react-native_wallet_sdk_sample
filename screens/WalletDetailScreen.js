@@ -31,7 +31,7 @@ import CurrencyText from '../components/CurrencyText';
 import Balance from '../components/Balance';
 import TransactionList from '../components/TransactionList';
 import Filter from '../components/Filter';
-import { colorPrimary, colorAccent, Coin } from '../Constants';
+import { colorPrimary, colorAccent, Coin, isFungibleToken } from '../Constants';
 import { toastError } from '../Helpers';
 
 const FILTER_DIRECTION = [
@@ -187,12 +187,13 @@ class WalletDetailScreen extends Component {
   };
 
   _goTransactionDetail = transaction => {
-    const { wallet } = this.props;
+    const { wallet, currencyItem } = this.props;
     this.props.navigation.navigate({
       routeName: 'TransactionDetail',
       params: {
         wallet,
         transaction,
+        isFungibleToken: isFungibleToken(currencyItem),
       },
     });
   };
@@ -208,12 +209,16 @@ class WalletDetailScreen extends Component {
   };
 
   _goWithdraw = () => {
-    const { wallet } = this.props;
+    const { wallet, balances, currencyItem } = this.props;
+    const balance =
+      balances[`${wallet.currency}#${wallet.tokenAddress}#${wallet.address}`];
     this.props.navigation.navigate({
       routeName: 'Withdraw',
       params: {
         wallet,
         onComplete: this._refresh,
+        tokenIds: balance ? balance.tokens : [],
+        isFungibleToken: isFungibleToken(currencyItem),
       },
     });
   };
@@ -518,9 +523,17 @@ class WalletDetailScreen extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   const wallet = ownProps.navigation.state.params.wallet;
+  const {
+    balance: { balances = {} },
+  } = state;
   return {
     wallet: (state.wallets.wallets || []).find(
       w => w.walletId === wallet.walletId
+    ),
+    balances: balances,
+    currencyItem: (state.currency.currencies || []).find(
+      c =>
+        c.currency === wallet.currency && c.tokenAddress === wallet.tokenAddress
     ),
   };
 };

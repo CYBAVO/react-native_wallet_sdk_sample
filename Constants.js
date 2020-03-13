@@ -25,6 +25,9 @@ const TX_EXPLORER_URIS = {
   [`${Coin.TRX}#`]: 'https://tronscan.org/#/transaction/%s', // TRX
 };
 
+export const isFungibleToken = currencyItem => {
+  return currencyItem && currencyItem.tokenVersion == 721;
+};
 export const getTransactionExplorerUri = ({ currency, tokenAddress, txid }) => {
   const template = TX_EXPLORER_URIS[`${currency}#${tokenAddress}`];
   if (!template) {
