@@ -660,7 +660,7 @@
   integrity sha512-r5160ogAvGyHsal38Kux7YYtodEKOj89RGb28ht1jh3SJb08VwRwAKKJL0bGb04Zd/3r9FL3BFIc3bBidYffCA==
   dependencies:
     exec-sh "^0.3.2"
-    minimist "^1.2.0"
+    minimist "^1.2.2"
 
 "@cybavo/react-native-wallet-service@^1.2.48":
   version "1.2.49"
@@ -845,7 +845,7 @@
     metro-memory-fs "^0.51.0"
     metro-react-native-babel-transformer "^0.51.0"
     mime "^1.3.4"
-    minimist "^1.2.0"
+    minimist "^1.2.2"
     mkdirp "^0.5.1"
     morgan "^1.9.0"
     node-fetch "^2.2.0"
