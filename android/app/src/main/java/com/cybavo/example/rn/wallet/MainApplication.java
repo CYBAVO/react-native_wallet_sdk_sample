@@ -8,6 +8,7 @@ import android.os.Build;
 
 import com.facebook.CallbackManager;
 import com.facebook.react.ReactApplication;
+import com.reactnativecommunity.rnpermissions.RNPermissionsPackage;
 import com.smixx.fabric.FabricPackage;
 import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
 import com.facebook.reactnative.androidsdk.FBSDKPackage;
@@ -27,13 +28,8 @@ import io.fabric.sdk.android.Fabric;
 import com.dieam.reactnativepushnotification.ReactNativePushNotificationPackage;
 import java.util.Arrays;
 import java.util.List;
+
 public class MainApplication extends Application implements ReactApplication {
-
-  private static CallbackManager mCallbackManager = CallbackManager.Factory.create();
-
-  protected static CallbackManager getCallbackManager() {
-    return mCallbackManager;
-  }
 
   public static final String CHANNEL_ID = "WalletExample.channel";
   private static final String CHANNEL_NAME = "WalletExample.notification";
@@ -50,11 +46,12 @@ public class MainApplication extends Application implements ReactApplication {
     @Override
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(new MainReactPackage(),
+            new RNPermissionsPackage(),
             new ReactNativePushNotificationPackage(),
             new FabricPackage(),
             new AsyncStoragePackage(),
             new LineLoginPackage(),
-            new FBSDKPackage(mCallbackManager),
+            new FBSDKPackage(),
             new WeChatPackage(), new CybavoWalletServicePackage(),
           new RNCameraPackage(), new RNFSPackage(), new SvgPackage(), new RNGoogleSigninPackage(),
           new RNGestureHandlerPackage());

@@ -96,7 +96,10 @@ export default class WithdrawScreen extends Component {
   _fetchWithdrawInfo = async () => {
     this.setState({ loading: true });
     const { navigation } = this.props;
-    const wallet = navigation.state.params.wallet;
+    const { wallet, tokenIds = [] } = navigation.state.params;
+    if (tokenIds && tokenIds.length > 0) {
+      this.setState({ selectedTokenId: tokenIds[0] });
+    }
     try {
       const fee = await Wallets.getTransactionFee(wallet.currency);
       const usage = await Wallets.getWalletUsage(wallet.walletId);
@@ -185,7 +188,7 @@ export default class WithdrawScreen extends Component {
     const wallet = navigation.state.params.wallet;
     const transactionFee = fee[selectedFee];
 
-    let extras = {};
+    let extras = { skip_email_notification: false };
     if (hasMemo(wallet)) {
       extras = {
         ...extras,
@@ -273,8 +276,7 @@ export default class WithdrawScreen extends Component {
       description,
     } = this.state;
     const { navigation } = this.props;
-    const wallet = navigation.state.params.wallet;
-    const tokenIds = navigation.state.params.tokenIds;
+    const { wallet, tokenIds = [] } = navigation.state.params;
     const isFungibleToken = navigation.state.params.isFungibleToken;
     const isValid =
       (amount != null || selectedTokenId != null) && !!outgoingAddress;

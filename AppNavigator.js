@@ -6,9 +6,9 @@
  */
 import {
   createSwitchNavigator,
-  createStackNavigator,
   createAppContainer,
 } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation-stack';
 import InitializeScreen from './screens/InitializeScreen';
 import MainScreen from './screens/MainScreen';
 import SignInScreen from './screens/SignInScreen';

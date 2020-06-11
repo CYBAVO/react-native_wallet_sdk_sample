@@ -12,7 +12,7 @@ export default {
     try {
       console.log('Facebook.signIn...');
       // eslint-disable-next-line no-undef
-      result = await LoginManager.logInWithReadPermissions([
+      result = await LoginManager.logInWithPermissions([
         'public_profile',
         'email',
       ]);

@@ -10,11 +10,7 @@ import {
   WalletSdk,
 } from '@cybavo/react-native-wallet-service';
 
-import {
-  AppRegistry,
-  Platform,
-  AsyncStorage,
-} from 'react-native';
+import { AppRegistry, Platform, AsyncStorage } from 'react-native';
 import PushNotificationIOS from '@react-native-community/push-notification-ios';
 import AppWrapper from './AppWrapper';
 import { GoogleSignin } from 'react-native-google-signin';
@@ -33,6 +29,7 @@ import RNPushNotification from 'react-native-push-notification';
 WalletSdk.init({
   endpoint: SERVICE_ENDPOINT,
   apiCode: SERVICE_API_CODE,
+  apnsSandbox: false,
 });
 
 // init Google Sign-in
@@ -70,12 +67,30 @@ const localNotificatiopnIos = notification => {
         vibrate: true,
       });
     }
-    console.debug('onNotification'+Wallets.Transaction.Direction.IN + ","+ data.walletID + ',' + data.type + "," + data.fee + "," + data.currency + "," + data.timestamp+","+data.tokenAddress);
+    console.debug(
+      'onNotification' +
+        Wallets.Transaction.Direction.IN +
+        ',' +
+        data.walletID +
+        ',' +
+        data.type +
+        ',' +
+        data.fee +
+        ',' +
+        data.currency +
+        ',' +
+        data.timestamp +
+        ',' +
+        data.tokenAddress
+    );
   }
 };
 const localNotificatiopnAndroid = notification => {
-  if (notification['pinpoint.jsonBody']) {
-    let data = CYBAVOPushNotification.parse(notification['pinpoint.jsonBody']);
+  let jsonbody =
+    notification['pinpoint.jsonBody'] ||
+    (notification.data && notification.data['pinpoint.jsonBody']);
+  if (jsonbody) {
+    let data = CYBAVOPushNotification.parse(jsonbody);
     if (data.direction == Wallets.Transaction.Direction.IN) {
       RNPushNotification.localNotification({
         id: '120',
@@ -91,7 +106,22 @@ const localNotificatiopnAndroid = notification => {
         vibrate: true,
       });
     }
-    console.debug('onNotification' + Wallets.Transaction.Direction.IN + "," + data.walletID + ',' + data.type + "," + data.fee + "," + data.currency + "," + data.timestamp + "," + data.tokenAddress);
+    console.debug(
+      'onNotification' +
+        Wallets.Transaction.Direction.IN +
+        ',' +
+        data.walletID +
+        ',' +
+        data.type +
+        ',' +
+        data.fee +
+        ',' +
+        data.currency +
+        ',' +
+        data.timestamp +
+        ',' +
+        data.tokenAddress
+    );
   }
 };
 
@@ -114,7 +144,7 @@ RNPushNotification.configure({
       localNotificatiopnAndroid(notification);
     }
   },
-})
+});
 export function getPushToken() {
   if (Platform.OS === 'ios') {
     return AsyncStorage.getItem('pushDeviceToken');

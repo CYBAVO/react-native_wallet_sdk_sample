@@ -22,7 +22,8 @@ import { signIn } from '../store/actions';
 import { colorPrimary, colorAccent, colorPrimaryDark } from '../Constants';
 import { SERVICE_ENDPOINT } from '../BuildConfig.json';
 import { toastError } from '../Helpers';
-
+import { AppleButton } from '@invertase/react-native-apple-authentication';
+import { Platform } from 'react-native';
 const {
   sdkInfo: { VERSION_NAME, VERSION_CODE, BUILD_TYPE },
 } = WalletSdk;
@@ -67,6 +68,7 @@ class SignInScreen extends Component {
       wechatSignIn,
       facebookSignIn,
       lineSignIn,
+      appleSignIn,
     } = this.props;
 
     return (
@@ -105,6 +107,15 @@ class SignInScreen extends Component {
             size="small"
             color={colorAccent}
           />
+          {Platform.OS === 'ios' && (
+            <AppleButton
+              style={{ alignSelf: 'stretch', height: 48, width: '100%' }}
+              buttonStyle={AppleButton.Style.WHITE}
+              buttonType={AppleButton.Type.SIGN_IN}
+              onPress={appleSignIn}
+              disabled={loading}
+            />
+          )}
           <Button
             full
             success
@@ -122,7 +133,7 @@ class SignInScreen extends Component {
             </View>
           </Button>
           <GoogleSigninButton
-            style={{ alignSelf: 'stretch', height: 48 }}
+            style={{ alignSelf: 'stretch', height: 48, width: '100%' }}
             size={GoogleSigninButton.Size.Wide}
             color={GoogleSigninButton.Color.Light}
             onPress={googleSignIn}
@@ -181,10 +192,8 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     wechatSignIn: () => dispatch(signIn('WeChat')),
     facebookSignIn: () => dispatch(signIn('Facebook')),
     lineSignIn: () => dispatch(signIn('LINE')),
+    appleSignIn: () => dispatch(signIn('Apple')),
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(SignInScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(SignInScreen);

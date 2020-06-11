@@ -11,6 +11,7 @@ import Google from './providers/google';
 import WeChat from './providers/wechat';
 import Facebook from './providers/facebook';
 import LINE from './providers/LINE';
+import Apple from './providers/apple';
 import { Crashlytics } from 'react-native-fabric';
 import { AsyncStorage } from 'react-native';
 
@@ -29,9 +30,9 @@ async function signInWithToken(idToken, identityProvider) {
   return resp;
 }
 
-async function signUpWithToken(idToken, identityProvider) {
+async function signUpWithToken(idToken, identityProvider, extraAttributes) {
   console.log('signUpWithToken... ', identityProvider);
-  const resp = await Auth.signUp(idToken, identityProvider);
+  const resp = await Auth.signUp(idToken, identityProvider, extraAttributes);
   console.log('signInWithToken... Done', resp);
   return resp;
 }
@@ -47,11 +48,16 @@ export function setPushDeviceToken() {
 
 function updateSignInState(signInState) {
   console.log('updateSignInState:', signInState);
-  return async dispatch => {
+  return async (dispatch, getState) => {
+    // if (getState().auth.signInState == signInState && signInState != 0) {
+    //   console.log('updateSignInState:', signInState);
+    //   return;
+    // }
     await dispatch({ type: AUTH_UPDATE_SIGN_IN_STATE, signInState });
     if (signInState === Auth.SignInState.UNKNOWN) {
       NavigationService.navigate('Init');
     } else if (signInState === Auth.SignInState.SIGNED_IN) {
+      // dispatch(setPushDeviceToken());
       NavigationService.navigate('Main');
     } else if (signInState === Auth.SignInState.SESSION_EXPIRED) {
       NavigationService.navigate('SessionExpired');
@@ -60,7 +66,19 @@ function updateSignInState(signInState) {
       dispatch({ type: COMMON_RESET });
     } else {
       // SESSION_INVALID
-      dispatch(signOut());
+      // ++id provider sign out++
+      const identityProvider = getState.auth.identity.provider;
+      dispatch({ type: AUTH_LOADING, loading: true })
+      const idProvider = IDENTITY_PROVIDERS[identityProvider];
+      console.log('idProvider.signOut...', idProvider);
+      if (idProvider) {
+        await idProvider.signOut();
+      }
+      console.log('idProvider.signOut... Done');
+      dispatch({ type: AUTH_LOADING, loading: false });
+      // ++reset status++
+      NavigationService.navigate('Auth');
+      dispatch({ type: COMMON_RESET });
     }
   };
 }
@@ -69,6 +87,7 @@ const IDENTITY_PROVIDERS = {
   WeChat: WeChat,
   Facebook: Facebook,
   LINE: LINE,
+  Apple: Apple,
 };
 
 export function signIn(identityProvider) {
@@ -107,7 +126,9 @@ export function signIn(identityProvider) {
         // signUp needed
         try {
           console.log('signUpWithToken...');
-          await signUpWithToken(userToken, identityProvider);
+          await signUpWithToken(userToken, identityProvider, {
+            user_name: identity.name, //Required for Apple Auth. Optional for other services
+          });
           console.log('signUpWithToken... Done');
           console.log('signInWithToken#2...');
           await signInWithToken(userToken, identityProvider);

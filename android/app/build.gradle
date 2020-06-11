@@ -162,14 +162,16 @@ ext{
     googlePlayServicesIidVersion = "16.0.1"
     supportV4Version = '1.0.0'
 }
+
 dependencies {
-   implementation project(':react-native-push-notification')
+    implementation project(':react-native-permissions')
+    implementation project(':react-native-wechat')
+    implementation project(':react-native-push-notification')
     implementation project(':react-native-fabric')
     implementation 'com.google.firebase:firebase-messaging:15.0.2'
     implementation 'com.google.firebase:firebase-core:15.0.2'
     implementation project(':@react-native-community_async-storage')
     implementation project(':react-native-fbsdk')
-    implementation project(':react-native-wechat')
     implementation project(':@cybavo_react-native-wallet-service')
     implementation (project(':react-native-camera'))
     implementation project(':react-native-fs')
@@ -179,6 +181,8 @@ dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "com.android.support:appcompat-v7:${rootProject.ext.supportLibVersion}"
     implementation "com.facebook.react:react-native:+"  // From node_modules
+    implementation 'org.webkit:android-jsc:+'
+
     implementation 'com.linecorp:linesdk:5.0.1'
     implementation 'com.facebook.android:facebook-android-sdk:4.34.0'
     implementation 'com.android.support:multidex:1.0.3'
