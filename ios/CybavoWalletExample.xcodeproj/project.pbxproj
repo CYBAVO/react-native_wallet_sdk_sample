@@ -25,7 +25,6 @@
 		B6505CFA92AF4951B4016198 /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8AFEC0686398435EB9156505 /* Foundation.ttf */; };
 		BF520CAFB2384BF69FF756CF /* FontAwesome5_Brands.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CC1C621B163747ECA689DDF7 /* FontAwesome5_Brands.ttf */; };
 		BF7F25DD2251E49A003A9DAE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BF7F25DC2251E499003A9DAE /* GoogleService-Info.plist */; };
-		BF7F6C1B23657CF5009B1A00 /* PinInputView.nib in Resources */ = {isa = PBXBuildFile; fileRef = BF7F6C1A23657CF5009B1A00 /* PinInputView.nib */; };
 		BFA45E9F23277A030055EE7B /* CybavoWalletExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA45E9E23277A030055EE7B /* CybavoWalletExample.swift */; };
 		BFDAF8A822545A4500CD1801 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFDAF8A522545A4500CD1801 /* SystemConfiguration.framework */; };
 		BFDAF8AA22545A4D00CD1801 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFDAF8A922545A4D00CD1801 /* CoreTelephony.framework */; };
@@ -91,7 +90,6 @@
 		B7B8495EFE03487F811A72D2 /* AntDesign.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = AntDesign.ttf; path = "../node_modules/native-base/Fonts/AntDesign.ttf"; sourceTree = "<group>"; };
 		BA603892E3B64D8988F0619D /* Roboto_medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Roboto_medium.ttf; path = "../node_modules/native-base/Fonts/Roboto_medium.ttf"; sourceTree = "<group>"; };
 		BF7F25DC2251E499003A9DAE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		BF7F6C1A23657CF5009B1A00 /* PinInputView.nib */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; path = PinInputView.nib; sourceTree = "<group>"; };
 		BFA45E9D23277A030055EE7B /* CybavoWalletExample-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CybavoWalletExample-Bridging-Header.h"; sourceTree = "<group>"; };
 		BFA45E9E23277A030055EE7B /* CybavoWalletExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CybavoWalletExample.swift; sourceTree = "<group>"; };
 		BFDAF8A522545A4500CD1801 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -155,7 +153,6 @@
 			children = (
 				A6C354ED2373F1D800071E81 /* CybavoWalletExampleDebug.entitlements */,
 				A6C354EC2373F12B00071E81 /* CybavoWalletExampleRelease.entitlements */,
-				BF7F6C1A23657CF5009B1A00 /* PinInputView.nib */,
 				BFE7C5372279AFDA0065BE32 /* LineLoginManager.h */,
 				BFE7C5382279AFDA0065BE32 /* LineLoginManager.m */,
 				BF7F25DC2251E499003A9DAE /* GoogleService-Info.plist */,
@@ -311,9 +308,8 @@
 				ORGANIZATIONNAME = Facebook;
 				TargetAttributes = {
 					13B07F861A680F5B00A75B9A = {
-						DevelopmentTeam = A46Z766J68;
 						LastSwiftMigration = 1030;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 					};
 				};
 			};
@@ -362,7 +358,6 @@
 				EE5F38A2ECC842D3A3C9FF08 /* AntDesign.ttf in Resources */,
 				9CF9E28231DE4E10A14A8E15 /* Entypo.ttf in Resources */,
 				CBAA5DC82AD649D29A043EA4 /* EvilIcons.ttf in Resources */,
-				BF7F6C1B23657CF5009B1A00 /* PinInputView.nib in Resources */,
 				63A19076C77B493BA9EA3314 /* Feather.ttf in Resources */,
 				5E84CF5F695A4B65AB108D23 /* FontAwesome.ttf in Resources */,
 				BF520CAFB2384BF69FF756CF /* FontAwesome5_Brands.ttf in Resources */,
@@ -604,10 +599,10 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = CybavoWalletExample/CybavoWalletExampleDebug.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
-				DEVELOPMENT_TEAM = A46Z766J68;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = YES;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
