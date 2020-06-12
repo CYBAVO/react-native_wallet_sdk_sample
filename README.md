@@ -90,8 +90,7 @@ We provide VAULT, wallet, ledger service for cryptocurrency. Trusted by many exc
    ```
 3. Place ssh key requested from CYBAVO to ~/.ssh/ (rename it if nessersary)
 4. Edit `ios/Podfile`, Replace source 'https://bitbucket.org/cybavo/Specs.git' with
-https://bitbucket.org/cybavo/Specs_510.git if using Xcode >= 11
-https://bitbucket.org/cybavo/Specs_501git if using Xcode >= 10.2
+https://bitbucket.org/cybavo/Specs_512.git
 5. Run `pod install` in `ios/`
 6. Place your `GoogleService-Info.plist` file downloaded from Firebase to `ios/` [(LearnMore)](https://github.com/react-native-community/react-native-google-signin/blob/master/docs/get-config-file.md)
 7. Open your project configuration: double-click the project name in the left tree view. Select your app from the TARGETS section, then select the Info tab, and expand the URL Types section. Replace `Identifier` and `URL Schemes` with `CLIENT_ID" and `REVERSED_CLIENT_ID` in your `GoogleService-Info.plist`. [(LearnMore)](https://developers.google.com/identity/sign-in/ios/start-integrating)
