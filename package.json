@@ -8,7 +8,7 @@
     "postinstall": "npx jetify"
   },
   "dependencies": {
-    "@cybavo/react-native-wallet-service": "^1.2.48",
+    "@cybavo/react-native-wallet-service": "^1.2.72",
     "@invertase/react-native-apple-authentication": "1.0.0",
     "@react-native-community/async-storage": "1.6.1",
     "@react-native-community/push-notification-ios": "^1.0.2",

@@ -7,6 +7,8 @@
 import React, { Component } from 'react';
 import { FlatList, View } from 'react-native';
 import { ListItem, Text, Badge, Icon, Body, Left, Right } from 'native-base';
+import { Wallets } from '@cybavo/react-native-wallet-service';
+
 import DisplayTime from './DisplayTime';
 import { colorPrimary, colorDanger } from '../Constants';
 
@@ -37,12 +39,11 @@ export default class TransactionList extends Component {
             }}
           >
             <>
-              {item.fromAddress === wallet.address && (
+              {item.direction === Wallets.Transaction.Direction.OUT ? (
                 <Badge warning>
                   <Text>WITHDRAW</Text>
                 </Badge>
-              )}
-              {item.fromAddress !== wallet.address && (
+              ) : (
                 <Badge success>
                   <Text>DEPOSIT</Text>
                 </Badge>
@@ -75,11 +76,17 @@ export default class TransactionList extends Component {
             numberOfLines={1}
             ellipsizeMode="middle"
             style={{
-              textDecorationLine: item.dropped ? 'line-through' : 'none',
+              textDecorationLine:
+                item.dropped || item.replaced ? 'line-through' : 'none',
             }}
           >
             {item.txid}
           </Text>
+          {!!item.replaceTxid && (
+            <Text note numberOfLines={1} ellipsizeMode="middle">
+              {item.replaceTxid}
+            </Text>
+          )}
         </Body>
         <Right style={{ flexDirection: 'row', alignItems: 'center' }}>
           <Icon name="ios-arrow-forward" />

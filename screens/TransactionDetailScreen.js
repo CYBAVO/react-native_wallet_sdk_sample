@@ -23,6 +23,7 @@ import { Wallets } from '@cybavo/react-native-wallet-service';
 import CurrencyIcon from '../components/CurrencyIcon';
 import CurrencyText from '../components/CurrencyText';
 import DisplayTime from '../components/DisplayTime';
+import InputPinCodeModal from '../components/InputPinCodeModal';
 import { toastError } from '../Helpers';
 import { getTransactionExplorerUri, colorDanger } from '../Constants';
 
@@ -38,6 +39,10 @@ const styles = StyleSheet.create({
     marginStart: 8,
   },
 });
+
+const ACTION_UPDATE_FEE = 'update_fee';
+const ACTION_CANCEL = 'cancel';
+const LARGER_TX_FEE = '0.0000003'; // must be at least 10% higher than original transaction, let's just hard-coded a value for now
 
 export default class TransactionDetailScreen extends Component {
   static navigationOptions = ({ navigation }) => ({
@@ -58,6 +63,8 @@ export default class TransactionDetailScreen extends Component {
 
   state = {
     confirmBlocks: null,
+    inputPinCode: null,
+    loading: false,
   };
 
   componentDidMount = () => {
@@ -91,11 +98,61 @@ export default class TransactionDetailScreen extends Component {
     }
   };
 
+  _increaseTransactionFee = async pinSecret => {
+    const { navigation } = this.props;
+    const { transaction, wallet } = navigation.state.params;
+
+    this.setState({ loading: true });
+    try {
+      await Wallets.increaseTransactionFee(
+        wallet.walletId,
+        transaction.txid,
+        LARGER_TX_FEE,
+        pinSecret
+      );
+      navigation.goBack();
+    } catch (error) {
+      console.log('Wallets.increaseTransactionFee failed', error);
+      toastError(error);
+      this._finishInputPinCode();
+    }
+    this.setState({ loading: false });
+  };
+
+  _cancelTransaction = async pinSecret => {
+    const { navigation } = this.props;
+    const { transaction, wallet } = navigation.state.params;
+
+    this.setState({ loading: true });
+    try {
+      await Wallets.cancelTransaction(
+        wallet.walletId,
+        transaction.txid,
+        LARGER_TX_FEE,
+        pinSecret
+      );
+      navigation.goBack();
+    } catch (error) {
+      console.log('Wallets.cancelTransaction failed', error);
+      toastError(error);
+      this._finishInputPinCode();
+    }
+    this.setState({ loading: false });
+  };
+
+  _inputPinCode = action => {
+    this.setState({ inputPinCode: action });
+  };
+
+  _finishInputPinCode = () => {
+    this.setState({ inputPinCode: null });
+  };
+
   render() {
     const { navigation } = this.props;
     const { transaction, wallet, isFungibleToken } = navigation.state.params;
     const withdraw = transaction.fromAddress === wallet.address;
-    const { confirmBlocks } = this.state;
+    const { confirmBlocks, inputPinCode, loading } = this.state;
     // console.log('TX', transaction);
     return (
       <Container>
@@ -206,6 +263,11 @@ export default class TransactionDetailScreen extends Component {
                 <Text>DROPPED</Text>
               </Badge>
             )}
+            {transaction.replaced && (
+              <Badge info style={styles.badge}>
+                <Text>REPLACED</Text>
+              </Badge>
+            )}
             {confirmBlocks != null && (
               <Badge success style={styles.badge}>
                 <Text>{confirmBlocks} CONFIRMED</Text>
@@ -217,14 +279,18 @@ export default class TransactionDetailScreen extends Component {
               style={[
                 styles.value,
                 {
-                  textDecorationLine: transaction.dropped
-                    ? 'line-through'
-                    : 'none',
+                  textDecorationLine:
+                    transaction.dropped || transaction.replaced
+                      ? 'line-through'
+                      : 'none',
                 },
               ]}
             >
               {transaction.txid}
             </Text>
+          )}
+          {!!transaction.replaceTxid && (
+            <Text style={[styles.value]}>{transaction.replaceTxid}</Text>
           )}
           {!!transaction.error && (
             <Text style={[styles.value, { color: colorDanger }]}>
@@ -243,17 +309,56 @@ export default class TransactionDetailScreen extends Component {
         </Content>
         <View
           style={{
-            justifyContent: 'flex-end',
+            flexDirection: 'row',
+            justifyContent: 'center',
             alignItems: 'center',
             alignSelf: 'center',
             width: '50%',
             margin: 16,
           }}
         >
-          <Button bordered full onPress={this._explorer}>
+          <Button
+            style={{ marginHorizontal: 4 }}
+            bordered
+            onPress={this._explorer}
+          >
             <Text>Explorer</Text>
           </Button>
+          {transaction.replaceable && (
+            <>
+              <Button
+                style={{ marginHorizontal: 4 }}
+                success
+                onPress={() => this._inputPinCode(ACTION_UPDATE_FEE)}
+              >
+                <Text>Speed up</Text>
+              </Button>
+              <Button
+                style={{ marginHorizontal: 4 }}
+                danger
+                onPress={() => this._inputPinCode(ACTION_CANCEL)}
+              >
+                <Text>Cancel</Text>
+              </Button>
+            </>
+          )}
         </View>
+
+        <InputPinCodeModal
+          isVisible={!!inputPinCode}
+          onCancel={() => {
+            this._finishInputPinCode();
+          }}
+          loading={loading}
+          onInputPinCode={pinSecret => {
+            if (inputPinCode === ACTION_UPDATE_FEE) {
+              this._increaseTransactionFee(pinSecret);
+            } else {
+              // cancel
+              this._cancelTransaction(pinSecret);
+            }
+          }}
+        />
       </Container>
     );
   }
