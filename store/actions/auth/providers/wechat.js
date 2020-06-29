@@ -4,7 +4,7 @@
  *
  * All rights reserved.
  */
-import * as WeChat from 'react-native-wechat';
+import * as WeChat from 'react-native-wechat-lib';
 
 export default {
   async signIn() {

@@ -15,21 +15,23 @@ import PushNotificationIOS from '@react-native-community/push-notification-ios';
 import AppWrapper from './AppWrapper';
 import { GoogleSignin } from 'react-native-google-signin';
 import { name as appName } from './app.json';
-import * as WeChat from 'react-native-wechat';
+import * as WeChat from 'react-native-wechat-lib';
 import {
   SERVICE_ENDPOINT,
   SERVICE_API_CODE,
+  SERVICE_API_CODE_IOS,
   GOOGLE_SIGN_IN_WEB_CLI_ID,
   GOOGLE_SENDER_ID,
   WECHAT_SIGN_IN_APP_ID,
+  WECHAT_UNIVERSAL_LINK,
 } from './BuildConfig.json';
 
 import RNPushNotification from 'react-native-push-notification';
 // init wallet SDK
 WalletSdk.init({
   endpoint: SERVICE_ENDPOINT,
-  apiCode: SERVICE_API_CODE,
-  apnsSandbox: false,
+  apiCode: Platform.OS === 'android' ? SERVICE_API_CODE : SERVICE_API_CODE_IOS,
+  apnsSandbox: true,
 });
 
 // init Google Sign-in
@@ -39,8 +41,8 @@ GoogleSignin.configure({
 });
 
 // init WeChat Sign-in
-WeChat.registerApp(WECHAT_SIGN_IN_APP_ID);
-//
+WeChat.registerApp(WECHAT_SIGN_IN_APP_ID, WECHAT_UNIVERSAL_LINK).then();
+
 const localNotificatiopnIos = notification => {
   // required on iOS only (see fetchCompletionHandler docs: https://facebook.github.io/react-native/docs/pushnotificationios.html)
   notification.finish(PushNotificationIOS.FetchResult.NoData);

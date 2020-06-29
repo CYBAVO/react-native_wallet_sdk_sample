@@ -20,7 +20,7 @@
 		9301464F554444819739ABA7 /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0724E7986D6C447CACEF4DBD /* MaterialIcons.ttf */; };
 		9CF9E28231DE4E10A14A8E15 /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0073C33BA9EF4E669C1DBCDB /* Entypo.ttf */; };
 		A10920EB947A08628374BE2D /* Pods_CybavoWalletExample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF2BAA287F1D4F1609816081 /* Pods_CybavoWalletExample.framework */; };
-		A649F73C24485BD7009C4C6C /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A649F73B24485BD7009C4C6C /* WebKit.framework */; };
+		A6B23D7324A9BB6B007636D0 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A649F73B24485BD7009C4C6C /* WebKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		A8BB84D3808A4FCA9AB669B0 /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 596E19BCE6524CA58F2BEBF6 /* SimpleLineIcons.ttf */; };
 		B6505CFA92AF4951B4016198 /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8AFEC0686398435EB9156505 /* Foundation.ttf */; };
 		BF520CAFB2384BF69FF756CF /* FontAwesome5_Brands.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CC1C621B163747ECA689DDF7 /* FontAwesome5_Brands.ttf */; };
@@ -84,9 +84,13 @@
 		A218667AF3D846ECB68367DB /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/native-base/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
 		A2FEC57EA33A44A2AD2F9299 /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/native-base/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
 		A649F73B24485BD7009C4C6C /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		A6B23D5324A9AEE6007636D0 /* react_native_webview.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = react_native_webview.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A6B23D6E24A9B891007636D0 /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libWeChatSDK.a; path = "../node_modules/react-native-wechat-lib/ios/libWeChatSDK.a"; sourceTree = "<group>"; };
+		A6B23D7424A9BC9C007636D0 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		A6C354C62373EB0700071E81 /* PushNotificationIOS.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = PushNotificationIOS.xcodeproj; path = "../node_modules/@react-native-community/push-notification-ios/ios/PushNotificationIOS.xcodeproj"; sourceTree = "<group>"; };
 		A6C354EC2373F12B00071E81 /* CybavoWalletExampleRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = CybavoWalletExampleRelease.entitlements; path = CybavoWalletExample/CybavoWalletExampleRelease.entitlements; sourceTree = "<group>"; };
 		A6C354ED2373F1D800071E81 /* CybavoWalletExampleDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = CybavoWalletExampleDebug.entitlements; path = CybavoWalletExample/CybavoWalletExampleDebug.entitlements; sourceTree = "<group>"; };
+		A6D2478524A767FF0082E376 /* RCTWeChat.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = RCTWeChat.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7B8495EFE03487F811A72D2 /* AntDesign.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = AntDesign.ttf; path = "../node_modules/native-base/Fonts/AntDesign.ttf"; sourceTree = "<group>"; };
 		BA603892E3B64D8988F0619D /* Roboto_medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Roboto_medium.ttf; path = "../node_modules/native-base/Fonts/Roboto_medium.ttf"; sourceTree = "<group>"; };
 		BF7F25DC2251E499003A9DAE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -115,9 +119,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A6B23D7324A9BB6B007636D0 /* WebKit.framework in Frameworks */,
 				BFDAF8AA22545A4D00CD1801 /* CoreTelephony.framework in Frameworks */,
 				BFDAF8A822545A4500CD1801 /* SystemConfiguration.framework in Frameworks */,
-				A649F73C24485BD7009C4C6C /* WebKit.framework in Frameworks */,
 				BFE7C5232279ADDE0065BE32 /* Security.framework in Frameworks */,
 				BFDAF8B022545A6A00CD1801 /* libz.tbd in Frameworks */,
 				BFDAF8AE22545A6200CD1801 /* libc++.tbd in Frameworks */,
@@ -172,6 +176,10 @@
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A6B23D7424A9BC9C007636D0 /* UIKit.framework */,
+				A6B23D6E24A9B891007636D0 /* libWeChatSDK.a */,
+				A6B23D5324A9AEE6007636D0 /* react_native_webview.framework */,
+				A6D2478524A767FF0082E376 /* RCTWeChat.framework */,
 				A649F73B24485BD7009C4C6C /* WebKit.framework */,
 				BFE7C5222279ADDE0065BE32 /* Security.framework */,
 				BFDAF8AF22545A6A00CD1801 /* libz.tbd */,
@@ -624,10 +632,6 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/CybavoWalletExample\"",
-					"\"$(SRCROOT)/CybavoWalletExample\"",
-					"\"$(SRCROOT)/CybavoWalletExample\"",
-					"\"$(SRCROOT)/CybavoWalletExample\"",
-					"\"$(SRCROOT)/CybavoWalletExample\"",
 				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -635,7 +639,7 @@
 					"-ObjC",
 					"-all_load",
 					"-force_load",
-					"$(SRCROOT)/../node_modules/react-native-wechat/ios/libWeChatSDK.a",
+					"$(SRCROOT)/../node_modules/react-native-wechat-lib/ios/libWeChatSDK.a",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.cybavo.example.rn.wallet;
 				PRODUCT_NAME = CybavoWalletExample;
@@ -681,10 +685,6 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/CybavoWalletExample\"",
-					"\"$(SRCROOT)/CybavoWalletExample\"",
-					"\"$(SRCROOT)/CybavoWalletExample\"",
-					"\"$(SRCROOT)/CybavoWalletExample\"",
-					"\"$(SRCROOT)/CybavoWalletExample\"",
 				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -692,7 +692,7 @@
 					"-ObjC",
 					"-all_load",
 					"-force_load",
-					"$(SRCROOT)/../node_modules/react-native-wechat/ios/libWeChatSDK.a",
+					"$(SRCROOT)/../node_modules/react-native-wechat-lib/ios/libWeChatSDK.a",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.cybavo.example.rn.wallet;
 				PRODUCT_NAME = CybavoWalletExample;

@@ -73,12 +73,12 @@ We provide VAULT, wallet, ledger service for cryptocurrency. Trusted by many exc
    walletsdk.maven.password=$MAVEN_REPO_PASSWORD
    ```
 4. Place your `google-services.json` file downloaded from Firebase to `android/app` [(LearnMore)](https://github.com/react-native-community/react-native-google-signin/blob/master/docs/get-config-file.md)
-5. Edit `BuildConfig.json` ➜ `MY_GOOGLE_SIGN_IN_WEB_CLI_ID` to your Google sign-in client ID
+5. Edit `BuildConfig.json` ➜ `GOOGLE_SIGN_IN_WEB_CLI_ID` to your Google sign-in client ID
 6. Edit `BuildConfig.json` ➜ `SERVICE_ENDPOINT` to point to your Wallet Service endpoont
 7. Register your app on CYBAVO WALLET MANAGEMENT system web > Administration > System settings, input `package name` and `Signature keystore SHA1 fingerprint`, follow the instruction to retrieve an `API Code`.
 8. Edit `BuildConfig.json` ➜ `SERVICE_API_CODE` to fill in your `API Code`
-9. Edit `BuildConfig.json` ➜ `MY_WECHAT_SIGN_IN_APP_ID` to fill in your `WeChat app id`
-9. Edit `BuildConfig.json` ➜ `MY_GOOGLE_SENDER_ID` to fill in your `GCM or FCM Sender ID (product_number)`(Android only)
+9. Edit `BuildConfig.json` ➜ `WECHAT_SIGN_IN_APP_ID` to fill in your `WeChat app id`
+9. Edit `BuildConfig.json` ➜ `GOOGLE_SENDER_ID` to fill in your `GCM or FCM Sender ID (product_number)`(Android only)
 10. Edit `android/app/src/main/res/values/strings.xml` ➜ `MY_FACEBOOK_APP_ID` to fill in your `Facebook app id`
 10. Edit `android/app/src/main/res/values/strings.xml` ➜ `MY_LINE_CHANNEL_ID` to fill in your `LINE channel scheme`
 
@@ -96,11 +96,12 @@ https://bitbucket.org/cybavo/Specs_512.git
 7. Open your project configuration: double-click the project name in the left tree view. Select your app from the TARGETS section, then select the Info tab, and expand the URL Types section. Replace `Identifier` and `URL Schemes` with `CLIENT_ID" and `REVERSED_CLIENT_ID` in your `GoogleService-Info.plist`. [(LearnMore)](https://developers.google.com/identity/sign-in/ios/start-integrating)
 8. Replace `MY_FACEBOOK_SIGN_IN_APP_ID` with your `Facebook app id`
 9. Replace `MY_LINE_CHANNEL_SCHEME` with your `LINE channel scheme`
-10. Edit `BuildConfig.json` ➜ `MY_GOOGLE_SIGN_IN_WEB_CLI_ID` to your Google sign-in client ID
+10. Edit `BuildConfig.json` ➜ `GOOGLE_SIGN_IN_WEB_CLI_ID` to your Google sign-in client ID
 11. Edit `BuildConfig.json` ➜ `SERVICE_ENDPOINT` to point to your Wallet Service endpoont
 12. Register your app on CYBAVO WALLET MANAGEMENT system web > Administration > System settings, input `bundle id`, follow the instruction to retrieve an `API Code`.
-13. Edit `BuildConfig.json` ➜ `SERVICE_API_CODE` to fill in yout `API Code`
-14. Edit `BuildConfig.json` ➜ `MY_WECHAT_SIGN_IN_APP_ID` to fill in yout `WeChat app id`
+13. Edit `BuildConfig.json` ➜ `SERVICE_API_CODE_IOS` to fill in yout `API Code`
+14. Edit `BuildConfig.json` ➜ `WECHAT_SIGN_IN_APP_ID` to fill in yout `WeChat app id`
+15. Edit `BuildConfig.json` ➜ `WECHAT_UNIVERSAL_LINK` to fill in yout `Universal Link` for WeChat sign in
 # Push notification
 To receive silent push notification of deposit/withdrawal. Please refer to [this](docs/PushNotification.md) to setup.
 # Features

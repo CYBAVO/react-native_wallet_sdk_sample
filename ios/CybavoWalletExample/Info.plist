@@ -81,6 +81,8 @@
 	<string>CYBAVO Wallet</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
+		<string>weixinULAPI</string>
+		<string>wechat</string>
 		<string>lineauth2</string>
 		<string>weixin</string>
 	</array>
@@ -106,9 +108,9 @@
 	</dict>
 	<key>NSAppleMusicUsageDescription</key>
 	<string>Not supposed to see this</string>
-	<key>NSBluetoothPeripheralUsageDescription</key>
-	<string>Not supposed to see this</string>
 	<key>NSBluetoothAlwaysUsageDescription</key>
+	<string>Not supposed to see this</string>
+	<key>NSBluetoothPeripheralUsageDescription</key>
 	<string>Not supposed to see this</string>
 	<key>NSCalendarsUsageDescription</key>
 	<string>Not supposed to see this</string>
@@ -125,6 +127,8 @@
 	<key>NSMotionUsageDescription</key>
 	<string>Not supposed to see this</string>
 	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Not supposed to see this</string>
+	<key>NSSiriUsageDescription</key>
 	<string>Not supposed to see this</string>
 	<key>NSSpeechRecognitionUsageDescription</key>
 	<string>Not supposed to see this</string>

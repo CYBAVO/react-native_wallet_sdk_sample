@@ -165,7 +165,7 @@ ext{
 
 dependencies {
     implementation project(':react-native-permissions')
-    implementation project(':react-native-wechat')
+    implementation project(':react-native-wechat-lib')
     implementation project(':react-native-push-notification')
     implementation project(':react-native-fabric')
     implementation 'com.google.firebase:firebase-messaging:15.0.2'

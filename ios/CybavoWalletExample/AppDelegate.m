@@ -66,6 +66,20 @@
   return handledFB || handledRCT;
 }
 
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
+    return  [WXApi handleOpenURL:url delegate:self];
+}
+
+- (BOOL)application:(UIApplication *)application
+  continueUserActivity:(NSUserActivity *)userActivity
+  restorationHandler:(void(^)(NSArray<id<UIUserActivityRestoring>> * __nullable
+  restorableObjects))restorationHandler {
+  [RCTLinkingManager application:application continueUserActivity:userActivity restorationHandler:restorationHandler];
+  return [WXApi handleOpenUniversalLink:userActivity
+  delegate:self];
+}
+
+
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url
             options:(NSDictionary<NSString*, id> *)options
 {
