@@ -164,6 +164,7 @@ ext{
 }
 
 dependencies {
+    implementation project(':react-native-device-info')
     implementation project(':react-native-permissions')
     implementation project(':react-native-wechat-lib')
     implementation project(':react-native-push-notification')

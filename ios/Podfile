@@ -75,6 +75,8 @@ target 'CybavoWalletExample' do
   pod 'ReactNativeFabric', :path => '../node_modules/react-native-fabric'
   pod 'react-native-webview', :path => '../node_modules/react-native-webview'
   pod 'RCTWeChat', :path => '../node_modules/react-native-wechat-lib'
+  pod 'RNDeviceInfo', :path => '../node_modules/react-native-device-info'
+
   pre_install do |installer|
     # workaround for https://github.com/CocoaPods/CocoaPods/issues/3289
     Pod::Installer::Xcode::TargetValidator.send(:define_method, :verify_no_static_framework_transitive_dependencies) {}

@@ -8,6 +8,7 @@ import android.os.Build;
 
 import com.facebook.CallbackManager;
 import com.facebook.react.ReactApplication;
+import com.learnium.RNDeviceInfo.RNDeviceInfo;
 import com.reactnativecommunity.rnpermissions.RNPermissionsPackage;
 import com.smixx.fabric.FabricPackage;
 import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
@@ -46,6 +47,7 @@ public class MainApplication extends Application implements ReactApplication {
     @Override
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(new MainReactPackage(),
+            new RNDeviceInfo(),
             new RNPermissionsPackage(),
             new ReactNativePushNotificationPackage(),
             new FabricPackage(),

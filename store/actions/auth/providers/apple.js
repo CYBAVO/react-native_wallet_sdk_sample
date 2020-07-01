@@ -3,6 +3,7 @@ import appleAuth, {
   AppleAuthRequestScope,
   AppleAuthCredentialState,
 } from '@invertase/react-native-apple-authentication';
+import { getFullName } from '../../../../Helpers';
 
 export default {
   async signIn() {
@@ -25,10 +26,10 @@ export default {
     // use credentialState response to ensure the user is authenticated
     if (credentialState === AppleAuthCredentialState.AUTHORIZED) {
       //this is only for demo. In production app, please do this by locale
-      fullName =
-        (appleAuthRequestResponse.fullName.givenName || '') +
-        ' ' +
-        (appleAuthRequestResponse.fullName.familyName || '');
+      let fullName = getFullName(
+        appleAuthRequestResponse.fullName.givenName || '',
+        appleAuthRequestResponse.fullName.familyName || ''
+      );
 
       // user is authenticated
       return {
