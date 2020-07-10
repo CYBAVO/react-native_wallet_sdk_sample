@@ -181,6 +181,52 @@ export default class WithdrawScreen extends Component {
     }
     this.setState({ loading: false });
   };
+  /*
+   * The smart contract is on test net for testing purpose
+   * */
+  _callAbiFunctionTransaction = async (wallet, transactionFee, pinSecret) => {
+    try {
+      const abiJson =
+        '[{"constant":false,"inputs":[{"name":"_spender","type":"address"},{"name":"_value","type":"uint256"}],"name":"approve","outputs":[{"name":"success","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"totalSupply","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_from","type":"address"},{"name":"_to","type":"address"},{"name":"_value","type":"uint256"}],"name":"transferFrom","outputs":[{"name":"success","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"_owner","type":"address"},{"name":"_testInt","type":"uint256"},{"name":"_testStr","type":"string"}],"name":"balanceOfCB","outputs":[{"name":"balance","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"to","type":"address"},{"name":"amount","type":"uint256"}],"name":"transferQQQ","outputs":[{"name":"success","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"_owner","type":"address"}],"name":"balanceOf","outputs":[{"name":"balance","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_to","type":"address"},{"name":"_value","type":"uint256"}],"name":"transfer","outputs":[{"name":"success","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[],"name":"transferFee","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"_owner","type":"address"},{"name":"_spender","type":"address"}],"name":"allowance","outputs":[{"name":"remaining","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_to","type":"address"},{"name":"_value","type":"uint256"},{"name":"_testInt","type":"uint256"},{"name":"_testStr","type":"string"}],"name":"transferCB","outputs":[{"name":"success","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"anonymous":false,"inputs":[{"indexed":true,"name":"_from","type":"address"},{"indexed":true,"name":"_to","type":"address"},{"indexed":false,"name":"_value","type":"uint256"}],"name":"Transfer","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"_owner","type":"address"},{"indexed":true,"name":"_spender","type":"address"},{"indexed":false,"name":"_value","type":"uint256"}],"name":"Approval","type":"event"}]';
+      const result = await Wallets.callAbiFunctionTransaction(
+        wallet.walletId,
+        'transferCB',
+        '0xef3aa4115b071a9a7cd43f1896e3129f296c5a5f',
+        abiJson,
+        ['0x490d510c1A8b74749949cFE5cA06D0C6BD7119E2', 1, 100, 'unittest'],
+        transactionFee ? transactionFee.amount : '0',
+        pinSecret
+      );
+
+      console.log(
+        'callAbiFunctionTransaction success',
+        result.txid,
+        result.signedTx
+      );
+    } catch (error) {
+      console.warn('callAbiFunctionTransaction failed', error);
+    }
+  };
+  /*
+   * The smart contract is on test net for testing purpose
+   * */
+  _callAbiFunctionRead = async wallet => {
+    try {
+      const abiJson =
+        '[{"constant":false,"inputs":[{"name":"_spender","type":"address"},{"name":"_value","type":"uint256"}],"name":"approve","outputs":[{"name":"success","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"totalSupply","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_from","type":"address"},{"name":"_to","type":"address"},{"name":"_value","type":"uint256"}],"name":"transferFrom","outputs":[{"name":"success","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"_owner","type":"address"},{"name":"_testInt","type":"uint256"},{"name":"_testStr","type":"string"}],"name":"balanceOfCB","outputs":[{"name":"balance","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"to","type":"address"},{"name":"amount","type":"uint256"}],"name":"transferQQQ","outputs":[{"name":"success","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"_owner","type":"address"}],"name":"balanceOf","outputs":[{"name":"balance","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_to","type":"address"},{"name":"_value","type":"uint256"}],"name":"transfer","outputs":[{"name":"success","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[],"name":"transferFee","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"_owner","type":"address"},{"name":"_spender","type":"address"}],"name":"allowance","outputs":[{"name":"remaining","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_to","type":"address"},{"name":"_value","type":"uint256"},{"name":"_testInt","type":"uint256"},{"name":"_testStr","type":"string"}],"name":"transferCB","outputs":[{"name":"success","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"anonymous":false,"inputs":[{"indexed":true,"name":"_from","type":"address"},{"indexed":true,"name":"_to","type":"address"},{"indexed":false,"name":"_value","type":"uint256"}],"name":"Transfer","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"_owner","type":"address"},{"indexed":true,"name":"_spender","type":"address"},{"indexed":false,"name":"_value","type":"uint256"}],"name":"Approval","type":"event"}]';
+      const result = await Wallets.callAbiFunctionRead(
+        wallet.walletId,
+        'balanceOfCB',
+        '0xef3aa4115b071a9a7cd43f1896e3129f296c5a5f',
+        abiJson,
+        ['0x281F397c5a5a6E9BE42255b01EfDf8b42F0Cd179', 123, 'test']
+      );
+
+      console.log('callAbiFunctionRead success', result.output);
+    } catch (error) {
+      console.warn('callAbiFunctionRead failed', error);
+    }
+  };
 
   _createTransaction = async pinSecret => {
     const { outgoingAddress, selectedFee, fee, memo, description } = this.state;
@@ -197,6 +243,8 @@ export default class WithdrawScreen extends Component {
     }
 
     this.setState({ loading: true });
+    // this._callAbiFunctionTransaction(wallet, transactionFee, pinSecret);
+    // this._callAbiFunctionRead(wallet);
     try {
       await Wallets.createTransaction(
         wallet.walletId,
