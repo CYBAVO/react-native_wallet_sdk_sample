@@ -8,7 +8,7 @@
     "postinstall": "npx jetify"
   },
   "dependencies": {
-    "@cybavo/react-native-wallet-service": "^1.2.72",
+    "@cybavo/react-native-wallet-service": "1.2.92",
     "@invertase/react-native-apple-authentication": "1.0.0",
     "@react-native-community/async-storage": "1.6.1",
     "@react-native-community/push-notification-ios": "^1.0.2",
@@ -37,7 +37,6 @@
     "react-native-qrcode-svg": "^5.1.2",
     "react-native-screens": "2.8.0",
     "react-native-svg": "^9.3.5",
-    "react-native-webview": "9.2.1",
     "react-native-wechat-lib": "1.1.16",
     "react-navigation": "4.0.10",
     "react-navigation-hooks": "1.1.0",
