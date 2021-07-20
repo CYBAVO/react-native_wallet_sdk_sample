@@ -23,7 +23,7 @@
     "react": "16.11.0",
     "react-art": "16.11.0",
     "react-dom": "16.11.0",
-    "react-native": "0.61.4",
+    "react-native": "0.62.3",
     "react-native-camera": "3.11.1",
     "react-native-device-info": "^5.6.1",
     "react-native-easy-grid": "^0.2.1",
