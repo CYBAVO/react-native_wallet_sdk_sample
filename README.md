@@ -1,3 +1,4 @@
+**This sample is discontinuing update, please go [CYBAVO_WALLET_RN_SAMPLE](https://github.com/CYBAVO/CYBAVO_WALLET_RN_SAMPLE) instead.**
 # CYBAVO Wallet SDK for React Native
 
 [![NPM](https://nodeico.herokuapp.com/@cybavo/react-native-wallet-service.svg)](https://npmjs.com/package/@cybavo/react-native-wallet-service)
