@@ -14,7 +14,7 @@
     "@react-native-community/push-notification-ios": "^1.0.2",
     "bignumber.js": "^9.0.0",
     "jetifier": "1.6.5",
-    "moment": "^2.24.0",
+    "moment": "^2.29.2",
     "y18n": "^4.0.1",
     "native-base": "2.12.1",
     "prop-types": "^15.7.2",
